@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class LoginPage extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
   static const routeName = '/loginPage';
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _LoginInformation extends StatelessWidget {
-  const _LoginInformation({Key key}) : super(key: key);
+class _SignupInformation extends StatelessWidget {
+  const _SignupInformation({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -57,7 +57,7 @@ class _BuildInputField extends StatelessWidget {
   }
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   bool animate = false;
   void initState() {
     super.initState();
@@ -124,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   height: MediaQuery.of(context).size.height * 0.56,
                   width: MediaQuery.of(context).size.width * 0.9,
-                  child: _LoginInformation()),
+                  child: _SignupInformation()),
             ),
           ],
         ),

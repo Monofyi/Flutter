@@ -61,7 +61,7 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomPadding: false,
+        resizeToAvoidBottomPadding: true,
         backgroundColor: Color(0xfff2f3f7),
         body: Stack(
           children: <Widget>[
@@ -180,7 +180,7 @@ class _BottomTextBox extends StatelessWidget {
                   text: 'Sign up',
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      Navigator.pushNamed(context, LoginPage.routeName);
+                      Navigator.pushNamed(context, SignUpPage.routeName);
                     },
                   style: TextStyle(color: Colors.blueAccent, fontSize: 18),
                 )
