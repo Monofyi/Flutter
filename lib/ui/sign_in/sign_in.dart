@@ -1,36 +1,26 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:inventory_management/ui/login_page/login_page.dart';
 
-class SignUpPage extends StatefulWidget {
-  static const routeName = '/loginPage';
+class SignInPage extends StatefulWidget {
+  static const routeName = '/signinPage';
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  _SignInPageState createState() => _SignInPageState();
 }
 
-class _SignupInformation extends StatelessWidget {
-  const _SignupInformation({Key key}) : super(key: key);
+class _SignInInformation extends StatelessWidget {
+  const _SignInInformation({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 16, right: 16),
+      padding: EdgeInsets.only(left: 32, right: 32),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _BuildInputField(
-            label: 'Company Name',
-            icon: Icon(Icons.work),
-          ),
-          _BuildInputField(
-            label: 'Email',
-            icon: Icon(Icons.email),
-          ),
-          _BuildInputField(
             label: 'UserName',
             icon: Icon(Icons.person),
-          ),
-          _BuildInputField(
-            label: 'phoneNumber',
-            icon: Icon(Icons.phone),
           ),
           _BuildInputField(
             label: 'password',
@@ -57,7 +47,7 @@ class _BuildInputField extends StatelessWidget {
   }
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignInPageState extends State<SignInPage> {
   bool animate = false;
   void initState() {
     super.initState();
@@ -71,7 +61,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomPadding: false,
+        resizeToAvoidBottomPadding: true,
         backgroundColor: Color(0xfff2f3f7),
         body: Stack(
           children: <Widget>[
@@ -105,7 +95,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             AnimatedPositioned(
               duration: Duration(milliseconds: 200),
-              bottom: animate ? 56 * 2.0 : -56 * 8.0,
+              bottom: animate ? 96 * 2.0 : -56 * 8.0,
               left: 16,
               right: 16,
               child: Container(
@@ -122,9 +112,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ],
                   ),
-                  height: MediaQuery.of(context).size.height * 0.56,
+                  height: MediaQuery.of(context).size.height * 0.26,
                   width: MediaQuery.of(context).size.width * 0.9,
-                  child: _SignupInformation()),
+                  child: _SignInInformation()),
             ),
           ],
         ),
@@ -143,7 +133,6 @@ class _NextButtonAndAgreement extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _BottomCheckBox(),
           Container(
             height: 46,
             decoration: BoxDecoration(
@@ -159,32 +148,43 @@ class _NextButtonAndAgreement extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                'Sign Up',
+                'Sign In',
                 style: TextStyle(color: Colors.white, fontSize: 24),
               ),
             ),
           ),
+          SizedBox(
+            height: 8,
+          ),
+          _BottomTextBox(),
         ],
       ),
     );
   }
 }
 
-class _BottomCheckBox extends StatelessWidget {
-  const _BottomCheckBox({Key key}) : super(key: key);
+class _BottomTextBox extends StatelessWidget {
+  const _BottomTextBox({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Checkbox(
-          activeColor: Theme.of(context).accentColor,
-          value: false,
-          onChanged: (bool value) {},
-        ),
-        Text(
-          'I agree to the T&C and Privacy Policy',
+        RichText(
+          text: TextSpan(
+              text: 'Dont have an account? ',
+              style: TextStyle(color: Colors.black, fontSize: 20),
+              children: <TextSpan>[
+                TextSpan(
+                  text: 'Sign up',
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Navigator.pushNamed(context, SignUpPage.routeName);
+                    },
+                  style: TextStyle(color: Colors.blueAccent, fontSize: 18),
+                )
+              ]),
         ),
       ],
     );
