@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
               child: _NextButtonAndAgreement(),
             ),
             AnimatedPositioned(
-              duration: Duration(seconds: 2),
+              duration: Duration(milliseconds: 200),
               bottom: animate ? 56 * 2.0 : -56 * 8.0,
               left: 16,
               right: 16,

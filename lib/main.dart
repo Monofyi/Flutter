@@ -2,10 +2,9 @@ import 'package:disposable_provider/disposable_provider.dart';
 import 'package:flamingo/flamingo.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/router.dart';
+import 'package:inventory_management/ui/components/bottom_navigator.dart';
 import 'package:inventory_management/ui/splash_page.dart';
 import 'package:provider/provider.dart';
-
-import 'file:///Users/huma.shaikh/countdown/inventory_management/lib/ui/components/bottom_navigator.dart';
 
 import 'app/providers/repository_provider.dart';
 import 'domain/app_navigator.dart';
@@ -13,7 +12,7 @@ import 'domain/app_root_switcher.dart';
 
 void main() {
   _initializePluginsBeforeAppLaunches();
-  runApp(BitCopeApp.wrapped());
+  runApp(BiteCopeApp.wrapped());
 }
 
 void _initializePluginsBeforeAppLaunches() {
@@ -35,8 +34,8 @@ enum MainPageTab {
   bill,
 }
 
-class BitCopeApp extends StatelessWidget {
-  const BitCopeApp({Key key}) : super(key: key);
+class BiteCopeApp extends StatelessWidget {
+  const BiteCopeApp({Key key}) : super(key: key);
 
   static Widget wrapped() {
     return MultiProvider(
@@ -64,7 +63,7 @@ class BitCopeApp extends StatelessWidget {
           ),
         )
       ],
-      child: BitCopeApp(),
+      child: BiteCopeApp(),
     );
   }
 
