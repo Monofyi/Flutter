@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:inventory_management/data/cloud_firestore/user_document.dart';
 import 'package:inventory_management/data/repositories/account_repository.dart';
 import 'package:inventory_management/ui/home_page.dart';
-import 'package:inventory_management/ui/login_page/login_page.dart';
+import 'package:inventory_management/ui/sign_in/sign_in.dart';
 import 'package:inventory_management/utils/subscription_container/subscription_container.dart';
 import 'package:inventory_management/utils/subscription_container/subscription_container_mixin.dart';
 import 'package:rxdart/rxdart.dart';
@@ -85,7 +85,7 @@ class AppRootSwitcher extends Disposable with SubscriptionContainerMixin {
           appNavigator.pushAndRemoveAllPage(HomePage.routeName);
           return;
         case _FirstDestination.LoginPage:
-          appNavigator.pushAndRemoveAllPage(LoginPage.routeName);
+          appNavigator.pushAndRemoveAllPage(SignInPage.routeName);
           return;
       }
       assert(false, 'Unexpected _Progress:${bundle.firstDestination}');

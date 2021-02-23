@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/ui/home_page.dart';
 import 'package:inventory_management/ui/login_page/login_page.dart';
+import 'package:inventory_management/ui/sign_in/sign_in.dart';
 import 'package:inventory_management/ui/splash_page.dart';
 import 'package:recase/recase.dart';
 
@@ -51,6 +52,9 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
     ),
     HomePage.routeName: _standardRoute(
       (context, settings) => const HomePage(),
+    ),
+    SignInPage.routeName: _standardRoute(
+      (context, settings) => SignInPage(),
     ),
   };
 
