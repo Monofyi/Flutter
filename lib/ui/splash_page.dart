@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_management/ui/home_page.dart';
+import 'package:inventory_management/ui/home_page/home_page.dart';
 
 /// A page which is represented when user launches APP.
 class SplashPage extends StatelessWidget {
