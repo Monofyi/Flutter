@@ -2,8 +2,7 @@ name: CI
 
 on:
   pull-request:
-    branches:
-      - master
+    branches :[ master ]
 
 jobs:
   linter_test:
