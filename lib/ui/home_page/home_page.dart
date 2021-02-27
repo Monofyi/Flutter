@@ -69,7 +69,9 @@ class _Body extends StatelessWidget {
                     color: index % 2 != 0 ? lightBlue : Colors.white,
                     child: ListTile(
                       title: Text('ITEM No.$index'),
-                      trailing: Text('${index * 12333}'),
+                      trailing: Text(
+                        '${index * 12333}',
+                      ),
                     ),
                   );
                 },
