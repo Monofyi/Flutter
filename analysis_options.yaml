@@ -1,3 +1,4 @@
+#Do not change
 # https://pub.dev/packages/pedantic_mono
 include: package:pedantic_mono/analysis_options.yaml
 
