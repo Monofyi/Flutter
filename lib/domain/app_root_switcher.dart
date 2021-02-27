@@ -12,7 +12,7 @@ import 'package:rxdart/rxdart.dart';
 
 import 'app_navigator.dart';
 
-enum _FirstDestination { homePage, LoginPage }
+enum _FirstDestination { homePage, loginPage }
 
 class _SwitchingConditionBundle {
   _SwitchingConditionBundle({
@@ -27,7 +27,7 @@ class _SwitchingConditionBundle {
     /// Force updating is first priority. Even user who launched app first should update.
 
     if (uid == null) {
-      return _FirstDestination.LoginPage;
+      return _FirstDestination.loginPage;
     } else {
       return _FirstDestination.homePage;
     }
@@ -85,7 +85,7 @@ class AppRootSwitcher extends Disposable with SubscriptionContainerMixin {
         case _FirstDestination.homePage:
           appNavigator.pushAndRemoveAllPage(HomePage.routeName);
           return;
-        case _FirstDestination.LoginPage:
+        case _FirstDestination.loginPage:
           appNavigator.pushAndRemoveAllPage(SignInPage.routeName);
           return;
       }

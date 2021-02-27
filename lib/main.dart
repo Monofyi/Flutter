@@ -2,7 +2,6 @@ import 'package:disposable_provider/disposable_provider.dart';
 import 'package:flamingo/flamingo.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/router.dart';
-import 'package:inventory_management/ui/components/bottom_navigator.dart';
 import 'package:inventory_management/ui/splash_page.dart';
 import 'package:provider/provider.dart';
 
@@ -40,7 +39,7 @@ class BiteCopeApp extends StatelessWidget {
   static Widget wrapped() {
     return MultiProvider(
       providers: [
-        RepositoriesProvider(),
+        const RepositoriesProvider(),
         Provider(
           lazy: false,
           create: (_) => AppNavigator(
@@ -63,7 +62,7 @@ class BiteCopeApp extends StatelessWidget {
           ),
         )
       ],
-      child: BiteCopeApp(),
+      child: const BiteCopeApp(),
     );
   }
 
@@ -77,48 +76,6 @@ class BiteCopeApp extends StatelessWidget {
       home: () {
         return const SplashPage();
       }(),
-    );
-  }
-}
-
-/// A controller to switch content of [MainPage] by tapping tab.
-class MainTabController extends ValueNotifier<MainPageTab> {
-  MainTabController() : super(MainPageTab.home);
-
-  void changeTab(MainPageTab tab) {
-    value = tab;
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => MainTabController(),
-        ),
-      ],
-      child: Scaffold(
-        bottomNavigationBar: _BottomNavigation(),
-      ),
-    );
-  }
-}
-
-class _BottomNavigation extends StatelessWidget {
-  const _BottomNavigation();
-
-  @override
-  Widget build(BuildContext context) {
-    final tabController = context.watch<MainTabController>();
-    final currentTabIndex = tabController.value.index;
-    return AppBottomNavigationBar(
-      currentIndex: currentTabIndex,
-      onTap: (index) {
-        tabController.changeTab(MainPageTab.values[index]);
-      },
     );
   }
 }

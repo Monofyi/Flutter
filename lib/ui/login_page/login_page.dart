@@ -46,14 +46,16 @@ class _SignUpPageState extends State<SignUpPage> {
   String _emailId;
   String _password;
   String _contactNumber;
-  String _companyName;
+
   bool animate = false;
+  @override
   void initState() {
     super.initState();
 
-    Future.delayed(Duration(milliseconds: 500)).then((value) => setState(() {
-          animate = true;
-        }));
+    Future<int>.delayed(const Duration(milliseconds: 500))
+        .then((_) => setState(() {
+              animate = true;
+            }));
   }
 
   @override
@@ -61,11 +63,11 @@ class _SignUpPageState extends State<SignUpPage> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
-        backgroundColor: Color(0xfff2f3f7),
+        backgroundColor: const Color(0xfff2f3f7),
         body: Stack(
           children: <Widget>[
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: RadialGradient(
                   center: Alignment.topRight,
                   radius: 1.5,
@@ -80,7 +82,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             Align(
               alignment: Alignment.topCenter,
-              child: Container(
+              child: SizedBox(
                 height: MediaQuery.of(context).size.height * 0.22,
                 width: MediaQuery.of(context).size.width * 0.36,
                 child: SvgPicture.asset(
@@ -101,12 +103,12 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             AnimatedPositioned(
-              duration: Duration(milliseconds: 200),
+              duration: const Duration(milliseconds: 200),
               bottom: animate ? 56 * 2.0 : -56 * 8.0,
               left: 16,
               right: 16,
               child: Container(
-                  margin: EdgeInsets.all(6),
+                  margin:const EdgeInsets.all(6),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
@@ -115,45 +117,43 @@ class _SignUpPageState extends State<SignUpPage> {
                         color: Colors.grey.withOpacity(0.3),
                         spreadRadius: 9,
                         blurRadius: 8,
-                        offset: Offset(0, 3), // changes position of shadow
+                        offset:const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
                   height: MediaQuery.of(context).size.height * 0.56,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 16, right: 16),
+                    padding: const EdgeInsets.only(left: 16, right: 16),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         _BuildInputField(
                           label: 'Company Name',
-                          icon: Icon(Icons.work),
-                          onChanged: (value) {
-                            _companyName = value;
-                          },
+                          icon: const Icon(Icons.work),
+                          onChanged: (value) {},
                         ),
                         _BuildInputField(
                             label: 'Email',
-                            icon: Icon(Icons.email),
+                            icon:const Icon(Icons.email),
                             onChanged: (value) {
                               _emailId = value;
                             }),
                         _BuildInputField(
                             label: 'UserName',
-                            icon: Icon(Icons.person),
+                            icon:const Icon(Icons.person),
                             onChanged: (value) {
                               _userName = value;
                             }),
                         _BuildInputField(
                             label: 'phoneNumber',
-                            icon: Icon(Icons.phone),
+                            icon:const Icon(Icons.phone),
                             onChanged: (value) {
                               _contactNumber = value;
                             }),
                         _BuildInputField(
                             label: 'password',
-                            icon: Icon(Icons.remove_red_eye),
+                            icon: const Icon(Icons.remove_red_eye),
                             onChanged: (value) {
                               _password = value;
                             }),
@@ -175,19 +175,19 @@ class _NextButtonAndAgreement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _BottomCheckBox(),
+          const _BottomCheckBox(),
           GestureDetector(
             onTap: onTap,
             child: Container(
               height: 46,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18.0),
-                gradient: RadialGradient(
+                borderRadius: BorderRadius.circular(18),
+                gradient:const RadialGradient(
                   center: Alignment.topRight,
                   radius: 1.5,
                   colors: <Color>[
@@ -196,7 +196,7 @@ class _NextButtonAndAgreement extends StatelessWidget {
                   ],
                 ),
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Sign Up',
                   style: TextStyle(color: Colors.white, fontSize: 24),
@@ -223,7 +223,7 @@ class _BottomCheckBox extends StatelessWidget {
           value: false,
           onChanged: (bool value) {},
         ),
-        Text(
+       const Text(
           'I agree to the T&C and Privacy Policy',
         ),
       ],
