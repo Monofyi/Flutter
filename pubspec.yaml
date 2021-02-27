@@ -24,6 +24,8 @@ dependencies:
   flutter:
     sdk: flutter
   disposable_provider: 2.2.0
+  font_awesome_flutter:
+
 
 
 
