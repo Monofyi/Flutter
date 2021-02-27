@@ -22,7 +22,7 @@ class CustomAppBar extends StatelessWidget {
       elevation: 0,
       backgroundColor: Colors.transparent,
       flexibleSpace: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: RadialGradient(
             center: Alignment.topCenter,
             radius: 1,
@@ -61,7 +61,7 @@ class CustomAppBar extends StatelessWidget {
                   child: Align(
                       alignment: Alignment.topCenter,
                       child: Padding(
-                          padding: EdgeInsets.all(36),
+                          padding: const EdgeInsets.all(36),
                           child: Text(
                             'Home',
                             style: style,
@@ -80,12 +80,12 @@ class CustomAppBar extends StatelessWidget {
                       )),
                 ),
               ),
-              Container(
+              SizedBox(
                 height: extendedAppBarHeight / 2,
                 child: Align(
                     alignment: Alignment.bottomLeft,
                     child: Padding(
-                        padding: EdgeInsets.all(32),
+                        padding: const EdgeInsets.all(32),
                         child: Opacity(
                           opacity: centerTitleOpacity,
                           child: Text(
@@ -148,7 +148,7 @@ class ScrollLane extends StatelessWidget {
   const ScrollLane({Key key, @required this.height}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: height,
       child: Stack(
         children: [
@@ -159,15 +159,15 @@ class ScrollLane extends StatelessWidget {
                 height: height / 2,
               )),
           Align(
-            alignment: Alignment(0, 1),
-            child: Container(
+            alignment: const Alignment(0, 1),
+            child: SizedBox(
               height: height,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 6,
                 itemBuilder: (context, index) {
                   if (index == 0) {
-                    return SizedBox(
+                    return const SizedBox(
                       width: 24,
                     );
                   }
@@ -213,11 +213,11 @@ class _AnalyticsCardState extends State<AnalyticsCard>
 
     final width = MediaQuery.of(context).size.width * 0.6;
     return Padding(
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       child: Container(
         child: Row(
           children: [
-            Container(
+            SizedBox(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -241,11 +241,11 @@ class _AnalyticsCardState extends State<AnalyticsCard>
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.all(16),
-                child: Container(
+                padding: const EdgeInsets.all(16),
+                child: SizedBox(
                   width: width / 2,
                   child: CountDownAnimation(
-                    child: Text(
+                    child: const Text(
                       '60%',
                       style: TextStyle(fontSize: 24),
                     ),
@@ -264,19 +264,19 @@ class _AnalyticsCardState extends State<AnalyticsCard>
             ),
           ],
         ),
-        margin: EdgeInsets.only(bottom: 4, right: 4),
+        margin: const EdgeInsets.only(bottom: 4, right: 4),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.2),
               spreadRadius: 5,
               blurRadius: 5,
-              offset: Offset(0, 2), // changes position of shadow
+              offset: const Offset(0, 2), // changes position of shadow
             ),
           ],
           color: Colors.white,
           border: Border.all(width: 2, color: Colors.grey.withOpacity(0.3)),
-          borderRadius: BorderRadius.all(
+          borderRadius: const BorderRadius.all(
             Radius.circular(16),
           ),
         ),

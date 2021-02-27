@@ -6,11 +6,11 @@ import '../../colors.dart';
 import 'custom_app_bar.dart';
 
 class HomePage extends StatelessWidget {
-  static var routeName = '/home';
+  static const routeName = '/home';
   static Widget wrapped() {
     return Provider(
       create: (context) => CountTriggerController(),
-      child: HomePage(),
+      child: const HomePage(),
     );
   }
 
@@ -45,7 +45,7 @@ class _Body extends StatelessWidget {
       color: Colors.white,
       height: topArea,
       child: Padding(
-        padding: EdgeInsets.only(left: 32, right: 32, bottom: 32),
+        padding: const EdgeInsets.only(left: 32, right: 32, bottom: 32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

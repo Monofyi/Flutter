@@ -52,10 +52,10 @@ class AccountRepository {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-    } on Exception catch (e) {
-      throw e;
+    } on Exception catch (_) {
+      rethrow;
     }
-    FirebaseAuth.instance.currentUser();
+    await FirebaseAuth.instance.currentUser();
     return LoginResult();
   }
 
@@ -69,10 +69,10 @@ class AccountRepository {
           .createUserWithEmailAndPassword(email: email, password: password);
 
       print(id.user);
-    } on Exception catch (e) {
-      throw e;
+    } on Exception catch (_) {
+      rethrow;
     }
-    FirebaseAuth.instance.currentUser();
+    await FirebaseAuth.instance.currentUser();
     return LoginResult();
   }
 
@@ -85,10 +85,10 @@ class AccountRepository {
       final id = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       print(id.user);
-    } on Exception catch (e) {
-      throw e;
+    } on Exception catch (_) {
+      rethrow;
     }
-    FirebaseAuth.instance.currentUser();
+    await FirebaseAuth.instance.currentUser();
     return LoginResult();
   }
 }
