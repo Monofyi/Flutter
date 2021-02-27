@@ -1,63 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:inventory_management/ui/login_page/controller/login_page_controller.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
   static const routeName = '/loginPage';
+  static Widget wrapped() {
+    return MultiProvider(
+      providers: [
+        Provider(
+          create: (context) =>
+              LoginPageController(accountRepository: context.read()),
+        )
+      ],
+      child: SignUpPage(),
+    );
+  }
+
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignupInformation extends StatelessWidget {
-  const _SignupInformation({Key key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 16, right: 16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          _BuildInputField(
-            label: 'Company Name',
-            icon: Icon(Icons.work),
-          ),
-          _BuildInputField(
-            label: 'Email',
-            icon: Icon(Icons.email),
-          ),
-          _BuildInputField(
-            label: 'UserName',
-            icon: Icon(Icons.person),
-          ),
-          _BuildInputField(
-            label: 'phoneNumber',
-            icon: Icon(Icons.phone),
-          ),
-          _BuildInputField(
-            label: 'password',
-            icon: Icon(Icons.remove_red_eye),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _BuildInputField extends StatelessWidget {
-  const _BuildInputField({Key key, @required this.label, @required this.icon})
-      : super(key: key);
+  const _BuildInputField({
+    Key key,
+    @required this.label,
+    @required this.icon,
+    @required this.onChanged,
+  }) : super(key: key);
   final String label;
   final Widget icon;
+  final ValueChanged<String> onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged: (value) {},
+      onChanged: onChanged,
       decoration: InputDecoration(prefixIcon: icon, labelText: label),
     );
   }
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  String _userName;
+  String _emailId;
+  String _password;
+  String _contactNumber;
+  String _companyName;
   bool animate = false;
   void initState() {
     super.initState();
@@ -101,7 +90,15 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: _NextButtonAndAgreement(),
+              child: _NextButtonAndAgreement(
+                onTap: () {
+                  context.read<LoginPageController>().login(
+                      userName: _userName,
+                      email: _emailId,
+                      contactNumber: _contactNumber,
+                      password: _password);
+                },
+              ),
             ),
             AnimatedPositioned(
               duration: Duration(milliseconds: 200),
@@ -124,7 +121,45 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   height: MediaQuery.of(context).size.height * 0.56,
                   width: MediaQuery.of(context).size.width * 0.9,
-                  child: _SignupInformation()),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 16, right: 16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        _BuildInputField(
+                          label: 'Company Name',
+                          icon: Icon(Icons.work),
+                          onChanged: (value) {
+                            _companyName = value;
+                          },
+                        ),
+                        _BuildInputField(
+                            label: 'Email',
+                            icon: Icon(Icons.email),
+                            onChanged: (value) {
+                              _emailId = value;
+                            }),
+                        _BuildInputField(
+                            label: 'UserName',
+                            icon: Icon(Icons.person),
+                            onChanged: (value) {
+                              _userName = value;
+                            }),
+                        _BuildInputField(
+                            label: 'phoneNumber',
+                            icon: Icon(Icons.phone),
+                            onChanged: (value) {
+                              _contactNumber = value;
+                            }),
+                        _BuildInputField(
+                            label: 'password',
+                            icon: Icon(Icons.remove_red_eye),
+                            onChanged: (value) {
+                              _password = value;
+                            }),
+                      ],
+                    ),
+                  )),
             ),
           ],
         ),
@@ -134,7 +169,9 @@ class _SignUpPageState extends State<SignUpPage> {
 }
 
 class _NextButtonAndAgreement extends StatelessWidget {
-  const _NextButtonAndAgreement({Key key}) : super(key: key);
+  const _NextButtonAndAgreement({Key key, @required this.onTap})
+      : super(key: key);
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -144,23 +181,26 @@ class _NextButtonAndAgreement extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _BottomCheckBox(),
-          Container(
-            height: 46,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18.0),
-              gradient: RadialGradient(
-                center: Alignment.topRight,
-                radius: 1.5,
-                colors: <Color>[
-                  Color(0xff33CEFF),
-                  Color(0xff30AAFF),
-                ],
+          GestureDetector(
+            onTap: onTap,
+            child: Container(
+              height: 46,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18.0),
+                gradient: RadialGradient(
+                  center: Alignment.topRight,
+                  radius: 1.5,
+                  colors: <Color>[
+                    Color(0xff33CEFF),
+                    Color(0xff30AAFF),
+                  ],
+                ),
               ),
-            ),
-            child: Center(
-              child: Text(
-                'Sign Up',
-                style: TextStyle(color: Colors.white, fontSize: 24),
+              child: Center(
+                child: Text(
+                  'Sign Up',
+                  style: TextStyle(color: Colors.white, fontSize: 24),
+                ),
               ),
             ),
           ),

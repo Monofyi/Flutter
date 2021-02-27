@@ -71,6 +71,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+  countdown_animation:
+    dependency: "direct dev"
+    description:
+      name: countdown_animation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.5+2"
   disposable_provider:
     dependency: "direct main"
     description:
