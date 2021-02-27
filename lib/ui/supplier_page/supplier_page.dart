@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SupplierPage extends StatefulWidget {
@@ -135,7 +136,11 @@ class _SupplierPageState extends State<SupplierPage> {
                           border: Border.all(color: Colors.blueAccent)
                           // color: Colors.purple,
                           ),
-                      child: const TextField(
+                      child: TextField(
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(400)
+                        ],
+                        maxLines: 4,
                         decoration: InputDecoration(border: InputBorder.none),
                       ),
                     ),
