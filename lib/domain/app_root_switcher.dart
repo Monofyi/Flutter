@@ -4,16 +4,15 @@ import 'package:disposable_provider/disposable_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:inventory_management/data/cloud_firestore/user_document.dart';
 import 'package:inventory_management/data/repositories/account_repository.dart';
-import 'package:inventory_management/ui/home_page.dart';
+import 'package:inventory_management/ui/home_page/home_page.dart';
 import 'package:inventory_management/ui/sign_in/sign_in.dart';
-import 'package:inventory_management/ui/supplier_page/supplier_page.dart';
 import 'package:inventory_management/utils/subscription_container/subscription_container.dart';
 import 'package:inventory_management/utils/subscription_container/subscription_container_mixin.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'app_navigator.dart';
 
-enum _FirstDestination { homePage, LoginPage }
+enum _FirstDestination { homePage, loginPage }
 
 class _SwitchingConditionBundle {
   _SwitchingConditionBundle({
@@ -27,8 +26,8 @@ class _SwitchingConditionBundle {
   _FirstDestination get firstDestination {
     /// Force updating is first priority. Even user who launched app first should update.
 
-    if (uid == null || userDoc == null) {
-      return _FirstDestination.LoginPage;
+    if (uid == null) {
+      return _FirstDestination.loginPage;
     } else {
       return _FirstDestination.homePage;
     }
@@ -81,12 +80,15 @@ class AppRootSwitcher extends Disposable with SubscriptionContainerMixin {
       final distinct = pre?.firstDestination == next?.firstDestination;
       return distinct;
     }).listen((bundle) async {
+      print(bundle.firstDestination);
       switch (bundle.firstDestination) {
         case _FirstDestination.homePage:
           appNavigator.pushAndRemoveAllPage(HomePage.routeName);
           return;
-        case _FirstDestination.LoginPage:
-          appNavigator.pushAndRemoveAllPage(SupplierPage.routeName);
+
+        case _FirstDestination.loginPage:
+          appNavigator.pushAndRemoveAllPage(SignInPage.routeName);
+
           return;
       }
       assert(false, 'Unexpected _Progress:${bundle.firstDestination}');

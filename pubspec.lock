@@ -71,6 +71,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+  countdown_animation:
+    dependency: "direct dev"
+    description:
+      name: countdown_animation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.5+2"
   disposable_provider:
     dependency: "direct main"
     description:
@@ -263,6 +270,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.9.2"
+  pedantic_mono:
+    dependency: "direct dev"
+    description:
+      name: pedantic_mono
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.10.0+3"
   petitparser:
     dependency: transitive
     description:

@@ -53,25 +53,43 @@ class AccountRepository {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-    } on Exception catch (e) {
-      throw e;
+    } on Exception catch (_) {
+      rethrow;
     }
-    FirebaseAuth.instance.currentUser();
+    await FirebaseAuth.instance.currentUser();
     return LoginResult();
   }
 
-  Future<LoginResult> loginWithPasswordAndEmail(
+  Future<LoginResult> createUserWithPasswordAndEmail(
       {@required String email, @required String password}) async {
     /// Refresh Authentication.
     await FirebaseAuth.instance.signOut();
 
     try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-    } on Exception catch (e) {
-      throw e;
+      final id = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+
+      print(id.user);
+    } on Exception catch (_) {
+      rethrow;
     }
-    FirebaseAuth.instance.currentUser();
+    await FirebaseAuth.instance.currentUser();
+    return LoginResult();
+  }
+
+  Future<LoginResult> loginWithEmailAndPassword(
+      {@required String email, @required String password}) async {
+    /// Refresh Authentication.
+    await FirebaseAuth.instance.signOut();
+
+    try {
+      final id = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      print(id.user);
+    } on Exception catch (_) {
+      rethrow;
+    }
+    await FirebaseAuth.instance.currentUser();
     return LoginResult();
   }
 }

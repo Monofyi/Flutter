@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_management/ui/home_page.dart';
+import 'package:inventory_management/ui/home_page/home_page.dart';
 import 'package:inventory_management/ui/login_page/login_page.dart';
 import 'package:inventory_management/ui/sign_in/sign_in.dart';
 import 'package:inventory_management/ui/splash_page.dart';
@@ -55,10 +55,10 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
       (context, settings) => SignInPage(),
     ),
     HomePage.routeName: _standardRoute(
-      (context, settings) => const HomePage(),
+      (context, settings) => HomePage.wrapped(),
     ),
     SignUpPage.routeName: _standardRoute(
-      (context, settings) => SignUpPage(),
+      (context, settings) => SignUpPage.wrapped(),
     ),
   };
 
@@ -69,6 +69,7 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
 
     if (routeBuilder == null) {
       assert(false, 'unexpected settings: $_settings');
+
       return null;
     }
 

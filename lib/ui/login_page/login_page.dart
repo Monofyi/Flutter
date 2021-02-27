@@ -1,70 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:inventory_management/ui/login_page/controller/login_page_controller.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
   static const routeName = '/loginPage';
+  static Widget wrapped() {
+    return MultiProvider(
+      providers: [
+        Provider(
+          create: (context) =>
+              LoginPageController(accountRepository: context.read()),
+        )
+      ],
+      child: SignUpPage(),
+    );
+  }
+
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignupInformation extends StatelessWidget {
-  const _SignupInformation({Key key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 16, right: 16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          _BuildInputField(
-            label: 'Company Name',
-            icon: Icon(Icons.work),
-          ),
-          _BuildInputField(
-            label: 'Email',
-            icon: Icon(Icons.email),
-          ),
-          _BuildInputField(
-            label: 'UserName',
-            icon: Icon(Icons.person),
-          ),
-          _BuildInputField(
-            label: 'phoneNumber',
-            icon: Icon(Icons.phone),
-          ),
-          _BuildInputField(
-            label: 'password',
-            icon: Icon(Icons.remove_red_eye),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _BuildInputField extends StatelessWidget {
-  const _BuildInputField({Key key, @required this.label, @required this.icon})
-      : super(key: key);
+  const _BuildInputField({
+    Key key,
+    @required this.label,
+    @required this.icon,
+    @required this.onChanged,
+  }) : super(key: key);
   final String label;
   final Widget icon;
+  final ValueChanged<String> onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged: (value) {},
+      onChanged: onChanged,
       decoration: InputDecoration(prefixIcon: icon, labelText: label),
     );
   }
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  String _userName;
+  String _emailId;
+  String _password;
+  String _contactNumber;
+
   bool animate = false;
+  @override
   void initState() {
     super.initState();
 
-    Future.delayed(Duration(milliseconds: 500)).then((value) => setState(() {
-          animate = true;
-        }));
+    Future<int>.delayed(const Duration(milliseconds: 500))
+        .then((_) => setState(() {
+              animate = true;
+            }));
   }
 
   @override
@@ -72,11 +63,11 @@ class _SignUpPageState extends State<SignUpPage> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
-        backgroundColor: Color(0xfff2f3f7),
+        backgroundColor: const Color(0xfff2f3f7),
         body: Stack(
           children: <Widget>[
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: RadialGradient(
                   center: Alignment.topRight,
                   radius: 1.5,
@@ -91,7 +82,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             Align(
               alignment: Alignment.topCenter,
-              child: Container(
+              child: SizedBox(
                 height: MediaQuery.of(context).size.height * 0.22,
                 width: MediaQuery.of(context).size.width * 0.36,
                 child: SvgPicture.asset(
@@ -101,15 +92,23 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: _NextButtonAndAgreement(),
+              child: _NextButtonAndAgreement(
+                onTap: () {
+                  context.read<LoginPageController>().login(
+                      userName: _userName,
+                      email: _emailId,
+                      contactNumber: _contactNumber,
+                      password: _password);
+                },
+              ),
             ),
             AnimatedPositioned(
-              duration: Duration(milliseconds: 200),
+              duration: const Duration(milliseconds: 200),
               bottom: animate ? 56 * 2.0 : -56 * 8.0,
               left: 16,
               right: 16,
               child: Container(
-                  margin: EdgeInsets.all(6),
+                  margin:const EdgeInsets.all(6),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
@@ -118,13 +117,49 @@ class _SignUpPageState extends State<SignUpPage> {
                         color: Colors.grey.withOpacity(0.3),
                         spreadRadius: 9,
                         blurRadius: 8,
-                        offset: Offset(0, 3), // changes position of shadow
+                        offset:const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
                   height: MediaQuery.of(context).size.height * 0.56,
                   width: MediaQuery.of(context).size.width * 0.9,
-                  child: _SignupInformation()),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        _BuildInputField(
+                          label: 'Company Name',
+                          icon: const Icon(Icons.work),
+                          onChanged: (value) {},
+                        ),
+                        _BuildInputField(
+                            label: 'Email',
+                            icon:const Icon(Icons.email),
+                            onChanged: (value) {
+                              _emailId = value;
+                            }),
+                        _BuildInputField(
+                            label: 'UserName',
+                            icon:const Icon(Icons.person),
+                            onChanged: (value) {
+                              _userName = value;
+                            }),
+                        _BuildInputField(
+                            label: 'phoneNumber',
+                            icon:const Icon(Icons.phone),
+                            onChanged: (value) {
+                              _contactNumber = value;
+                            }),
+                        _BuildInputField(
+                            label: 'password',
+                            icon: const Icon(Icons.remove_red_eye),
+                            onChanged: (value) {
+                              _password = value;
+                            }),
+                      ],
+                    ),
+                  )),
             ),
           ],
         ),
@@ -134,33 +169,38 @@ class _SignUpPageState extends State<SignUpPage> {
 }
 
 class _NextButtonAndAgreement extends StatelessWidget {
-  const _NextButtonAndAgreement({Key key}) : super(key: key);
+  const _NextButtonAndAgreement({Key key, @required this.onTap})
+      : super(key: key);
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _BottomCheckBox(),
-          Container(
-            height: 46,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18.0),
-              gradient: RadialGradient(
-                center: Alignment.topRight,
-                radius: 1.5,
-                colors: <Color>[
-                  Color(0xff33CEFF),
-                  Color(0xff30AAFF),
-                ],
+          const _BottomCheckBox(),
+          GestureDetector(
+            onTap: onTap,
+            child: Container(
+              height: 46,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                gradient:const RadialGradient(
+                  center: Alignment.topRight,
+                  radius: 1.5,
+                  colors: <Color>[
+                    Color(0xff33CEFF),
+                    Color(0xff30AAFF),
+                  ],
+                ),
               ),
-            ),
-            child: Center(
-              child: Text(
-                'Sign Up',
-                style: TextStyle(color: Colors.white, fontSize: 24),
+              child: const Center(
+                child: Text(
+                  'Sign Up',
+                  style: TextStyle(color: Colors.white, fontSize: 24),
+                ),
               ),
             ),
           ),
@@ -183,7 +223,7 @@ class _BottomCheckBox extends StatelessWidget {
           value: false,
           onChanged: (bool value) {},
         ),
-        Text(
+       const Text(
           'I agree to the T&C and Privacy Policy',
         ),
       ],

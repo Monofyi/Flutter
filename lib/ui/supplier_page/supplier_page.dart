@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:inventory_management/ui/components/customtextfield.dart';
 
 class SupplierPage extends StatefulWidget {
   static String routeName = '/suppliers';
@@ -15,19 +14,19 @@ class _SupplierPageState extends State<SupplierPage> {
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
-          IconButton(icon: Icon(FontAwesomeIcons.bell), onPressed: () {})
+          IconButton(icon: const Icon(FontAwesomeIcons.bell), onPressed: () {})
         ],
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             FontAwesomeIcons.chevronLeft,
             size: 25,
           ),
           onPressed: () {},
         ),
         centerTitle: true,
-        title: Text("Suppliers"),
+        title: const Text("Suppliers"),
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -44,7 +43,7 @@ class _SupplierPageState extends State<SupplierPage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(25.0),
+          padding: const EdgeInsets.all(25),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -56,17 +55,17 @@ class _SupplierPageState extends State<SupplierPage> {
                           border: Border.all(color: Colors.blueAccent)
                           // color: Colors.purple,
                           ),
-                      child: TextField(
+                      child: const TextField(
                         decoration: InputDecoration(border: InputBorder.none),
                       ),
                     ),
 
                     Positioned(
                       top: -8.5,
-                      left: 10.0,
+                      left: 10,
                       child: Container(
                         color: Colors.white,
-                        child: Text("Company Name"),
+                        child: const Text("Company Name"),
                         clipBehavior: Clip.none,
                       ),
                     ),
@@ -78,7 +77,7 @@ class _SupplierPageState extends State<SupplierPage> {
                   fit: StackFit.loose,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
@@ -93,24 +92,24 @@ class _SupplierPageState extends State<SupplierPage> {
                               border: Border.all(color: Colors.blueAccent)
                               // color: Colors.purple,
                               ),
-                          child: TextField(
+                          child: const TextField(
                             decoration:
                                 InputDecoration(border: InputBorder.none),
                           ),
                         ),
                         Positioned(
                           top: -8.5,
-                          left: 10.0,
+                          left: 10,
                           child: Container(
                             color: Colors.white,
-                            child: Text("Tag"),
+                            child: const Text("Tag"),
                             clipBehavior: Clip.none,
                           ),
                         ),
-                        Positioned(
-                            bottom: 0.0,
-                            top: 0.0,
-                            right: 10.0,
+                        const Positioned(
+                            bottom: 0,
+                            top: 0,
+                            right: 10,
                             //left: 10.0,
                             child: Icon(Icons.expand_more)),
                         // Text("Company Name")
@@ -121,10 +120,10 @@ class _SupplierPageState extends State<SupplierPage> {
                       fit: StackFit.loose,
                     ),
                   ),
-                  Text("+add")
+                  const Text("+add")
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -136,17 +135,17 @@ class _SupplierPageState extends State<SupplierPage> {
                           border: Border.all(color: Colors.blueAccent)
                           // color: Colors.purple,
                           ),
-                      child: TextField(
+                      child: const TextField(
                         decoration: InputDecoration(border: InputBorder.none),
                       ),
                     ),
 
                     Positioned(
                       top: -8.5,
-                      left: 10.0,
+                      left: 10,
                       child: Container(
                         color: Colors.white,
-                        child: Text("Description"),
+                        child: const Text("Description"),
                         clipBehavior: Clip.none,
                       ),
                     ),
@@ -158,7 +157,7 @@ class _SupplierPageState extends State<SupplierPage> {
                   fit: StackFit.loose,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               // Center(child: RaisedButton(onPressed: () {})),
@@ -166,17 +165,17 @@ class _SupplierPageState extends State<SupplierPage> {
                 child: InkWell(
                   onTap: () => print('hello'),
                   child: Container(
-                    width: 100.0,
-                    height: 30.0,
+                    width: 100,
+                    height: 30,
                     decoration: BoxDecoration(
                       // color: Colors.blueAccent,
-                      border: Border.all(color: Colors.blue, width: 2.0),
-                      borderRadius: BorderRadius.circular(5.0),
+                      border: Border.all(color: Colors.blue, width: 2),
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         'Confirm',
-                        style: TextStyle(fontSize: 18.0, color: Colors.black),
+                        style: TextStyle(fontSize: 18, color: Colors.black),
                       ),
                     ),
                   ),
