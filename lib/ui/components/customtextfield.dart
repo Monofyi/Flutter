@@ -14,6 +14,9 @@ Widget customTextFields({
   Function iconTap,
 }) {
   return TextFormField(
+    autofocus: true,
+    enabled: true,
+
     obscureText: obscureText,
     controller: controller,
     keyboardType: keyboardType,

@@ -48,64 +48,139 @@ class _SupplierPageState extends State<SupplierPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Stack(
-                children: <Widget>[
+              Container(
+                child: Stack(
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blueAccent)
+                          // color: Colors.purple,
+                          ),
+                      child: TextField(
+                        decoration: InputDecoration(border: InputBorder.none),
+                      ),
+                    ),
+
+                    Positioned(
+                      top: -8.5,
+                      left: 10.0,
+                      child: Container(
+                        color: Colors.white,
+                        child: Text("Company Name"),
+                        clipBehavior: Clip.none,
+                      ),
+                    ),
+                    // Text("Company Name")
+                  ],
+                  clipBehavior: Clip.none,
+                  overflow: Overflow.visible,
+                  alignment: Alignment.topLeft,
+                  fit: StackFit.loose,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blueAccent)
-                        // color: Colors.purple,
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                          width: 200,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.blueAccent)
+                              // color: Colors.purple,
+                              ),
+                          child: TextField(
+                            decoration:
+                                InputDecoration(border: InputBorder.none),
+                          ),
                         ),
-                    child: TextField(),
+                        Positioned(
+                          top: -8.5,
+                          left: 10.0,
+                          child: Container(
+                            color: Colors.white,
+                            child: Text("Tag"),
+                            clipBehavior: Clip.none,
+                          ),
+                        ),
+                        Positioned(
+                            bottom: 0.0,
+                            top: 0.0,
+                            right: 10.0,
+                            //left: 10.0,
+                            child: Icon(Icons.expand_more)),
+                        // Text("Company Name")
+                      ],
+                      clipBehavior: Clip.none,
+                      overflow: Overflow.visible,
+                      alignment: Alignment.topLeft,
+                      fit: StackFit.loose,
+                    ),
                   ),
-                  Positioned(
-                      top: 0.0, right: 240.0, child: Text("Company Name")),
-                  // Text("Company Name")
+                  Text("+add")
                 ],
               ),
               SizedBox(
                 height: 20,
               ),
-              customTextFields(
-                //controller: _passwordController,
-                keyboardType: TextInputType.text,
-                context: context,
-                color: Colors.black,
-                iconData: Icons.visibility,
-                name: 'Password*',
-                validator: (value) {
-                  if (value.isEmpty) return 'Password is Required';
-                  return null;
-                },
-                obscureText: false,
-                iconTap: () {},
-              ),
-              SizedBox(
-                height: 30,
-              ),
               Container(
-                width: 200,
-                child: Row(
+                child: Stack(
                   children: <Widget>[
-                    Expanded(
-                      child: customTextFields(
-                        //controller: _passwordController,
-                        keyboardType: TextInputType.text,
-                        context: context,
-                        color: Colors.black,
-                        iconData: Icons.visibility,
-                        name: 'Password*',
-                        validator: (value) {
-                          if (value.isEmpty) return 'Password is Required';
-                          return null;
-                        },
-                        obscureText: false,
-                        iconTap: () {},
+                    Container(
+                      height: 150,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blueAccent)
+                          // color: Colors.purple,
+                          ),
+                      child: TextField(
+                        decoration: InputDecoration(border: InputBorder.none),
                       ),
                     ),
-                  ],
-                ),
 
-                //  Icon(Icons.arrow_drop_down),
+                    Positioned(
+                      top: -8.5,
+                      left: 10.0,
+                      child: Container(
+                        color: Colors.white,
+                        child: Text("Description"),
+                        clipBehavior: Clip.none,
+                      ),
+                    ),
+                    // Text("Company Name")
+                  ],
+                  clipBehavior: Clip.none,
+                  overflow: Overflow.visible,
+                  alignment: Alignment.topLeft,
+                  fit: StackFit.loose,
+                ),
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              // Center(child: RaisedButton(onPressed: () {})),
+              Center(
+                child: InkWell(
+                  onTap: () => print('hello'),
+                  child: Container(
+                    width: 100.0,
+                    height: 30.0,
+                    decoration: BoxDecoration(
+                      // color: Colors.blueAccent,
+                      border: Border.all(color: Colors.blue, width: 2.0),
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Confirm',
+                        style: TextStyle(fontSize: 18.0, color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
