@@ -6,7 +6,7 @@ on:
 
 jobs:
   flutter_test:
-    name: Flutter test
+    name: Flutter test and analyze
     runs-on : ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,6 +17,6 @@ jobs:
         with :
           channel: "stable"
 
-      -run :flutter pub get
+      -run: flutter pub get
       -run: flutter analyze
       -run: flutter test
