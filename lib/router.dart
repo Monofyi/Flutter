@@ -65,6 +65,7 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
 
     if (routeBuilder == null) {
       assert(false, 'unexpected settings: $_settings');
+
       return null;
     }
 
