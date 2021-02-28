@@ -255,7 +255,7 @@ class Body extends StatelessWidget {
     return Container(
       color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
