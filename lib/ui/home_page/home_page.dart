@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/ui/home_page/custom_app_bar.dart';
+import 'package:inventory_management/ui/supplier_page/supplier_page.dart';
 
 import '../../colors.dart';
 
@@ -27,12 +28,28 @@ class HomePage extends StatelessWidget {
         title: 'List_details',
         icon: 'images/icons/list_details.jpg',
         subCategory: [
-          'Suppliers',
-          'Buyers',
-          'Raw Material',
-          'Warehouse location',
-          'Goods',
-          'Machines'
+          ListItem(
+              title: 'Suppliers',
+              icon: null,
+              onTap: () {
+                Navigator.of(context).popAndPushNamed(SupplierPage.routeName);
+              }),
+          ListItem(
+            title: 'Buyers',
+            icon: null,
+          ),
+          ListItem(
+            title: 'Warehouse location',
+            icon: null,
+          ),
+          ListItem(
+            title: 'Goods',
+            icon: null,
+          ),
+          ListItem(
+            title: 'Machines',
+            icon: null,
+          ),
         ],
       ),
       ListItem(
@@ -201,7 +218,8 @@ class HomePage extends StatelessWidget {
                               .map((e) => ListTile(
                                     contentPadding:
                                         const EdgeInsets.only(left: 64),
-                                    title: Text(e),
+                                    title: Text(e.title),
+                                    onTap: e.onTap ?? () {},
                                   ))
                               .toList(),
                         )
@@ -279,7 +297,7 @@ class Body extends StatelessWidget {
 class ListItem {
   final String icon;
   final String title;
-  final List<String> subCategory;
+  final List<ListItem> subCategory;
   final VoidCallback onTap;
 
   ListItem(
