@@ -1,51 +1,243 @@
-import 'package:countdown_animation/countdown_animation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:inventory_management/ui/home_page/custom_app_bar.dart';
 
 import '../../colors.dart';
-import 'custom_app_bar.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/home';
-  static Widget wrapped() {
-    return Provider(
-      create: (context) => CountTriggerController(),
-      child: const HomePage(),
-    );
-  }
-
   const HomePage({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
+    final items = [
+      ListItem(
+          title: 'Home',
+          icon: 'images/icons/home.jpg',
+          onTap: () {
+            Navigator.of(context).pop();
+          }),
+      ListItem(
+        title: 'Setting',
+        icon: 'images/icons/setting.jpg',
+      ),
+      ListItem(
+        title: 'User_management',
+        icon: 'images/icons/user_management.jpg',
+      ),
+      ListItem(
+        title: 'List_details',
+        icon: 'images/icons/list_details.jpg',
+        subCategory: [
+          'Suppliers',
+          'Buyers',
+          'Raw Material',
+          'Warehouse location',
+          'Goods',
+          'Machines'
+        ],
+      ),
+      ListItem(
+        title: 'Purchase',
+        icon: 'images/icons/purchase.jpg',
+      ),
+      ListItem(
+        title: 'Raw Material',
+        icon: 'images/icons/raw_material.jpg',
+      ),
+      ListItem(
+        title: 'Production',
+        icon: 'images/icons/production.jpg',
+      ),
+      ListItem(
+        title: 'Goods',
+        icon: 'images/icons/goods.jpg',
+      ),
+      ListItem(
+        title: 'Printing',
+        icon: 'images/icons/printing.jpg',
+      ),
+      ListItem(
+        title: 'Wastage',
+        icon: 'images/icons/wastage.jpg',
+      ),
+      ListItem(
+        title: 'Shipment',
+        icon: 'images/icons/shipment.jpg',
+      ),
+      ListItem(
+        title: 'Logout',
+        icon: 'images/icons/signout.jpg',
+      ),
+    ];
+    final titleStyle =
+        Theme.of(context).textTheme.subtitle2.copyWith(color: Colors.white);
+    final extendedAppBarHeight = MediaQuery.of(context).size.height * 0.45;
     return Scaffold(
-      backgroundColor: theme.colorScheme.onSecondary,
       body: NestedScrollView(
         headerSliverBuilder: (_, __) => [
-          const CustomAppBar(),
+          SliverAppBar(
+            pinned: true,
+            floating: true,
+            expandedHeight: extendedAppBarHeight,
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                gradient: RadialGradient(
+                  center: Alignment.topRight,
+                  radius: 1.5,
+                  colors: <Color>[
+                    Color(0xff33CEFF),
+                    Color(0xff30AAFF),
+                  ],
+                ),
+              ),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final topPadding = MediaQuery.of(context).padding.top;
+
+                  final maxVisibleAreaHeight =
+                      extendedAppBarHeight + topPadding;
+                  final headerHeight = kToolbarHeight + topPadding;
+                  final centerTitleOpacity =
+                      (constraints.maxHeight - headerHeight) /
+                          (maxVisibleAreaHeight - headerHeight);
+
+                  final headerFollowButtonOpacity = 1 - centerTitleOpacity;
+
+                  final visibility = constraints.maxHeight > 56 + 86;
+                  return Container(
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Opacity(
+                            opacity: centerTitleOpacity,
+                            child: Visibility(
+                              visible: visibility,
+                              child: ScrollLane(
+                                height: constraints.maxHeight,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: kBottomNavigationBarHeight - 8),
+                            child: Opacity(
+                              opacity: headerFollowButtonOpacity,
+                              child: Text(
+                                'Available Raw Material',
+                                style: titleStyle,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
         ],
-        body: const _Body(),
+        body: const Body(),
       ),
+      drawer: Drawer(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          DrawerHeader(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      image: DecorationImage(
+                        image: AssetImage("images/logo.jpg"),
+                        fit: BoxFit.contain,
+                      ),
+                      shape: BoxShape.circle,
+                    ),
+                    height: 80,
+                    width: 80,
+                  ),
+                  Text(
+                    'BiteCope',
+                    style: Theme.of(context).textTheme.headline5.copyWith(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                ]),
+            decoration: const BoxDecoration(
+              gradient: RadialGradient(
+                center: Alignment.topRight,
+                radius: 1.5,
+                colors: <Color>[
+                  Color(0xff33CEFF),
+                  Color(0xff30AAFF),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: ListView.builder(
+                physics: const ClampingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final item = items[index];
+                  return item.subCategory != null
+                      ? ExpansionTile(
+                          tilePadding: EdgeInsets.zero,
+                          childrenPadding: EdgeInsets.zero,
+                          title: Text(item.title),
+                          trailing: const Icon(Icons.keyboard_arrow_down),
+                          leading: SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: Image.asset(items[index].icon)),
+                          children: item.subCategory
+                              .map((e) => ListTile(
+                                    contentPadding:
+                                        const EdgeInsets.only(left: 64),
+                                    title: Text(e),
+                                  ))
+                              .toList(),
+                        )
+                      : ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          title: Text(items[index].title),
+                          onTap: item?.onTap ?? () {},
+                          leading: SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: Image.asset(items[index].icon)),
+                        );
+                },
+                itemCount: items.length,
+              ),
+            ),
+          )
+        ],
+      )),
     );
   }
 }
 
-class _Body extends StatelessWidget {
-  const _Body({Key key}) : super(key: key);
+class Body extends StatelessWidget {
+  const Body({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
     final tableHeaderStyle =
         textTheme.subtitle1.copyWith(fontWeight: FontWeight.bold);
-    final topArea = MediaQuery.of(context).size.height * 0.35;
+
     return Container(
       color: Colors.white,
-      height: topArea,
       child: Padding(
-        padding: const EdgeInsets.only(left: 32, right: 32, bottom: 32),
+        padding: const EdgeInsets.only(left: 16, right: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -82,4 +274,17 @@ class _Body extends StatelessWidget {
       ),
     );
   }
+}
+
+class ListItem {
+  final String icon;
+  final String title;
+  final List<String> subCategory;
+  final VoidCallback onTap;
+
+  ListItem(
+      {this.onTap,
+      @required this.icon,
+      @required this.title,
+      this.subCategory});
 }

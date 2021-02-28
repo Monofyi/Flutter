@@ -22,7 +22,7 @@ class SplashPage extends StatelessWidget {
               alignment: Alignment.center,
               child: Center(
                 child: Image.asset(
-                  'images/splash_logo.jpg',
+                  'images/logo.jpg',
                 ),
               ),
             ),
