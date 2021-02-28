@@ -3,6 +3,7 @@ import 'package:inventory_management/ui/home_page/home_page.dart';
 import 'package:inventory_management/ui/login_page/login_page.dart';
 import 'package:inventory_management/ui/sign_in/sign_in.dart';
 import 'package:inventory_management/ui/splash_page.dart';
+import 'package:inventory_management/ui/supplier_page/supplier_page.dart';
 import 'package:recase/recase.dart';
 
 /// A builder function to build page.
@@ -46,6 +47,9 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
   final _routes = <String, RouteConfiguration>{
     SplashPage.routeName: _standardRoute(
       (context, settings) => const SplashPage(),
+    ),
+    SupplierPage.routeName: _standardRoute(
+      (context, settings) => SupplierPage(),
     ),
     SignInPage.routeName: _standardRoute(
       (context, settings) => SignInPage(),
