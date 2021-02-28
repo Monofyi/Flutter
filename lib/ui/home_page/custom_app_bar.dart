@@ -100,20 +100,12 @@ class CustomAppBar extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: topPadding),
-                    Row(
-                      children: <Widget>[
-                        BackButton(
-                          onPressed: () {},
-                          color: Colors.white,
-                        ),
-                        Opacity(
-                          opacity: appBarOpacity,
-                          child: IgnorePointer(
-                            ignoring: headerFollowButtonOpacity < 0.25,
-                            child: const _TopTitle(),
-                          ),
-                        ),
-                      ],
+                    Opacity(
+                      opacity: appBarOpacity,
+                      child: IgnorePointer(
+                        ignoring: headerFollowButtonOpacity < 0.25,
+                        child: const _TopTitle(),
+                      ),
                     ),
                   ],
                 ),
@@ -148,45 +140,67 @@ class ScrollLane extends StatelessWidget {
   const ScrollLane({Key key, @required this.height}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: height,
-      child: Stack(
-        children: [
-          Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                color: Colors.white,
-                height: height / 2,
-              )),
-          Align(
-            alignment: const Alignment(0, 1),
-            child: SizedBox(
-              height: height,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 6,
-                itemBuilder: (context, index) {
-                  if (index == 0) {
-                    return const SizedBox(
-                      width: 24,
-                    );
-                  }
-                  return AnalyticsCard(
-                    index: index,
-                  );
-                },
-              ),
+    final titleStyle =
+        Theme.of(context).textTheme.headline5.copyWith(color: Colors.white);
+    return Stack(
+      children: [
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: SizedBox(
+            height: height / 2,
+            child: Stack(
+              children: [
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    color: Colors.white,
+                    height: height / 4,
+                  ),
+                ),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: SizedBox(
+            height: height / 2,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 6,
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  return const SizedBox(
+                    width: 24,
+                  );
+                }
+                return AnalyticsCard(
+                  index: index,
+                  height: height / 20,
+                );
+              },
+            ),
+          ),
+        ),
+        Align(
+          alignment: const Alignment(-1, -0.3),
+          child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(
+                'Available Raw Material',
+                style: titleStyle,
+              )),
+        ),
+      ],
     );
   }
 }
 
 class AnalyticsCard extends StatefulWidget {
-  const AnalyticsCard({Key key, @required this.index}) : super(key: key);
+  const AnalyticsCard({Key key, @required this.index, @required this.height})
+      : super(key: key);
   final int index;
+  final double height;
   @override
   _AnalyticsCardState createState() => _AnalyticsCardState();
 }
@@ -217,27 +231,29 @@ class _AnalyticsCardState extends State<AnalyticsCard>
       child: Container(
         child: Row(
           children: [
-            SizedBox(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      countTriggerController.trigger(widget.index);
-                    },
-                    child: Text(
-                      'Material ${widget.index}',
-                      style: subTitle,
+            Expanded(
+              child: SizedBox(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        countTriggerController.trigger(widget.index);
+                      },
+                      child: Text(
+                        'Material ${widget.index}',
+                        style: subTitle,
+                      ),
                     ),
-                  ),
-                  Text(
-                    '100 kg',
-                    style: style,
-                  )
-                ],
+                    Text(
+                      '100 kg',
+                      style: style,
+                    )
+                  ],
+                ),
+                width: width / 2,
               ),
-              width: width / 2,
             ),
             Expanded(
               child: Padding(
@@ -245,9 +261,13 @@ class _AnalyticsCardState extends State<AnalyticsCard>
                 child: SizedBox(
                   width: width / 2,
                   child: CountDownAnimation(
-                    child: const Text(
-                      '60%',
-                      style: TextStyle(fontSize: 24),
+                    child: LayoutBuilder(
+                      builder: (c, b) {
+                        return Text(
+                          '60%',
+                          style: TextStyle(fontSize: b.maxHeight / 4),
+                        );
+                      },
                     ),
                     controller: countTriggerController,
                     initialCounterIndex: 1,
@@ -257,7 +277,7 @@ class _AnalyticsCardState extends State<AnalyticsCard>
                     progressColor: lightBlue,
                     onChanged: (index) {},
                     backgroundColor: Colors.lightBlue,
-                    strokeWidth: 12,
+                    strokeWidth: widget.height,
                   ),
                 ),
               ),

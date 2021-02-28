@@ -51,7 +51,7 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
       (context, settings) => SignInPage(),
     ),
     HomePage.routeName: _standardRoute(
-      (context, settings) => HomePage.wrapped(),
+      (context, settings) => const HomePage(),
     ),
     SignUpPage.routeName: _standardRoute(
       (context, settings) => SignUpPage.wrapped(),
