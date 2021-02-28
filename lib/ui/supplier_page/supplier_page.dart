@@ -141,7 +141,8 @@ class _SupplierPageState extends State<SupplierPage> {
                           LengthLimitingTextInputFormatter(400)
                         ],
                         maxLines: 4,
-                        decoration: InputDecoration(border: InputBorder.none),
+                        decoration:
+                            const InputDecoration(border: InputBorder.none),
                       ),
                     ),
 
