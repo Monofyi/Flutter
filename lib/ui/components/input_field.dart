@@ -7,17 +7,20 @@ class LengthCountingTextField extends FormField<String> {
   LengthCountingTextField(
     this.initialString, {
     int maxLine,
-    Widget label,
+    String label,
     int maxLength,
     FormFieldSetter<String> onSaved,
     ValueChanged<String> onChanged,
     FormFieldValidator<String> validator,
+    TextInputType type = TextInputType.text,
+    Widget icon,
     String hintText,
     Key key,
   }) : super(
           key: key,
           onSaved: onSaved,
           initialValue: initialString,
+          autovalidateMode: AutovalidateMode.always,
           validator: validator,
           builder: (field) {
             final state = field as _LengthCountingTextFieldState;
@@ -28,7 +31,7 @@ class LengthCountingTextField extends FormField<String> {
             }
 
             return LabeledFormField(
-              label: label,
+              label: Text(''),
               note: Visibility(
                 visible: maxLength != null,
                 child: Text(
@@ -43,29 +46,15 @@ class LengthCountingTextField extends FormField<String> {
                   (state.hasError) ? Text(state.errorText) : const SizedBox(),
               child: Builder(builder: (context) {
                 return TextField(
+                  keyboardType: type,
                   maxLines: maxLine,
                   style: const TextStyle(
                     fontSize: 15,
                   ),
                   onChanged: onChangedHandler,
                   controller: state._controller,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-                    border: InputBorder.none,
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(width: 1),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12),
-                      ),
-                    ),
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(width: 1),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12),
-                      ),
-                    ),
-                    hintText: hintText,
-                  ),
+                  decoration:
+                      InputDecoration(prefixIcon: icon, labelText: label),
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(maxLength),
                   ],
@@ -143,16 +132,18 @@ class _LengthCountingTextFieldState extends FormFieldState<String> {
   }
 }
 
-class InputField extends StatelessWidget {
-  final String Function(String) validator;
+class BuildInputField extends StatelessWidget {
+  final FormFieldValidator<String> validator;
   final String hintText;
   final int maxLength;
   final String label;
   final int maxLine;
   final String initialString;
-  final void Function(String) value;
+  final FormFieldSetter<String> onChanged;
+  final Widget icon;
+  final TextInputType type;
 
-  const InputField({
+  const BuildInputField({
     Key key,
     this.validator,
     this.hintText,
@@ -160,34 +151,24 @@ class InputField extends StatelessWidget {
     this.label,
     this.maxLine,
     this.initialString,
-    this.value,
+    this.onChanged,
+    this.icon,
+    this.type,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: LengthCountingTextField(
-        initialString,
-        maxLine: maxLine,
-        label: Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: RichText(
-            text: TextSpan(
-              text: label,
-              style: Theme.of(context)
-                  .textTheme
-                  .subtitle1
-                  .copyWith(fontWeight: FontWeight.bold, fontSize: 12),
-            ),
-          ),
-        ),
-        maxLength: maxLength,
-        onSaved: value,
-        validator: validator,
-        hintText: hintText,
-        onChanged: value,
-      ),
+    return LengthCountingTextField(
+      initialString,
+      maxLine: maxLine,
+      label: label,
+      icon: icon,
+      type: type,
+      maxLength: maxLength,
+      onSaved: onChanged,
+      validator: validator,
+      hintText: hintText,
+      onChanged: onChanged,
     );
   }
 }

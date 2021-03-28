@@ -1,14 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: implicit_dynamic_parameter
-
 part of 'supplier_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SupplierModel _$_$_SupplierModelFromJson(Map json) {
+_$_SupplierModel _$_$_SupplierModelFromJson(Map<String, dynamic> json) {
   return _$_SupplierModel(
     supplierName: json['supplier_name'] as String,
     phoneNumber: json['phone_no'] as int,

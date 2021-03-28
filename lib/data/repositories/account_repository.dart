@@ -21,10 +21,10 @@ class AccountRepository {
     return pref.setString('token', token);
   }
 
-  Future<void> registerUser(
+  Future<LoginResult> registerUser(
       {@required String userName,
       @required String email,
-      @required String contactNumber,
+      @required int contactNumber,
       @required String password,
       @required String confirmPassword,
       @required String recoveryQuestion,
@@ -33,7 +33,7 @@ class AccountRepository {
     final response =
         await post(Uri.parse("http://65.1.236.26:8000/register/"), body: {
       'username': userName,
-      'phone_no': contactNumber,
+      'phone_no': contactNumber.toString(),
       'email': email,
       'password': password,
       'confirm_password': confirmPassword,
@@ -45,8 +45,12 @@ class AccountRepository {
       final json = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
       final token = json["token"] as String;
 
-      await setToken(token: token);
+      if (token != null) {
+        await setToken(token: token);
+        return LoginResult.successfull;
+      }
     }
+    return LoginResult.failed;
   }
 
   Future<LoginResult> signIn({

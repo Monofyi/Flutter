@@ -43,6 +43,7 @@ dev_dependencies:
   build_runner: 1.11.1
   http: 0.13.0
   flutter_state_notifier: 0.6.1
+  email_validator: 1.0.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

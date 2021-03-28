@@ -18,10 +18,10 @@ class _$SupplierModelTearOff {
 
 // ignore: unused_element
   _SupplierModel call(
-      {@JsonKey(name: "supplier_name") String supplierName = '',
-      @JsonKey(name: "phone_no") int phoneNumber = 0,
-      @JsonKey(name: "address") String address = '',
-      @JsonKey(name: "description") String description = ''}) {
+      {@JsonKey(name: 'supplier_name') String supplierName = '',
+      @JsonKey(name: 'phone_no') int phoneNumber = 0,
+      @JsonKey(name: 'address') String address = '',
+      @JsonKey(name: 'description') String description = ''}) {
     return _SupplierModel(
       supplierName: supplierName,
       phoneNumber: phoneNumber,
@@ -42,13 +42,13 @@ const $SupplierModel = _$SupplierModelTearOff();
 
 /// @nodoc
 mixin _$SupplierModel {
-  @JsonKey(name: "supplier_name")
+  @JsonKey(name: 'supplier_name')
   String get supplierName;
-  @JsonKey(name: "phone_no")
+  @JsonKey(name: 'phone_no')
   int get phoneNumber;
-  @JsonKey(name: "address")
+  @JsonKey(name: 'address')
   String get address;
-  @JsonKey(name: "description")
+  @JsonKey(name: 'description')
   String get description;
 
   Map<String, dynamic> toJson();
@@ -62,10 +62,10 @@ abstract class $SupplierModelCopyWith<$Res> {
           SupplierModel value, $Res Function(SupplierModel) then) =
       _$SupplierModelCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: "supplier_name") String supplierName,
-      @JsonKey(name: "phone_no") int phoneNumber,
-      @JsonKey(name: "address") String address,
-      @JsonKey(name: "description") String description});
+      {@JsonKey(name: 'supplier_name') String supplierName,
+      @JsonKey(name: 'phone_no') int phoneNumber,
+      @JsonKey(name: 'address') String address,
+      @JsonKey(name: 'description') String description});
 }
 
 /// @nodoc
@@ -105,10 +105,10 @@ abstract class _$SupplierModelCopyWith<$Res>
       __$SupplierModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: "supplier_name") String supplierName,
-      @JsonKey(name: "phone_no") int phoneNumber,
-      @JsonKey(name: "address") String address,
-      @JsonKey(name: "description") String description});
+      {@JsonKey(name: 'supplier_name') String supplierName,
+      @JsonKey(name: 'phone_no') int phoneNumber,
+      @JsonKey(name: 'address') String address,
+      @JsonKey(name: 'description') String description});
 }
 
 /// @nodoc
@@ -147,10 +147,10 @@ class __$SupplierModelCopyWithImpl<$Res>
 /// @nodoc
 class _$_SupplierModel implements _SupplierModel {
   const _$_SupplierModel(
-      {@JsonKey(name: "supplier_name") this.supplierName = '',
-      @JsonKey(name: "phone_no") this.phoneNumber = 0,
-      @JsonKey(name: "address") this.address = '',
-      @JsonKey(name: "description") this.description = ''})
+      {@JsonKey(name: 'supplier_name') this.supplierName = '',
+      @JsonKey(name: 'phone_no') this.phoneNumber = 0,
+      @JsonKey(name: 'address') this.address = '',
+      @JsonKey(name: 'description') this.description = ''})
       : assert(supplierName != null),
         assert(phoneNumber != null),
         assert(address != null),
@@ -160,16 +160,16 @@ class _$_SupplierModel implements _SupplierModel {
       _$_$_SupplierModelFromJson(json);
 
   @override
-  @JsonKey(name: "supplier_name")
+  @JsonKey(name: 'supplier_name')
   final String supplierName;
   @override
-  @JsonKey(name: "phone_no")
+  @JsonKey(name: 'phone_no')
   final int phoneNumber;
   @override
-  @JsonKey(name: "address")
+  @JsonKey(name: 'address')
   final String address;
   @override
-  @JsonKey(name: "description")
+  @JsonKey(name: 'description')
   final String description;
 
   @override
@@ -216,25 +216,25 @@ class _$_SupplierModel implements _SupplierModel {
 
 abstract class _SupplierModel implements SupplierModel {
   const factory _SupplierModel(
-      {@JsonKey(name: "supplier_name") String supplierName,
-      @JsonKey(name: "phone_no") int phoneNumber,
-      @JsonKey(name: "address") String address,
-      @JsonKey(name: "description") String description}) = _$_SupplierModel;
+      {@JsonKey(name: 'supplier_name') String supplierName,
+      @JsonKey(name: 'phone_no') int phoneNumber,
+      @JsonKey(name: 'address') String address,
+      @JsonKey(name: 'description') String description}) = _$_SupplierModel;
 
   factory _SupplierModel.fromJson(Map<String, dynamic> json) =
       _$_SupplierModel.fromJson;
 
   @override
-  @JsonKey(name: "supplier_name")
+  @JsonKey(name: 'supplier_name')
   String get supplierName;
   @override
-  @JsonKey(name: "phone_no")
+  @JsonKey(name: 'phone_no')
   int get phoneNumber;
   @override
-  @JsonKey(name: "address")
+  @JsonKey(name: 'address')
   String get address;
   @override
-  @JsonKey(name: "description")
+  @JsonKey(name: 'description')
   String get description;
   @override
   @JsonKey(ignore: true)

@@ -33,10 +33,10 @@ class _AddNewSupplierState extends State<AddNewSupplier> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const InputField(
+                const BuildInputField(
                   label: 'Supplier Name',
                 ),
-                const InputField(
+                const BuildInputField(
                   label: 'Description',
                   maxLine: 8,
                 ),
@@ -50,7 +50,7 @@ class _AddNewSupplierState extends State<AddNewSupplier> {
                     setState(
                       () {
                         list.add(
-                          InputField(
+                          BuildInputField(
                             label: label,
                           ),
                         );
