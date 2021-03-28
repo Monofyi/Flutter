@@ -1,29 +1,43 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+class SupplierPageArgument {
+  final String companyName;
+  final String description;
+
+  SupplierPageArgument(
+      {@required this.companyName, @required this.description});
+}
 
 class SupplierPage extends StatefulWidget {
   static String routeName = '/suppliers';
+  final String companyName;
+  final String description;
+
+  const SupplierPage(
+      {Key key, @required this.companyName, @required this.description})
+      : super(key: key);
   @override
   _SupplierPageState createState() => _SupplierPageState();
+  static Widget wrapped(SupplierPageArgument supplierPageArgument) {
+    return SupplierPage(
+      companyName: supplierPageArgument.companyName,
+      description: supplierPageArgument.description,
+    );
+  }
 }
 
 class _SupplierPageState extends State<SupplierPage> {
   @override
   Widget build(BuildContext context) {
+    print(widget.description);
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
-          IconButton(icon: const Icon(FontAwesomeIcons.bell), onPressed: () {})
+          IconButton(icon: const Icon(Icons.notifications), onPressed: () {})
         ],
-        leading: IconButton(
-          icon: const Icon(
-            FontAwesomeIcons.chevronLeft,
-            size: 25,
-          ),
-          onPressed: () {},
-        ),
+        leading: const BackButton(),
         centerTitle: true,
         title: const Text("Suppliers"),
         flexibleSpace: Container(
@@ -33,7 +47,7 @@ class _SupplierPageState extends State<SupplierPage> {
               end: Alignment.bottomRight,
               //stops: [.03, 0.04, .8],
               colors: <Color>[
-                Color(0xFF033CFFF),
+                Color(0xFF033CFF),
                 Color(0xFF30AAFF),
                 Color(0xFF33CFFF),
                 Colors.blue
@@ -51,16 +65,6 @@ class _SupplierPageState extends State<SupplierPage> {
               Container(
                 child: Stack(
                   children: <Widget>[
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.blueAccent)
-                          // color: Colors.purple,
-                          ),
-                      child: const TextField(
-                        decoration: InputDecoration(border: InputBorder.none),
-                      ),
-                    ),
-
                     Positioned(
                       top: -8.5,
                       left: 10,
@@ -70,10 +74,21 @@ class _SupplierPageState extends State<SupplierPage> {
                         clipBehavior: Clip.none,
                       ),
                     ),
+                    Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blueAccent)
+                          // color: Colors.purple,
+                          ),
+                      child: TextFormField(
+                        initialValue: widget.companyName,
+                        decoration:
+                            const InputDecoration(border: InputBorder.none),
+                      ),
+                    ),
+
                     // Text("Company Name")
                   ],
                   clipBehavior: Clip.none,
-                  overflow: Overflow.visible,
                   alignment: Alignment.topLeft,
                   fit: StackFit.loose,
                 ),
@@ -81,49 +96,7 @@ class _SupplierPageState extends State<SupplierPage> {
               const SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    child: Stack(
-                      children: <Widget>[
-                        Container(
-                          width: 200,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.blueAccent)
-                              // color: Colors.purple,
-                              ),
-                          child: const TextField(
-                            decoration:
-                                InputDecoration(border: InputBorder.none),
-                          ),
-                        ),
-                        Positioned(
-                          top: -8.5,
-                          left: 10,
-                          child: Container(
-                            color: Colors.white,
-                            child: const Text("Tag"),
-                            clipBehavior: Clip.none,
-                          ),
-                        ),
-                        const Positioned(
-                            bottom: 0,
-                            top: 0,
-                            right: 10,
-                            //left: 10.0,
-                            child: Icon(Icons.expand_more)),
-                        // Text("Company Name")
-                      ],
-                      clipBehavior: Clip.none,
-                      overflow: Overflow.visible,
-                      alignment: Alignment.topLeft,
-                      fit: StackFit.loose,
-                    ),
-                  ),
-                  const Text("+add")
-                ],
-              ),
+
               const SizedBox(
                 height: 20,
               ),
@@ -136,7 +109,8 @@ class _SupplierPageState extends State<SupplierPage> {
                           border: Border.all(color: Colors.blueAccent)
                           // color: Colors.purple,
                           ),
-                      child: TextField(
+                      child: TextFormField(
+                        initialValue: widget.description,
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(400)
                         ],
@@ -158,7 +132,6 @@ class _SupplierPageState extends State<SupplierPage> {
                     // Text("Company Name")
                   ],
                   clipBehavior: Clip.none,
-                  overflow: Overflow.visible,
                   alignment: Alignment.topLeft,
                   fit: StackFit.loose,
                 ),
@@ -169,7 +142,7 @@ class _SupplierPageState extends State<SupplierPage> {
               // Center(child: RaisedButton(onPressed: () {})),
               Center(
                 child: InkWell(
-                  onTap: () => print('hello'),
+                  onTap: () {},
                   child: Container(
                     width: 100,
                     height: 30,

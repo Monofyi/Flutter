@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/ui/home_page/custom_app_bar.dart';
-import 'package:inventory_management/ui/supplier_page/supplier_page.dart';
+import 'package:inventory_management/ui/list_details/supplier_page/supplier_list.dart';
+import 'package:inventory_management/ui/raw_material/raw_material_history.dart';
 
 import '../../colors.dart';
 
@@ -32,7 +33,8 @@ class HomePage extends StatelessWidget {
               title: 'Suppliers',
               icon: null,
               onTap: () {
-                Navigator.of(context).popAndPushNamed(SupplierPage.routeName);
+                Navigator.of(context)
+                    .popAndPushNamed(SupplierListPage.routeName);
               }),
           ListItem(
             title: 'Buyers',
@@ -57,9 +59,11 @@ class HomePage extends StatelessWidget {
         icon: 'images/icons/purchase.jpg',
       ),
       ListItem(
-        title: 'Raw Material',
-        icon: 'images/icons/raw_material.jpg',
-      ),
+          title: 'Raw Material',
+          icon: 'images/icons/raw_material.jpg',
+          onTap: () {
+            Navigator.of(context).popAndPushNamed(RawMaterialHistory.routeName);
+          }),
       ListItem(
         title: 'Production',
         icon: 'images/icons/production.jpg',

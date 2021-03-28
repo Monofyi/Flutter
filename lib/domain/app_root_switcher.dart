@@ -2,37 +2,14 @@ import 'dart:async';
 
 import 'package:disposable_provider/disposable_provider.dart';
 import 'package:flutter/foundation.dart';
-import 'package:inventory_management/data/cloud_firestore/user_document.dart';
 import 'package:inventory_management/data/repositories/account_repository.dart';
 import 'package:inventory_management/ui/home_page/home_page.dart';
-import 'package:inventory_management/ui/supplier_page/supplier_page.dart';
+import 'package:inventory_management/ui/sign_in/sign_in.dart';
 import 'package:inventory_management/utils/subscription_container/subscription_container.dart';
 import 'package:inventory_management/utils/subscription_container/subscription_container_mixin.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'app_navigator.dart';
-
-enum _FirstDestination { homePage, loginPage }
-
-class _SwitchingConditionBundle {
-  _SwitchingConditionBundle({
-    @required this.uid,
-    @required this.userDoc,
-  });
-
-  final String uid;
-  final UserDocument userDoc;
-
-  _FirstDestination get firstDestination {
-    /// Force updating is first priority. Even user who launched app first should update.
-
-    if (uid == null) {
-      return _FirstDestination.loginPage;
-    } else {
-      return _FirstDestination.homePage;
-    }
-  }
-}
 
 /// A model which switches root pages by checking
 /// user data.
@@ -48,61 +25,13 @@ class AppRootSwitcher extends Disposable with SubscriptionContainerMixin {
   }
 
   void _subscribeAuthState() {
-    accountRepository
-        .subscribeMyUserId()
-        .distinct((preUid, nextUid) => preUid == nextUid)
-        .pipe(_firebaseUserId);
-
-    _firebaseUserId
-        .asyncMap(
-          (userId) async {
-            if (userId == null) {
-              return null;
-            }
-            return accountRepository.getCurrentUserPublicPart();
-          },
-        )
-        .onErrorReturn(null)
-        .pipe(_userDocument);
-
-    Rx.combineLatest2<String, UserDocument, _SwitchingConditionBundle>(
-      _firebaseUserId.stream,
-      _userDocument.stream,
-      (
-        fireUserId,
-        userDoc,
-      ) =>
-          _SwitchingConditionBundle(
-        uid: fireUserId,
-        userDoc: userDoc,
-      ),
-    ).distinct((pre, next) {
-      final distinct = pre?.firstDestination == next?.firstDestination;
-      return distinct;
-    }).listen((bundle) async {
-      print(bundle.firstDestination);
-      switch (bundle.firstDestination) {
-        case _FirstDestination.homePage:
-          appNavigator.pushAndRemoveAllPage(HomePage.routeName);
-          return;
-
-        case _FirstDestination.loginPage:
-          appNavigator.pushAndRemoveAllPage(SupplierPage.routeName);
-
-          return;
+    accountRepository.getToken().asStream().listen((token) async {
+      if (token == null) {
+        appNavigator.pushAndRemoveAllPage(SignInPage.routeName);
+      } else {
+        appNavigator.pushAndRemoveAllPage(HomePage.routeName);
       }
-      assert(false, 'Unexpected _Progress:${bundle.firstDestination}');
     }).append(subscriptionContainer);
-  }
-
-  final _firebaseUserId = BehaviorSubject<String>();
-  final _userDocument = BehaviorSubject<UserDocument>();
-
-  @override
-  void dispose() {
-    super.dispose();
-    _firebaseUserId.safeClose();
-    _userDocument.safeClose();
   }
 }
 

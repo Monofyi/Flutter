@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/ui/home_page/home_page.dart';
+import 'package:inventory_management/ui/list_details/supplier_page/add_new_supplier.dart';
+import 'package:inventory_management/ui/list_details/supplier_page/supplier_list.dart';
+import 'package:inventory_management/ui/list_details/supplier_page/supplier_page.dart';
 import 'package:inventory_management/ui/login_page/login_page.dart';
+import 'package:inventory_management/ui/raw_material/raw_material_history.dart';
 import 'package:inventory_management/ui/sign_in/sign_in.dart';
 import 'package:inventory_management/ui/splash_page.dart';
-import 'package:inventory_management/ui/supplier_page/supplier_page.dart';
 import 'package:recase/recase.dart';
 
 /// A builder function to build page.
@@ -49,16 +52,26 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
       (context, settings) => const SplashPage(),
     ),
     SupplierPage.routeName: _standardRoute(
-      (context, settings) => SupplierPage(),
+      (context, settings) =>
+          SupplierPage.wrapped(settings.arguments as SupplierPageArgument),
     ),
     SignInPage.routeName: _standardRoute(
-      (context, settings) => SignInPage(),
+      (context, settings) => SignInPage.wrapped(),
     ),
     HomePage.routeName: _standardRoute(
       (context, settings) => const HomePage(),
     ),
     SignUpPage.routeName: _standardRoute(
       (context, settings) => SignUpPage.wrapped(),
+    ),
+    SupplierListPage.routeName: _standardRoute(
+      (context, settings) => SupplierListPage.wrapped(),
+    ),
+    AddNewSupplier.routeName: _standardRoute(
+      (context, settings) => const AddNewSupplier(),
+    ),
+    RawMaterialHistory.routeName: _standardRoute(
+      (context, settings) => const RawMaterialHistory(),
     ),
   };
 
@@ -74,7 +87,10 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
     }
 
     return MaterialPageRoute<dynamic>(
-      builder: (context) => routeBuilder.builder(context, _settings),
+      builder: (context) => routeBuilder.builder(
+        context,
+        _settings,
+      ),
       settings: _settings,
       fullscreenDialog: true,
     );

@@ -11,8 +11,19 @@ class LoginPageController {
     @required String email,
     @required String contactNumber,
     @required String password,
+    @required String confirmPassword,
+    @required String recoveryQuestion,
+    @required String recoveryAnswer,
+    @required String userType,
   }) {
-    accountRepository.createUserWithPasswordAndEmail(
-        email: email, password: password);
+    accountRepository.registerUser(
+        email: email,
+        password: password,
+        contactNumber: contactNumber,
+        confirmPassword: confirmPassword,
+        userType: userType,
+        recoveryAnswer: recoveryAnswer,
+        userName: userName,
+        recoveryQuestion: recoveryQuestion);
   }
 }

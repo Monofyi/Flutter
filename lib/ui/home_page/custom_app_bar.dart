@@ -229,6 +229,23 @@ class _AnalyticsCardState extends State<AnalyticsCard>
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Container(
+        margin: const EdgeInsets.only(bottom: 4, right: 4),
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 5,
+              blurRadius: 5,
+              offset: const Offset(0, 2), // changes position of shadow
+            ),
+          ],
+          color: Colors.white,
+          border: Border.all(width: 2, color: Colors.grey.withOpacity(0.3)),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(16),
+          ),
+        ),
+        width: width,
         child: Row(
           children: [
             Expanded(
@@ -284,23 +301,6 @@ class _AnalyticsCardState extends State<AnalyticsCard>
             ),
           ],
         ),
-        margin: const EdgeInsets.only(bottom: 4, right: 4),
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 5,
-              blurRadius: 5,
-              offset: const Offset(0, 2), // changes position of shadow
-            ),
-          ],
-          color: Colors.white,
-          border: Border.all(width: 2, color: Colors.grey.withOpacity(0.3)),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(16),
-          ),
-        ),
-        width: width,
       ),
     );
   }

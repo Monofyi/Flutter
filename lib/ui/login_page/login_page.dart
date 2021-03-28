@@ -45,7 +45,11 @@ class _SignUpPageState extends State<SignUpPage> {
   String _userName;
   String _emailId;
   String _password;
+  String _confirmPassword;
   String _contactNumber;
+  String _recoveryQuestion;
+  String _recoveryAnswer;
+  String _userType;
 
   bool animate = false;
   @override
@@ -62,7 +66,6 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomPadding: false,
         backgroundColor: const Color(0xfff2f3f7),
         body: Stack(
           children: <Widget>[
@@ -98,7 +101,11 @@ class _SignUpPageState extends State<SignUpPage> {
                       userName: _userName,
                       email: _emailId,
                       contactNumber: _contactNumber,
-                      password: _password);
+                      password: _password,
+                      recoveryAnswer: _recoveryAnswer,
+                      recoveryQuestion: _recoveryQuestion,
+                      confirmPassword: _confirmPassword,
+                      userType: _userType);
                 },
               ),
             ),
@@ -108,58 +115,88 @@ class _SignUpPageState extends State<SignUpPage> {
               left: 16,
               right: 16,
               child: Container(
-                  margin:const EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.3),
-                        spreadRadius: 9,
-                        blurRadius: 8,
-                        offset:const Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  height: MediaQuery.of(context).size.height * 0.56,
-                  width: MediaQuery.of(context).size.width * 0.9,
+                margin: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 9,
+                      blurRadius: 8,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                height: MediaQuery.of(context).size.height * 0.6,
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         _BuildInputField(
-                          label: 'Company Name',
-                          icon: const Icon(Icons.work),
-                          onChanged: (value) {},
+                          label: 'UserName',
+                          icon: const Icon(Icons.person),
+                          onChanged: (value) {
+                            _userName = value;
+                          },
                         ),
                         _BuildInputField(
-                            label: 'Email',
-                            icon:const Icon(Icons.email),
-                            onChanged: (value) {
-                              _emailId = value;
-                            }),
+                          label: 'Email',
+                          icon: const Icon(Icons.email),
+                          onChanged: (value) {
+                            _emailId = value;
+                          },
+                        ),
                         _BuildInputField(
-                            label: 'UserName',
-                            icon:const Icon(Icons.person),
-                            onChanged: (value) {
-                              _userName = value;
-                            }),
+                          label: 'phoneNumber',
+                          icon: const Icon(Icons.phone),
+                          onChanged: (value) {
+                            _contactNumber = value;
+                          },
+                        ),
                         _BuildInputField(
-                            label: 'phoneNumber',
-                            icon:const Icon(Icons.phone),
-                            onChanged: (value) {
-                              _contactNumber = value;
-                            }),
+                          label: 'password',
+                          icon: const Icon(Icons.remove_red_eye),
+                          onChanged: (value) {
+                            _password = value;
+                          },
+                        ),
                         _BuildInputField(
-                            label: 'password',
-                            icon: const Icon(Icons.remove_red_eye),
-                            onChanged: (value) {
-                              _password = value;
-                            }),
+                          label: 'confirm password',
+                          icon: const Icon(Icons.remove_red_eye),
+                          onChanged: (value) {
+                            _confirmPassword = value;
+                          },
+                        ),
+                        _BuildInputField(
+                          label: 'recovery_question',
+                          icon: const Icon(Icons.remove_red_eye),
+                          onChanged: (value) {
+                            _recoveryQuestion = value;
+                          },
+                        ),
+                        _BuildInputField(
+                          label: 'recovery_answer',
+                          icon: const Icon(Icons.remove_red_eye),
+                          onChanged: (value) {
+                            _recoveryAnswer = value;
+                          },
+                        ),
+                        _BuildInputField(
+                          label: 'user_type',
+                          icon: const Icon(Icons.supervised_user_circle),
+                          onChanged: (value) {
+                            _userType = value;
+                          },
+                        ),
                       ],
                     ),
-                  )),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
@@ -187,7 +224,7 @@ class _NextButtonAndAgreement extends StatelessWidget {
               height: 46,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
-                gradient:const RadialGradient(
+                gradient: const RadialGradient(
                   center: Alignment.topRight,
                   radius: 1.5,
                   colors: <Color>[
@@ -223,7 +260,7 @@ class _BottomCheckBox extends StatelessWidget {
           value: false,
           onChanged: (bool value) {},
         ),
-       const Text(
+        const Text(
           'I agree to the T&C and Privacy Policy',
         ),
       ],

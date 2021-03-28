@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/data/repositories/account_repository.dart';
+import 'package:inventory_management/data/repositories/supplier/supplier_repository.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -15,6 +16,7 @@ class RepositoriesProvider extends SingleChildStatelessWidget {
     return MultiProvider(
       providers: [
         Provider.value(value: const AccountRepository()),
+        Provider.value(value: SupplierRepository()),
       ],
       child: child,
     );

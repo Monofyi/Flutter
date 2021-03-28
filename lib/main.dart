@@ -1,5 +1,4 @@
 import 'package:disposable_provider/disposable_provider.dart';
-import 'package:flamingo/flamingo.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/router.dart';
 import 'package:inventory_management/ui/splash_page.dart';
@@ -15,15 +14,7 @@ void main() {
 }
 
 void _initializePluginsBeforeAppLaunches() {
-  // note: To initialize [InAppBillingRepository] before calling `runApp`.
-  //       Because [InAppPurchaseConnection] uses [WidgetsBinding].
   WidgetsFlutterBinding.ensureInitialized();
-
-  Flamingo.configure(
-    firestore: Firestore.instance,
-    storage: FirebaseStorage.instance,
-    root: Firestore.instance.document(''),
-  );
 }
 
 enum MainPageTab {

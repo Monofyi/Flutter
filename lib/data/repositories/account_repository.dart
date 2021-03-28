@@ -1,96 +1,72 @@
 import 'dart:async';
+import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:inventory_management/data/cloud_firestore/user_document.dart';
+import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginResult {}
+enum LoginResult { successfull, failed }
 
 class AccountRepository {
   /// Try to fetch current logged in user, throws NoSuchUserException if user not exists.
   const AccountRepository();
 
-  Future<UserDocument> getCurrentUserPublicPart() async {
-    final userId = await getCurrentUserId();
-
-    final userRef = UserDocument(id: userId).reference;
-    final snapshot = await userRef.get();
-
-    if (!snapshot.exists) {
-      throw NoSuchUserException(userId);
-    }
-
-    return UserDocument(snapshot: snapshot);
+  Future<String> getToken() async {
+    final pref = await SharedPreferences.getInstance();
+    return pref.getString('token');
   }
 
-  Stream<String> subscribeMyUserId() {
-    return FirebaseAuth.instance.onAuthStateChanged.map((firUser) {
-      return firUser?.uid;
+  Future<void> setToken({String token}) async {
+    final pref = await SharedPreferences.getInstance();
+    return pref.setString('token', token);
+  }
+
+  Future<void> registerUser(
+      {@required String userName,
+      @required String email,
+      @required String contactNumber,
+      @required String password,
+      @required String confirmPassword,
+      @required String recoveryQuestion,
+      @required String recoveryAnswer,
+      @required String userType}) async {
+    final response =
+        await post(Uri.parse("http://65.1.236.26:8000/register/"), body: {
+      'username': userName,
+      'phone_no': contactNumber,
+      'email': email,
+      'password': password,
+      'confirm_password': confirmPassword,
+      'recovery_question': recoveryQuestion,
+      'recovery_answer': recoveryAnswer,
+      'user_type': userType
     });
-  }
+    if (response.statusCode == 200) {
+      final json = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
+      final token = json["token"] as String;
 
-  Future<void> logout() async {
-    final _auth = FirebaseAuth.instance;
-    await _auth.signOut();
-
-    /// It's workaround to update state of [FirebaseAuth.instance.onAuthStateChanged].
-    // ignore: unawaited_futures
-    _auth.currentUser();
-  }
-
-  /// Fetch logged in user id
-  Future<String> getCurrentUserId() async {
-    final user = await FirebaseAuth.instance.currentUser();
-    return user?.uid;
-  }
-
-  //todo - have to add Phone auth
-  Future<LoginResult> loginWithContactNumber(
-      {@required String email, @required String password}) async {
-    /// Refresh Authentication.
-    await FirebaseAuth.instance.signOut();
-
-    try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-    } on Exception catch (_) {
-      rethrow;
+      await setToken(token: token);
     }
-    await FirebaseAuth.instance.currentUser();
-    return LoginResult();
   }
 
-  Future<LoginResult> createUserWithPasswordAndEmail(
-      {@required String email, @required String password}) async {
-    /// Refresh Authentication.
-    await FirebaseAuth.instance.signOut();
+  Future<LoginResult> signIn({
+    @required String username,
+    @required String password,
+  }) async {
+    final response =
+        await post(Uri.parse("http://65.1.236.26:8000/login/"), body: {
+      'username': username,
+      'password': password,
+    });
+    if (response.statusCode == 200) {
+      final json = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
+      final token = json["token"] as String;
 
-    try {
-      final id = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
-
-      print(id.user);
-    } on Exception catch (_) {
-      rethrow;
+      await setToken(token: token);
+      return LoginResult.successfull;
+    } else {
+      return LoginResult.failed;
     }
-    await FirebaseAuth.instance.currentUser();
-    return LoginResult();
-  }
-
-  Future<LoginResult> loginWithEmailAndPassword(
-      {@required String email, @required String password}) async {
-    /// Refresh Authentication.
-    await FirebaseAuth.instance.signOut();
-
-    try {
-      final id = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-      print(id.user);
-    } on Exception catch (_) {
-      rethrow;
-    }
-    await FirebaseAuth.instance.currentUser();
-    return LoginResult();
   }
 }
 
