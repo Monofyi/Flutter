@@ -76,6 +76,7 @@ class LoginPageController extends StateNotifier<LoginModel> {
       : super(LoginModel());
 
   Future<void> login() async {
+    state = state.copyWith(loading: true);
     final result = await accountRepository.registerUser(
         email: state.email,
         password: state.password,
@@ -85,8 +86,8 @@ class LoginPageController extends StateNotifier<LoginModel> {
         recoveryAnswer: state.recoveryAnswer,
         userName: state.userName,
         recoveryQuestion: state.recoveryQuestion);
-    print(result);
-    if (result == LoginResult.successfull) {
+    state = state.copyWith(loading: false);
+    if (result == LoginStatus.successfull) {
       appNavigator.pushAndRemoveAllPage(HomePage.routeName);
     }
   }
@@ -173,15 +174,12 @@ class LoginPageController extends StateNotifier<LoginModel> {
     }
   }
 
-  void userTypeChanged(String type) {
+  void userTypeChanged(int user) {
     if (type != null) {
-      final user = int.parse(type);
       state = state.copyWith(
         userType: user,
-        validation: type.isEmpty
-            ? user != 0 || user != 1
-                ? ValidationResult.userTypeMismatch
-                : ValidationResult.userTypeEmpty
+        validation: user != 0 || user != 1
+            ? ValidationResult.userTypeMismatch
             : ValidationResult.valid,
       );
     }

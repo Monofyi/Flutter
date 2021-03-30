@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inventory_management/ui/components/input_field.dart';
+import 'package:inventory_management/ui/components_new/rounded_button.dart';
 import 'package:inventory_management/ui/login_page/controller/login_page_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -29,8 +30,10 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   static final _formKey = GlobalKey<FormState>();
   bool animate = false;
+  int _value;
   @override
   void initState() {
+    _value = 2;
     super.initState();
 
     Future<int>.delayed(const Duration(milliseconds: 500))
@@ -43,6 +46,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     final vm = context.select((LoginModel value) => value);
     final controller = context.watch<LoginPageController>();
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xfff2f3f7),
@@ -101,7 +105,7 @@ class _SignUpPageState extends State<SignUpPage> {
               width: MediaQuery.of(context).size.width * 0.9,
               child: Padding(
                 padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom / 2),
+                    bottom: MediaQuery.of(context).viewInsets.bottom / 2.4),
                 child: Form(
                   key: _formKey,
                   child: Padding(
@@ -157,11 +161,31 @@ class _SignUpPageState extends State<SignUpPage> {
                                 validator:
                                     controller.validationMessageRecoveryAnswer,
                               ),
-                              BuildInputField(
-                                label: 'user_type',
-                                icon: const Icon(Icons.supervised_user_circle),
-                                onChanged: controller.userTypeChanged,
-                                validator: controller.validationMessageUserType,
+                              Container(
+                                padding: EdgeInsets.only(top: 20.0, bottom: 16),
+                                child: DropdownButton<int>(
+                                    value: _value,
+                                    items: [
+                                      DropdownMenuItem(
+                                        child: Text("User type"),
+                                        value: 2,
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Text("Owner"),
+                                        value: 0,
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Text("Employee"),
+                                        value: 1,
+                                      ),
+                                    ],
+                                    onChanged: (value) {
+                                      print(value);
+                                      setState(() {
+                                        controller.userTypeChanged(value);
+                                        _value = value;
+                                      });
+                                    }),
                               ),
                             ],
                           ),
@@ -178,6 +202,10 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
           ),
+          if (vm.loading)
+            Center(
+              child: CircularProgressIndicator(),
+            ),
         ],
       ),
     );
@@ -196,30 +224,8 @@ class _NextButtonAndAgreement extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const _BottomCheckBox(),
-          GestureDetector(
-            onTap: onTap,
-            child: Container(
-              height: 46,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18),
-                gradient: const RadialGradient(
-                  center: Alignment.topRight,
-                  radius: 1.5,
-                  colors: <Color>[
-                    Color(0xff33CEFF),
-                    Color(0xff30AAFF),
-                  ],
-                ),
-              ),
-              child: const Center(
-                child: Text(
-                  'Sign Up',
-                  style: TextStyle(color: Colors.white, fontSize: 24),
-                ),
-              ),
-            ),
-          ),
+          //const _BottomCheckBox(),
+          RoundedButton(onTap: onTap, title: 'Sign up')
         ],
       ),
     );

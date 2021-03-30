@@ -5,7 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum LoginResult { successfull, failed }
+enum LoginStatus { successfull, failed, none }
+
+class LoginResult {
+  final String error;
+  final LoginStatus status;
+
+  LoginResult({this.error, @required this.status});
+}
 
 class AccountRepository {
   /// Try to fetch current logged in user, throws NoSuchUserException if user not exists.
@@ -21,7 +28,7 @@ class AccountRepository {
     return pref.setString('token', token);
   }
 
-  Future<LoginResult> registerUser(
+  Future<LoginStatus> registerUser(
       {@required String userName,
       @required String email,
       @required int contactNumber,
@@ -41,16 +48,17 @@ class AccountRepository {
       'recovery_answer': recoveryAnswer,
       'user_type': userType
     });
+    print(response.body);
     if (response.statusCode == 200) {
       final json = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
       final token = json["token"] as String;
 
       if (token != null) {
         await setToken(token: token);
-        return LoginResult.successfull;
+        return LoginStatus.successfull;
       }
     }
-    return LoginResult.failed;
+    return LoginStatus.failed;
   }
 
   Future<LoginResult> signIn({
@@ -62,14 +70,17 @@ class AccountRepository {
       'username': username,
       'password': password,
     });
+    print(response.body);
+    final json = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
     if (response.statusCode == 200) {
-      final json = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
       final token = json["token"] as String;
 
       await setToken(token: token);
-      return LoginResult.successfull;
+      return LoginResult(status: LoginStatus.successfull);
     } else {
-      return LoginResult.failed;
+      final error = json["error"] as String;
+      print(error);
+      return LoginResult(status: LoginStatus.failed, error: error);
     }
   }
 }

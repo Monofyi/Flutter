@@ -23,7 +23,8 @@ class _$LoginModelTearOff {
       @nullable String confirmPassword,
       @nullable String recoveryQuestion,
       @nullable String recoveryAnswer,
-      @nullable int userType}) {
+      @nullable int userType,
+      bool loading = false}) {
     return _LoginModel(
       validation: validation,
       userName: userName,
@@ -34,6 +35,7 @@ class _$LoginModelTearOff {
       recoveryQuestion: recoveryQuestion,
       recoveryAnswer: recoveryAnswer,
       userType: userType,
+      loading: loading,
     );
   }
 }
@@ -61,6 +63,7 @@ mixin _$LoginModel {
   String get recoveryAnswer;
   @nullable
   int get userType;
+  bool get loading;
 
   @JsonKey(ignore: true)
   $LoginModelCopyWith<LoginModel> get copyWith;
@@ -80,7 +83,8 @@ abstract class $LoginModelCopyWith<$Res> {
       @nullable String confirmPassword,
       @nullable String recoveryQuestion,
       @nullable String recoveryAnswer,
-      @nullable int userType});
+      @nullable int userType,
+      bool loading});
 }
 
 /// @nodoc
@@ -102,6 +106,7 @@ class _$LoginModelCopyWithImpl<$Res> implements $LoginModelCopyWith<$Res> {
     Object recoveryQuestion = freezed,
     Object recoveryAnswer = freezed,
     Object userType = freezed,
+    Object loading = freezed,
   }) {
     return _then(_value.copyWith(
       validation: validation == freezed
@@ -123,6 +128,7 @@ class _$LoginModelCopyWithImpl<$Res> implements $LoginModelCopyWith<$Res> {
           ? _value.recoveryAnswer
           : recoveryAnswer as String,
       userType: userType == freezed ? _value.userType : userType as int,
+      loading: loading == freezed ? _value.loading : loading as bool,
     ));
   }
 }
@@ -142,7 +148,8 @@ abstract class _$LoginModelCopyWith<$Res> implements $LoginModelCopyWith<$Res> {
       @nullable String confirmPassword,
       @nullable String recoveryQuestion,
       @nullable String recoveryAnswer,
-      @nullable int userType});
+      @nullable int userType,
+      bool loading});
 }
 
 /// @nodoc
@@ -166,6 +173,7 @@ class __$LoginModelCopyWithImpl<$Res> extends _$LoginModelCopyWithImpl<$Res>
     Object recoveryQuestion = freezed,
     Object recoveryAnswer = freezed,
     Object userType = freezed,
+    Object loading = freezed,
   }) {
     return _then(_LoginModel(
       validation: validation == freezed
@@ -187,6 +195,7 @@ class __$LoginModelCopyWithImpl<$Res> extends _$LoginModelCopyWithImpl<$Res>
           ? _value.recoveryAnswer
           : recoveryAnswer as String,
       userType: userType == freezed ? _value.userType : userType as int,
+      loading: loading == freezed ? _value.loading : loading as bool,
     ));
   }
 }
@@ -202,8 +211,10 @@ class _$_LoginModel implements _LoginModel {
       @nullable this.confirmPassword,
       @nullable this.recoveryQuestion,
       @nullable this.recoveryAnswer,
-      @nullable this.userType})
-      : assert(validation != null);
+      @nullable this.userType,
+      this.loading = false})
+      : assert(validation != null),
+        assert(loading != null);
 
   @JsonKey(defaultValue: ValidationResult.valid)
   @override
@@ -232,6 +243,9 @@ class _$_LoginModel implements _LoginModel {
   @override
   @nullable
   final int userType;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool loading;
 
   bool _didvalid = false;
   bool _valid;
@@ -261,7 +275,7 @@ class _$_LoginModel implements _LoginModel {
 
   @override
   String toString() {
-    return 'LoginModel(validation: $validation, userName: $userName, email: $email, contactNumber: $contactNumber, password: $password, confirmPassword: $confirmPassword, recoveryQuestion: $recoveryQuestion, recoveryAnswer: $recoveryAnswer, userType: $userType, valid: $valid)';
+    return 'LoginModel(validation: $validation, userName: $userName, email: $email, contactNumber: $contactNumber, password: $password, confirmPassword: $confirmPassword, recoveryQuestion: $recoveryQuestion, recoveryAnswer: $recoveryAnswer, userType: $userType, loading: $loading, valid: $valid)';
   }
 
   @override
@@ -293,7 +307,9 @@ class _$_LoginModel implements _LoginModel {
                     .equals(other.recoveryAnswer, recoveryAnswer)) &&
             (identical(other.userType, userType) ||
                 const DeepCollectionEquality()
-                    .equals(other.userType, userType)));
+                    .equals(other.userType, userType)) &&
+            (identical(other.loading, loading) ||
+                const DeepCollectionEquality().equals(other.loading, loading)));
   }
 
   @override
@@ -307,7 +323,8 @@ class _$_LoginModel implements _LoginModel {
       const DeepCollectionEquality().hash(confirmPassword) ^
       const DeepCollectionEquality().hash(recoveryQuestion) ^
       const DeepCollectionEquality().hash(recoveryAnswer) ^
-      const DeepCollectionEquality().hash(userType);
+      const DeepCollectionEquality().hash(userType) ^
+      const DeepCollectionEquality().hash(loading);
 
   @JsonKey(ignore: true)
   @override
@@ -325,7 +342,8 @@ abstract class _LoginModel implements LoginModel {
       @nullable String confirmPassword,
       @nullable String recoveryQuestion,
       @nullable String recoveryAnswer,
-      @nullable int userType}) = _$_LoginModel;
+      @nullable int userType,
+      bool loading}) = _$_LoginModel;
 
   @override
   ValidationResult get validation;
@@ -353,6 +371,8 @@ abstract class _LoginModel implements LoginModel {
   @override
   @nullable
   int get userType;
+  @override
+  bool get loading;
   @override
   @JsonKey(ignore: true)
   _$LoginModelCopyWith<_LoginModel> get copyWith;

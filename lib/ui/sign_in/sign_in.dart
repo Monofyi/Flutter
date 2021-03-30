@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:inventory_management/ui/components/input_field.dart';
 import 'package:inventory_management/ui/login_page/login_page.dart';
 import 'package:provider/provider.dart';
 
@@ -26,75 +27,8 @@ class SignInPage extends StatefulWidget {
   _SignInPageState createState() => _SignInPageState();
 }
 
-class _SignInInformation extends StatelessWidget {
-  final Function(String) userNameValue;
-  final Function(String) password;
-
-  const _SignInInformation(
-      {Key key, @required this.userNameValue, @required this.password})
-      : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    final vm = context.watch<SignInController>().value;
-    return Padding(
-      padding: const EdgeInsets.only(left: 32, right: 32),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _BuildInputField(
-            label: 'UserName',
-            icon: const Icon(Icons.person),
-            onChanged: userNameValue,
-            error: vm.username,
-          ),
-          _BuildInputField(
-            label: 'password',
-            icon: const Icon(Icons.remove_red_eye),
-            onChanged: password,
-            error: vm.password,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _BuildInputField extends StatelessWidget {
-  const _BuildInputField({
-    Key key,
-    @required this.label,
-    @required this.icon,
-    @required this.onChanged,
-    this.error,
-  }) : super(key: key);
-  final String label;
-  final Widget icon;
-  final Function(String) onChanged;
-  final Validation error;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TextFormField(
-          onChanged: onChanged,
-          decoration: InputDecoration(prefixIcon: icon, labelText: label),
-        ),
-        const SizedBox(
-          height: 2,
-        ),
-        if (error != Validation.valid)
-          Text(
-            'Please input $label',
-            style: const TextStyle(color: Colors.red),
-          ),
-      ],
-    );
-  }
-}
-
 class _SignInPageState extends State<SignInPage> {
+  static final _formKey = GlobalKey<FormState>();
   bool animate = false;
   String _password;
   String _username;
@@ -115,10 +49,12 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     final controller = context.watch<SignInController>();
     final vm = controller.value;
+
     final valid =
         vm.username == Validation.valid && vm.password == Validation.valid;
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: const Color(0xfff2f3f7),
         body: Stack(
           children: <Widget>[
@@ -151,15 +87,15 @@ class _SignInPageState extends State<SignInPage> {
               child: _NextButtonAndAgreement(
                 onTap: valid
                     ? () {
-                        controller.signIn(
-                            username: _username, password: _password);
+                        controller.signIn();
                       }
                     : null,
               ),
             ),
             AnimatedPositioned(
               duration: const Duration(milliseconds: 200),
-              bottom: animate ? 96 * 2.0 : -56 * 8.0,
+              bottom:
+                  animate ? MediaQuery.of(context).size.height / 3 : -56 * 8.0,
               left: 16,
               right: 16,
               child: Container(
@@ -178,15 +114,41 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 height: MediaQuery.of(context).size.height * 0.26,
                 width: MediaQuery.of(context).size.width * 0.9,
-                child: _SignInInformation(
-                  password: (value) {
-                    _password = value;
-                    controller.setPassword(value);
-                  },
-                  userNameValue: (value) {
-                    _username = value;
-                    controller.setUserName(value);
-                  },
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom / 4),
+                  child: Form(
+                    key: _formKey,
+                    child: Padding(
+                      padding: EdgeInsets.all(8),
+                      child: CustomScrollView(
+                        slivers: [
+                          SliverList(
+                            delegate: SliverChildListDelegate(
+                              [
+                                BuildInputField(
+                                  label: 'username',
+                                  icon: const Icon(Icons.person),
+                                  validator: (_) {},
+                                  onChanged: (value) {},
+                                ),
+                                BuildInputField(
+                                    label: 'password',
+                                    icon: const Icon(Icons.remove_red_eye),
+                                    onChanged: (_) {},
+                                    validator: (_) {}),
+                              ],
+                            ),
+                          ),
+                          const SliverPadding(
+                            padding: EdgeInsets.all(
+                              16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -235,7 +197,7 @@ class _NextButtonAndAgreement extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 8,
+            height: 36,
           ),
           const _BottomTextBox(),
         ],

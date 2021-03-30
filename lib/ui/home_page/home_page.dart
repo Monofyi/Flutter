@@ -52,6 +52,10 @@ class HomePage extends StatelessWidget {
             title: 'Machines',
             icon: null,
           ),
+          ListItem(
+            title: 'Items',
+            icon: null,
+          ),
         ],
       ),
       ListItem(

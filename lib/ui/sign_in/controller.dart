@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/domain/app_navigator.dart';
 import 'package:inventory_management/ui/home_page/home_page.dart';
+import 'package:inventory_management/ui/login_page/controller/login_page_controller.dart';
+import 'package:inventory_management/ui/sign_in/sign_in_model.dart';
 
 import '../../data/repositories/account_repository.dart';
 
-enum Validation { empty, valid, noAccount }
+enum Validation { empty, valid, noAccount, invalid }
 
 class ViewModel {
   final Validation username;
@@ -14,45 +16,49 @@ class ViewModel {
   ViewModel({this.noAccount, @required this.username, @required this.password});
 }
 
-class SignInController extends ValueNotifier<ViewModel> {
+class SignInController extends ValueNotifier<SignInModel> {
   final AccountRepository accountRepository;
   final AppNavigator appNavigator;
 
   SignInController(this.accountRepository, this.appNavigator)
       : super(
-          ViewModel(username: Validation.valid, password: Validation.valid),
+          SignInModel(),
         );
   void setUserName(String username) {
+    print(username);
     if (username.isEmpty) {
-      value = ViewModel(username: Validation.empty, password: value.password);
+      value = value.copyWith(
+          username: username, validation: ValidationResult.userNameEmpty);
     } else {
-      value = ViewModel(username: Validation.valid, password: value.password);
+      value = value.copyWith(
+          username: username, validation: ValidationResult.valid);
     }
   }
 
   void setPassword(String password) {
     if (password.isEmpty) {
-      value = ViewModel(username: value.username, password: Validation.empty);
+      value = value.copyWith(
+          password: password, validation: ValidationResult.passwordEmpty);
     } else {
-      value = ViewModel(username: value.username, password: Validation.valid);
+      value = value.copyWith(
+          password: password, validation: ValidationResult.valid);
     }
   }
 
-  Future<void> signIn({
-    @required String username,
-    @required String password,
-  }) async {
-    final result =
-        await accountRepository.signIn(username: username, password: password);
-    switch (result) {
-      case LoginResult.successfull:
+  Future<void> signIn() async {
+    value = value.copyWith(loading: true);
+    final result = await accountRepository.signIn(
+        username: value.username, password: value.password);
+    value = value.copyWith(loading: false);
+    switch (result.status) {
+      case LoginStatus.successfull:
         appNavigator.pushAndRemoveAllPage(HomePage.routeName);
         break;
-      case LoginResult.failed:
-        value = ViewModel(
-            username: value.username,
-            password: value.password,
-            noAccount: true);
+      case LoginStatus.failed:
+        value = value.copyWith(status: LoginStatus.failed);
+        break;
+      case LoginStatus.none:
+        // noop
         break;
     }
   }

@@ -9,6 +9,8 @@ import 'package:inventory_management/ui/sign_in/sign_in.dart';
 import 'package:inventory_management/ui/splash_page.dart';
 import 'package:recase/recase.dart';
 
+import 'new_login.dart';
+
 /// A builder function to build page.
 typedef WidgetPageBuilder = Widget Function(
   BuildContext context,
@@ -72,6 +74,9 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
     ),
     RawMaterialHistory.routeName: _standardRoute(
       (context, settings) => const RawMaterialHistory(),
+    ),
+    LoginScreen.routeName: _standardRoute(
+      (context, settings) => LoginScreen(),
     ),
   };
 

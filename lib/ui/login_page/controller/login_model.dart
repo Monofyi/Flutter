@@ -15,6 +15,7 @@ abstract class LoginModel with _$LoginModel {
     @nullable String recoveryQuestion,
     @nullable String recoveryAnswer,
     @nullable int userType,
+    @Default(false) bool loading,
   }) = _LoginModel;
 
   @late
