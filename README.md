@@ -7,6 +7,7 @@ A  Flutter application for inventory management.
 This app adopts *layered architecture*.
 Each layer has several role.
 
+
 ```
 
    Backend Services (Firebase, server application, etc...)
