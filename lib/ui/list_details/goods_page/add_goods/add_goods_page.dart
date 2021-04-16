@@ -1,47 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:inventory_management/ui/components/input_field.dart';
+import 'package:inventory_management/ui/list_details/goods_page/add_goods/controller/goods_model.dart';
 import 'package:provider/provider.dart';
 
 import 'controller/add_goods_controller.dart';
-import 'controller/model.dart';
 
-class AddNewWarehouse extends StatefulWidget {
+class AddNewGoods extends StatefulWidget {
   static Widget wrapped() {
     return MultiProvider(
       providers: [
-        StateNotifierProvider<AddWarehouseController, WarehouseModel>(
+        StateNotifierProvider<AddGoodsController, GoodsModel>(
           create: (context) {
-            return AddWarehouseController(context.read());
+            return AddGoodsController(context.read());
           },
         )
       ],
-      child: AddNewWarehouse(),
+      child: AddNewGoods(),
     );
   }
 
-  static const routeName = '/newWarehouse';
-  const AddNewWarehouse({Key key}) : super(key: key);
+  static const routeName = '/newGoods';
+  const AddNewGoods({Key key}) : super(key: key);
   @override
-  _AddNewWarehouseState createState() => _AddNewWarehouseState();
+  _AddNewGoodsState createState() => _AddNewGoodsState();
 }
 
-class _AddNewWarehouseState extends State<AddNewWarehouse> {
-  int len;
-  List<Widget> list;
-  @override
-  void initState() {
-    len = 0;
-    super.initState();
-    list = [];
-  }
-
+class _AddNewGoodsState extends State<AddNewGoods> {
   @override
   Widget build(BuildContext context) {
-    final controller = context.watch<AddWarehouseController>();
+    final controller = context.watch<AddGoodsController>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add New Warehouse'),
+        title: const Text('Add New Goods'),
       ),
       body: Container(
         child: Padding(
@@ -52,13 +43,13 @@ class _AddNewWarehouseState extends State<AddNewWarehouse> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 BuildInputField(
-                  label: 'Warehouse Name',
+                  label: 'Goods Name',
                   onChanged: controller.updateName,
                 ),
-                const BuildInputField(
-                  label: 'Description',
-                  maxLine: 8,
-                ),
+                BuildInputField(
+                    label: 'Quantity', onChanged: controller.updateQuantity),
+                BuildInputField(
+                    label: 'Location', onChanged: controller.updateLocation),
                 const SizedBox(
                   height: 16,
                 ),
@@ -66,8 +57,8 @@ class _AddNewWarehouseState extends State<AddNewWarehouse> {
                   height: 36,
                 ),
                 ElevatedButton(
-                  onPressed: controller.addWarehouse,
-                  child: const Text('Add warehouse'),
+                  onPressed: controller.addGoods,
+                  child: const Text('Add goods'),
                 )
               ],
             ),

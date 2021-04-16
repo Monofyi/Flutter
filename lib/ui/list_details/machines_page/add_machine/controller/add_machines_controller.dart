@@ -1,17 +1,17 @@
-import 'package:inventory_management/data/repositories/warehouse/warehouse.dart';
+import 'package:inventory_management/data/repositories/machines/machines_repository.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import 'warehouse_model.dart';
+import 'machine_model.dart';
 
-class AddWarehouseController extends StateNotifier<WarehouseModel> {
-  final WarehouseRepository warehouseRepository;
-  AddWarehouseController(this.warehouseRepository) : super(WarehouseModel());
+class AddMachineController extends StateNotifier<MachineModel> {
+  final MachineRepository machineRepository;
+  AddMachineController(this.machineRepository) : super(MachineModel());
 
-  void addWarehouse() {
-    warehouseRepository.addWarehouse(locationName: state.locationName);
+  void addMachine() {
+    machineRepository.addMachines(machineName: state.machineName);
   }
 
   void updateName(String newValue) {
-    state = state.copyWith(locationName: newValue);
+    state = state.copyWith(machineName: newValue);
   }
 }

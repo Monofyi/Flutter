@@ -2,42 +2,49 @@ import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:inventory_management/ui/components/delete_alert.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/supplier_page.dart';
+import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_controller.dart';
+import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_list_model.dart';
 import 'package:provider/provider.dart';
 
-import 'add_buyer/add_buyers_page.dart';
+import 'add_warehouse/add_warehouse_page.dart';
 
-class BuyerListPage extends StatefulWidget {
-  static const routeName = '/buyerList';
+class WarehouseListPage extends StatefulWidget {
+  static const routeName = '/warehouseList';
   static Widget wrapped() {
     return MultiProvider(
       providers: [
-        StateNotifierProvider<BuyerListController, BuyerList>(
+        StateNotifierProvider<WarehouseListController, WarehouseList>(
           lazy: false,
-          create: (context) =>
-              BuyerListController(buyerRepository: context.read()),
+          create: (context) => WarehouseListController(
+            warehouseRepository: context.read(),
+          ),
         )
       ],
-      child: BuyerListPage(),
+      child: WarehouseListPage(),
     );
   }
 
   @override
-  _BuyerListPageState createState() => _BuyerListPageState();
+  _WarehouseListPageState createState() => _WarehouseListPageState();
 }
 
-class _BuyerListPageState extends State<BuyerListPage> {
+class _WarehouseListPageState extends State<WarehouseListPage> {
   @override
   Widget build(BuildContext context) {
-    final vm = context.select((BuyerList value) => value);
-    final buyers = vm.suppliers;
+    final vm = context.select((WarehouseList value) => value);
+    final controller = context.watch<WarehouseListController>();
+    final warehouses = vm.warehouses;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Buyers List'),
+        title: const Text('Warehouse List'),
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
         onPressed: () {
-          Navigator.of(context).pushNamed(AddNewBuyer.routeName);
+          Navigator.of(context)
+              .pushNamed(AddNewWarehouse.routeName)
+              .whenComplete(() => controller.refresh);
         },
         child: const Icon(Icons.add),
       ),
@@ -45,9 +52,9 @@ class _BuyerListPageState extends State<BuyerListPage> {
         if (vm.loading) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (vm.suppliers.isEmpty) {
+        if (vm.warehouses == null || vm.warehouses.isEmpty) {
           return const Center(
-            child: Text('No buyers'),
+            child: Text('No warehouses'),
           );
         }
         return Padding(
@@ -55,14 +62,14 @@ class _BuyerListPageState extends State<BuyerListPage> {
           child: ListView.separated(
             clipBehavior: Clip.hardEdge,
             physics: const BouncingScrollPhysics(),
-            itemCount: buyers.length,
+            itemCount: warehouses.length,
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () {
                   Navigator.pushNamed(context, SupplierPage.routeName,
                       arguments: SupplierPageArgument(
-                          companyName: buyers[index].buyerName,
-                          description: buyers[index].description));
+                          supplierName: warehouses[index].locationName,
+                          description: warehouses[index].description));
                 },
                 child: Container(
                   margin: const EdgeInsets.all(4),
@@ -87,12 +94,17 @@ class _BuyerListPageState extends State<BuyerListPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            buyers[index].buyerName,
+                            warehouses[index].locationName,
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              DeleteSubProfileDialog.show(context,
-                                  onDelete: () {});
+                              DeleteDialog.show(
+                                context,
+                                onDelete: () {
+                                  controller
+                                      .remove(warehouses[index].locationId);
+                                },
+                              );
                             },
                             child: const Text('remove'),
                           )

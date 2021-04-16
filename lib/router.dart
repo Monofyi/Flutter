@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/ui/home_page/home_page.dart';
-import 'package:inventory_management/ui/list_details/supplier_page/add_new_supplier.dart';
+import 'package:inventory_management/ui/list_details/buyers_page/add_buyer/add_buyers_page.dart';
+import 'package:inventory_management/ui/list_details/buyers_page/buyer_edit_page.dart';
+import 'package:inventory_management/ui/list_details/buyers_page/buyer_list.dart';
+import 'package:inventory_management/ui/list_details/goods_page/add_goods/add_goods_page.dart';
+import 'package:inventory_management/ui/list_details/goods_page/goods_list.dart';
+import 'package:inventory_management/ui/list_details/machines_page/add_machine/add_machine_page.dart';
+import 'package:inventory_management/ui/list_details/machines_page/machines_list.dart';
+import 'package:inventory_management/ui/list_details/production_page/start_production/add_goods_page.dart';
+import 'package:inventory_management/ui/list_details/raw_material_page/raw_material_page.dart';
+import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/add_new_supplier.dart';
+import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/supplier_page.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/supplier_list.dart';
-import 'package:inventory_management/ui/list_details/supplier_page/supplier_page.dart';
+import 'package:inventory_management/ui/list_details/warehouse_page/add_warehouse/add_warehouse_page.dart';
+import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list.dart';
 import 'package:inventory_management/ui/login_page/login_page.dart';
-import 'package:inventory_management/ui/raw_material/raw_material_history.dart';
+import 'package:inventory_management/ui/printing/ongoing_printing/ongoing_printing.dart';
+import 'package:inventory_management/ui/printing/start_printing/start_printing.dart';
+import 'package:inventory_management/ui/settings/change_password/change_password.dart';
+import 'package:inventory_management/ui/settings/settings_page.dart';
 import 'package:inventory_management/ui/sign_in/sign_in.dart';
 import 'package:inventory_management/ui/splash_page.dart';
 import 'package:recase/recase.dart';
@@ -53,9 +67,38 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
     SplashPage.routeName: _standardRoute(
       (context, settings) => const SplashPage(),
     ),
+    AddRawMaterials.routeName: _standardRoute(
+      (context, settings) => AddRawMaterials.wrapped(),
+    ),
+    RawMaterialListPage.routeName: _standardRoute(
+      (context, settings) => RawMaterialListPage.wrapped(),
+    ),
+    AddNewGoods.routeName: _standardRoute(
+      (context, settings) => AddNewGoods.wrapped(),
+    ),
+    GoodsListPage.routeName: _standardRoute(
+      (context, settings) => GoodsListPage.wrapped(),
+    ),
+    AddNewMachines.routeName: _standardRoute(
+      (context, settings) => AddNewMachines.wrapped(),
+    ),
+    MachineListPage.routeName: _standardRoute(
+      (context, settings) => MachineListPage.wrapped(),
+    ),
+    AddNewWarehouse.routeName: _standardRoute(
+      (context, settings) => AddNewWarehouse.wrapped(),
+    ),
+    WarehouseListPage.routeName: _standardRoute(
+      (context, settings) => WarehouseListPage.wrapped(),
+    ),
     SupplierPage.routeName: _standardRoute(
       (context, settings) =>
           SupplierPage.wrapped(settings.arguments as SupplierPageArgument),
+    ),
+    EditBuyerPage.routeName: _standardRoute(
+      (context, settings) => EditBuyerPage.wrapped(
+        settings.arguments as EditSupplierPageArgument,
+      ),
     ),
     SignInPage.routeName: _standardRoute(
       (context, settings) => SignInPage.wrapped(),
@@ -63,20 +106,38 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
     HomePage.routeName: _standardRoute(
       (context, settings) => const HomePage(),
     ),
-    SignUpPage.routeName: _standardRoute(
-      (context, settings) => SignUpPage.wrapped(),
-    ),
+    // SignUpPage.routeName: _standardRoute(
+    // (context, settings) => SignUpPage.wrapped(),
+    //),
     SupplierListPage.routeName: _standardRoute(
       (context, settings) => SupplierListPage.wrapped(),
     ),
-    AddNewSupplier.routeName: _standardRoute(
-      (context, settings) => const AddNewSupplier(),
+    SignUpPage.routeName: _standardRoute(
+      (context, settings) => SignUpPage.wrapped(),
     ),
-    RawMaterialHistory.routeName: _standardRoute(
-      (context, settings) => const RawMaterialHistory(),
+    AddNewSupplier.routeName: _standardRoute(
+      (context, settings) => AddNewSupplier.wrapped(),
+    ),
+    BuyerListPage.routeName: _standardRoute(
+      (context, settings) => BuyerListPage.wrapped(),
+    ),
+    AddNewBuyer.routeName: _standardRoute(
+      (context, settings) => AddNewBuyer.wrapped(),
     ),
     LoginScreen.routeName: _standardRoute(
       (context, settings) => LoginScreen(),
+    ),
+    OnGoingPrintingList.routeName: _standardRoute(
+      (context, settings) => LoginScreen(),
+    ),
+    StartPrinting.routeName: _standardRoute(
+      (context, settings) => StartPrinting.wrapped(),
+    ),
+    SettingsPage.routeName: _standardRoute(
+      (context, settings) => SettingsPage(),
+    ),
+    ChangePassword.routeName: _standardRoute(
+      (context, settings) => ChangePassword(),
     ),
   };
 

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:inventory_management/ui/list_details/warehouse_page/add_buyer/controller/model.dart';
+import 'package:inventory_management/ui/list_details/warehouse_page/add_warehouse/controller/warehouse_model.dart';
 
 part 'warehouse_list_model.freezed.dart';
 

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:inventory_management/ui/components/enter_key_alert.dart';
 import 'package:inventory_management/ui/components/input_field.dart';
 import 'package:provider/provider.dart';
 
 import 'controller/add_warehouse_controller.dart';
-import 'controller/model.dart';
+import 'controller/warehouse_model.dart';
 
 class AddNewWarehouse extends StatefulWidget {
   static Widget wrapped() {
@@ -21,7 +20,7 @@ class AddNewWarehouse extends StatefulWidget {
     );
   }
 
-  static const routeName = '/newBuyer';
+  static const routeName = '/newWarehouse';
   const AddNewWarehouse({Key key}) : super(key: key);
   @override
   _AddNewWarehouseState createState() => _AddNewWarehouseState();
@@ -42,7 +41,7 @@ class _AddNewWarehouseState extends State<AddNewWarehouse> {
     final controller = context.watch<AddWarehouseController>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add New Buyer'),
+        title: const Text('Add New Warehouse'),
       ),
       body: Container(
         child: Padding(
@@ -53,16 +52,8 @@ class _AddNewWarehouseState extends State<AddNewWarehouse> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 BuildInputField(
-                  label: 'Buyer Name',
-                  onChanged: controller.updateBuyerName,
-                ),
-                BuildInputField(
-                  label: 'Address',
-                  onChanged: controller.updateAddress,
-                ),
-                BuildInputField(
-                  label: 'Contact number',
-                  onChanged: controller.updateContactNumber,
+                  label: 'Warehouse Name',
+                  onChanged: controller.updateName,
                 ),
                 const BuildInputField(
                   label: 'Description',
@@ -71,43 +62,15 @@ class _AddNewWarehouseState extends State<AddNewWarehouse> {
                 const SizedBox(
                   height: 16,
                 ),
-                GestureDetector(
-                  onTap: () async {
-                    final label =
-                        await EnterKeyName.show(context, onDelete: () {});
-                    setState(
-                      () {
-                        list.add(
-                          BuildInputField(
-                            label: label,
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  child: const Text('+add'),
-                ),
-                for (var i in list)
-                  Stack(children: [
-                    i,
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            list.remove(i);
-                          });
-                        },
-                        child: const Icon(Icons.cancel),
-                      ),
-                    ),
-                  ]),
                 const SizedBox(
                   height: 36,
                 ),
                 ElevatedButton(
-                  onPressed: controller.addSupplier,
-                  child: const Text('Add supplier'),
+                  onPressed: () {
+                    controller.addWarehouse();
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Add warehouse'),
                 )
               ],
             ),

@@ -31,7 +31,7 @@ class LengthCountingTextField extends FormField<String> {
             }
 
             return LabeledFormField(
-              label: Text(''),
+              label: Text(label),
               note: Visibility(
                 visible: maxLength != null,
                 child: Text(
@@ -44,22 +44,29 @@ class LengthCountingTextField extends FormField<String> {
               ),
               error:
                   (state.hasError) ? Text(state.errorText) : const SizedBox(),
-              child: Builder(builder: (context) {
-                return TextField(
-                  keyboardType: type,
-                  maxLines: maxLine,
-                  style: const TextStyle(
-                    fontSize: 15,
-                  ),
-                  onChanged: onChangedHandler,
-                  controller: state._controller,
-                  decoration:
-                      InputDecoration(prefixIcon: icon, labelText: label),
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(maxLength),
-                  ],
-                );
-              }),
+              child: Builder(
+                builder: (context) {
+                  return TextField(
+                    keyboardType: type,
+                    maxLines: maxLine,
+                    style: const TextStyle(
+                      fontSize: 15,
+                    ),
+                    onChanged: onChangedHandler,
+                    controller: state._controller,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(maxLength),
+                    ],
+                  );
+                },
+              ),
             );
           },
         );

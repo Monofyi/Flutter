@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_management/data/repositories/supplier/supplier_repository.dart';
-import 'package:inventory_management/ui/list_details/supplier_page/controller/supplier_controller/supplier_list/supplier_list_model.dart';
+import 'package:inventory_management/data/repositories/buyer/buyer_repository.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-class BuyerListController extends StateNotifier<SupplierList> {
-  final SupplierRepository supplierRepository;
-  BuyerListController({@required this.supplierRepository})
-      : super(const SupplierList()) {
+import 'buyer_list/buyer_list_model.dart';
+
+class BuyerListController extends StateNotifier<BuyerList> {
+  final BuyerRepository buyerRepository;
+  BuyerListController({@required this.buyerRepository})
+      : super(const BuyerList()) {
     initialize();
   }
   Future<void> initialize() async {
-    final suppliers = await supplierRepository.fetchSuppliers();
-    state = state.copyWith(loading: false, suppliers: suppliers);
+    final buyers = await buyerRepository.fetchBuyers();
+    state = state.copyWith(loading: false, buyers: buyers);
+  }
+
+  Future<void> refresh() async {
+    state = state.copyWith(loading: true);
+    final buyers = await buyerRepository.fetchBuyers();
+    state = state.copyWith(loading: false, buyers: buyers);
+  }
+
+  Future<void> remove({@required int buyerid}) async {
+    state = state.copyWith(loading: false);
+
+    await buyerRepository.removeBuyers(buyerId: buyerid);
+    await refresh();
   }
 }

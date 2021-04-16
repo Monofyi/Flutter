@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/ui/home_page/custom_app_bar.dart';
+import 'package:inventory_management/ui/list_details/buyers_page/buyer_list.dart';
+import 'package:inventory_management/ui/list_details/goods_page/goods_list.dart';
+import 'package:inventory_management/ui/list_details/machines_page/machines_list.dart';
+import 'package:inventory_management/ui/list_details/raw_material_page/raw_material_page.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/supplier_list.dart';
-import 'package:inventory_management/ui/raw_material/raw_material_history.dart';
+import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list.dart';
+import 'package:inventory_management/ui/printing/start_printing/start_printing.dart';
+import 'package:inventory_management/ui/settings/settings_page.dart';
 
 import '../../colors.dart';
 
@@ -12,14 +18,18 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final items = [
       ListItem(
-          title: 'Home',
-          icon: 'images/icons/home.jpg',
-          onTap: () {
-            Navigator.of(context).pop();
-          }),
+        title: 'Home',
+        icon: 'images/icons/home.jpg',
+        onTap: () {
+          Navigator.of(context).pop();
+        },
+      ),
       ListItem(
         title: 'Setting',
         icon: 'images/icons/setting.jpg',
+        onTap: () {
+          Navigator.of(context).popAndPushNamed(SettingsPage.routeName);
+        },
       ),
       ListItem(
         title: 'User_management',
@@ -30,31 +40,33 @@ class HomePage extends StatelessWidget {
         icon: 'images/icons/list_details.jpg',
         subCategory: [
           ListItem(
-              title: 'Suppliers',
-              icon: null,
-              onTap: () {
-                Navigator.of(context)
-                    .popAndPushNamed(SupplierListPage.routeName);
-              }),
+            title: 'Suppliers',
+            icon: null,
+            onTap: () {
+              Navigator.of(context).popAndPushNamed(SupplierListPage.routeName);
+            },
+          ),
           ListItem(
             title: 'Buyers',
             icon: null,
+            onTap: () {
+              Navigator.of(context).popAndPushNamed(BuyerListPage.routeName);
+            },
           ),
           ListItem(
             title: 'Warehouse location',
             icon: null,
-          ),
-          ListItem(
-            title: 'Goods',
-            icon: null,
+            onTap: () {
+              Navigator.of(context)
+                  .popAndPushNamed(WarehouseListPage.routeName);
+            },
           ),
           ListItem(
             title: 'Machines',
             icon: null,
-          ),
-          ListItem(
-            title: 'Items',
-            icon: null,
+            onTap: () {
+              Navigator.of(context).popAndPushNamed(MachineListPage.routeName);
+            },
           ),
         ],
       ),
@@ -66,7 +78,7 @@ class HomePage extends StatelessWidget {
           title: 'Raw Material',
           icon: 'images/icons/raw_material.jpg',
           onTap: () {
-            Navigator.of(context).popAndPushNamed(RawMaterialHistory.routeName);
+            Navigator.of(context).pushNamed(RawMaterialListPage.routeName);
           }),
       ListItem(
         title: 'Production',
@@ -75,11 +87,29 @@ class HomePage extends StatelessWidget {
       ListItem(
         title: 'Goods',
         icon: 'images/icons/goods.jpg',
+        onTap: () {
+          Navigator.of(context).popAndPushNamed(GoodsListPage.routeName);
+        },
       ),
       ListItem(
-        title: 'Printing',
-        icon: 'images/icons/printing.jpg',
-      ),
+          title: 'Printing',
+          icon: 'images/icons/printing.jpg',
+          subCategory: [
+            ListItem(
+              title: 'Start Printing',
+              icon: null,
+              onTap: () {
+                Navigator.of(context).popAndPushNamed(StartPrinting.routeName);
+              },
+            ),
+            ListItem(
+              title: 'Buyers',
+              icon: null,
+              onTap: () {
+                Navigator.of(context).popAndPushNamed(BuyerListPage.routeName);
+              },
+            ),
+          ]),
       ListItem(
         title: 'Wastage',
         icon: 'images/icons/wastage.jpg',

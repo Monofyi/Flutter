@@ -10,9 +10,9 @@ class AddNewMachines extends StatefulWidget {
   static Widget wrapped() {
     return MultiProvider(
       providers: [
-        StateNotifierProvider<AddWarehouseController, MachineModel>(
+        StateNotifierProvider<AddMachineController, MachineModel>(
           create: (context) {
-            return AddWarehouseController(context.read());
+            return AddMachineController(context.read());
           },
         )
       ],
@@ -29,10 +29,10 @@ class AddNewMachines extends StatefulWidget {
 class _AddNewMachinesState extends State<AddNewMachines> {
   @override
   Widget build(BuildContext context) {
-    final controller = context.watch<AddWarehouseController>();
+    final controller = context.watch<AddMachineController>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add New Warehouse'),
+        title: const Text('Add New Machines'),
       ),
       body: Container(
         child: Padding(
@@ -50,7 +50,7 @@ class _AddNewMachinesState extends State<AddNewMachines> {
                   height: 36,
                 ),
                 ElevatedButton(
-                  onPressed: controller.addWarehouse,
+                  onPressed: controller.addMachine,
                   child: const Text('Add Machine'),
                 )
               ],

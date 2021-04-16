@@ -1,38 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:inventory_management/data/repositories/buyer/buyer_repository.dart';
+import 'package:inventory_management/data/repositories/warehouse/warehouse.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import 'model.dart';
+import 'warehouse_model.dart';
 
 class AddWarehouseController extends StateNotifier<WarehouseModel> {
-  final BuyerRepository buyerRepository;
-  AddWarehouseController(this.buyerRepository) : super(WarehouseModel());
+  final WarehouseRepository warehouseRepository;
+  AddWarehouseController(this.warehouseRepository) : super(WarehouseModel());
 
-  void addSupplier() {
-    buyerRepository.addBuyers(
-      number: state.phoneNumber.toString(),
-      name: state.buyerName,
-      address: state.address,
-    );
+  void addWarehouse() {
+    warehouseRepository.addWarehouse(locationName: state.locationName);
   }
 
-  void updateDescription({@required String description}) {
-    if (description != null) {}
-  }
-
-  void updateContactNumber(String number) {
-    final contactNumber = int.parse(number);
-
-    if (number != null) {
-      state = state.copyWith(phoneNumber: contactNumber);
-    }
-  }
-
-  void updateAddress(String address) {
-    state = state.copyWith(address: address);
-  }
-
-  void updateBuyerName(String name) {
-    state = state.copyWith(buyerName: name);
+  void updateName(String newValue) {
+    state = state.copyWith(locationName: newValue);
   }
 }

@@ -1,38 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:inventory_management/ui/components/input_field.dart';
-import 'package:inventory_management/ui/list_details/goods_page/add_goods/controller/goods_model.dart';
+import 'package:inventory_management/ui/list_details/raw_material_page/add_raw_material/controller/raw_material_model.dart';
 import 'package:provider/provider.dart';
 
-import 'controller/add_goods_controller.dart';
+import 'controller/add_raw_material_controller.dart';
 
-class AddNewGoods extends StatefulWidget {
+class AddRawMaterials extends StatefulWidget {
   static Widget wrapped() {
     return MultiProvider(
       providers: [
-        StateNotifierProvider<AddGoodsController, GoodsModel>(
+        StateNotifierProvider<AddRawMaterialController, RawMaterialModel>(
           create: (context) {
-            return AddGoodsController(context.read());
+            return AddRawMaterialController(context.read());
           },
         )
       ],
-      child: AddNewGoods(),
+      child: AddRawMaterials(),
     );
   }
 
-  static const routeName = '/newGoods';
-  const AddNewGoods({Key key}) : super(key: key);
+  static const routeName = '/addRawMaterial';
+  const AddRawMaterials({Key key}) : super(key: key);
   @override
-  _AddNewGoodsState createState() => _AddNewGoodsState();
+  _AddRawMaterialsState createState() => _AddRawMaterialsState();
 }
 
-class _AddNewGoodsState extends State<AddNewGoods> {
+class _AddRawMaterialsState extends State<AddRawMaterials> {
+  int _value;
+  @override
+  void initState() {
+    // TODO: implement initState
+    _value = 2;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final controller = context.watch<AddGoodsController>();
+    final controller = context.watch<AddRawMaterialController>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add New Goods'),
+        title: const Text('Add Raw Material'),
       ),
       body: Container(
         child: Padding(
@@ -43,11 +50,44 @@ class _AddNewGoodsState extends State<AddNewGoods> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 BuildInputField(
-                  label: 'Goods Name',
+                  label: 'Raw Material Name',
                   onChanged: controller.updateName,
                 ),
                 BuildInputField(
                     label: 'Quantity', onChanged: controller.updateQuantity),
+                BuildInputField(
+                  label: 'Location',
+                  onChanged: controller.updateLocation,
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: 20.0, bottom: 16),
+                  child: DropdownButton<int>(
+                    value: _value,
+                    items: [
+                      DropdownMenuItem(
+                        child: Text("Choose Tag"),
+                        value: 2,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Others"),
+                        value: 0,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Raw Material"),
+                        value: 1,
+                      ),
+                    ],
+                    onChanged: (value) {
+                      print(value);
+                      setState(
+                        () {
+                          controller.updateTag(value);
+                          _value = value;
+                        },
+                      );
+                    },
+                  ),
+                ),
                 const SizedBox(
                   height: 16,
                 ),
@@ -55,8 +95,8 @@ class _AddNewGoodsState extends State<AddNewGoods> {
                   height: 36,
                 ),
                 ElevatedButton(
-                  onPressed: controller.addGoods,
-                  child: const Text('Add goods'),
+                  onPressed: controller.addRawMaterial,
+                  child: const Text('Add Raw Material'),
                 )
               ],
             ),

@@ -11,13 +11,13 @@ targets:
       freezed:
         generate_for:
           include:
-            - lib/**/*model.dart # contains `lib/**/*view_model.dart`
+            - lib/**/*machine_model.dart # contains `lib/**/*view_model.dart`
             - lib/**/*value.dart
             - lib/**/*state.dart
       json_serializable:
         generate_for:
           include:
-            - lib/**/*model.dart # contains `lib/**/*view_model.dart`
+            - lib/**/*machine_model.dart # contains `lib/**/*view_model.dart`
             - lib/**/*value.dart
             - lib/**/*state.dart
         options:

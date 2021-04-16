@@ -1,9 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:inventory_management/ui/list_details/goods_page/add_goods/controller/goods_model.dart';
+import 'package:inventory_management/ui/list_details/raw_material_page/add_raw_material/controller/raw_material_model.dart';
+
+part 'raw_material_list_model.freezed.dart';
 
 @freezed
-abstract class RawMaterialList with _$GoodsList {
+abstract class RawMaterialList with _$RawMaterialList {
   const factory RawMaterialList(
-      {@Default(<GoodsModel>[]) List<GoodsModel> goods,
-      @Default(true) bool loading}) = _GoodsList;
+      {@Default(<RawMaterialModel>[]) List<RawMaterialModel> rawMaterials,
+      @Default(true) bool loading}) = _RawMaterialList;
 }

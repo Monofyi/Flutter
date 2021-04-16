@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../supplier_model.dart';
+import '../../../add_supplier/controller/supplier_model.dart';
 
 part 'supplier_list_model.freezed.dart';
 

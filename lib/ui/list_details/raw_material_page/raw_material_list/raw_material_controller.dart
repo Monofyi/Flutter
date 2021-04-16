@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_management/data/repositories/goods_repository/goods_repository.dart';
+import 'package:inventory_management/data/repositories/raw_material/raw_material_repository.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-import 'goods_list_model.dart';
+import 'raw_material_list_model.dart';
 
-class GoodsListController extends StateNotifier<GoodsList> {
-  final GoodsRepository goodsRepository;
-  GoodsListController({@required this.goodsRepository})
-      : super(const GoodsList()) {
+class RawMaterialController extends StateNotifier<RawMaterialList> {
+  final RawMaterialRepository rawMaterialRepository;
+  RawMaterialController({@required this.rawMaterialRepository})
+      : super(const RawMaterialList()) {
     initialize();
   }
   Future<void> initialize() async {
-    //final goods = await goodsRepository.fetchGoods();
+    final raw_material = await rawMaterialRepository.fetchRawMaterials();
     state = state.copyWith(
       loading: false,
-    ); //goods: goods);
+      rawMaterials: raw_material,
+    );
   }
 
   Future<void> fetch(String locationId) async {
     state = state.copyWith(
       loading: true,
     );
-    final goods = await goodsRepository.fetchGoods(locationId: locationId);
-    state = state.copyWith(loading: false, goods: goods);
+    final rawMaterials = await rawMaterialRepository.fetchRawMaterials();
+    state = state.copyWith(loading: false, rawMaterials: rawMaterials);
   }
 }

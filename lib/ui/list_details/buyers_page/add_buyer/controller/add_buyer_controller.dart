@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_management/data/repositories/supplier/supplier_repository.dart';
-import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/controller/supplier_model.dart';
+import 'package:inventory_management/data/repositories/buyer/buyer_repository.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-class AddBuyerController extends StateNotifier<SupplierModel> {
-  final SupplierRepository supplierRepository;
-  AddBuyerController(this.supplierRepository) : super(SupplierModel());
+import 'buyer_model.dart';
 
-  void addSupplier() {
-    supplierRepository.addSuppliers(
+class AddBuyerController extends StateNotifier<BuyerModel> {
+  final BuyerRepository buyerRepository;
+  AddBuyerController(this.buyerRepository) : super(BuyerModel());
+
+  void addBuyer() {
+    buyerRepository.addBuyers(
       number: state.phoneNumber.toString(),
-      name: state.supplierName,
+      name: state.buyerName,
       address: state.address,
     );
   }
@@ -31,7 +32,7 @@ class AddBuyerController extends StateNotifier<SupplierModel> {
     state = state.copyWith(address: address);
   }
 
-  void updateSupplierName(String name) {
-    state = state.copyWith(supplierName: name);
+  void updateBuyerName(String name) {
+    state = state.copyWith(buyerName: name);
   }
 }

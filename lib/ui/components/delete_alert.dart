@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
 /// The dialog to confirm sub profile image delete.
-class DeleteSubProfileDialog extends StatelessWidget {
+class DeleteDialog extends StatelessWidget {
   static Future<void> show(
     BuildContext context, {
     @required VoidCallback onDelete,
   }) {
     return showDialog(
       context: context,
-      builder: (_) => DeleteSubProfileDialog._(
+      builder: (_) => DeleteDialog._(
         onDelete: onDelete,
       ),
     );
   }
 
-  const DeleteSubProfileDialog._({
+  const DeleteDialog._({
     @required this.onDelete,
     Key key,
   })  : assert(onDelete != null),

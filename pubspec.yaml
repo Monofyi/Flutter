@@ -44,6 +44,8 @@ dev_dependencies:
   http: 0.13.0
   flutter_state_notifier: 0.6.1
   email_validator: 1.0.6
+  animations: 1.1.2
+  auto_size_text: 2.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

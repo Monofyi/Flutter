@@ -1,14 +1,15 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'goods_model.freezed.dart';
-part 'goods_model.g.dart';
+part 'raw_material_model.freezed.dart';
+part 'raw_material_model.g.dart';
 
 @freezed
 abstract class RawMaterialModel with _$RawMaterialModel {
   const factory RawMaterialModel({
-    @JsonKey(name: "goods_name") @Default('') String goodsName,
-    @JsonKey(name: "location_name") @Default('') String locationName,
-    @JsonKey(name: "quantity") @Default('') String quantity,
+    @JsonKey(name: "item_name") @Default('') String itemName,
+    @JsonKey(name: "warehouse_name") @Default('') String location,
+    @JsonKey(name: "quantity") @Default(0) int quantity,
+    @JsonKey(name: "tag") @Default('') String tag,
   }) = _RawMaterialModel;
   factory RawMaterialModel.fromJson(Map<String, dynamic> json) =>
       _$_$_RawMaterialModelFromJson(json);

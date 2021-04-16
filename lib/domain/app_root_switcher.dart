@@ -26,6 +26,7 @@ class AppRootSwitcher extends Disposable with SubscriptionContainerMixin {
 
   void _subscribeAuthState() {
     accountRepository.getToken().asStream().listen((token) async {
+      print(token);
       if (token == null) {
         appNavigator.pushAndRemoveAllPage(SignInPage.routeName);
       } else {

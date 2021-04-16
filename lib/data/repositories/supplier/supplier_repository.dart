@@ -1,8 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:inventory_management/data/repositories/account_repository.dart';
-import 'package:inventory_management/ui/list_details/supplier_page/controller/supplier_controller/supplier_model.dart';
+import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/controller/supplier_model.dart';
 
 class SupplierRepository {
   Future<List<SupplierModel>> fetchSuppliers() async {
@@ -15,23 +16,70 @@ class SupplierRepository {
         'Authorization': 'Token $token',
       },
     );
-
+    print(suppliers.body);
     final supplierList = (json.decode(suppliers.body) as List)
         .map((dynamic e) => SupplierModel.fromJson(e as Map<String, dynamic>))
         .toList();
     return supplierList;
   }
 
-  Future<void> addSuppliers() async {
+  Future<void> addSuppliers({
+    @required String name,
+    @required String number,
+    @required String address,
+    @required String description,
+  }) async {
     final token = await const AccountRepository().getToken();
+    print(token);
 
-    await post(Uri.parse('http://65.1.236.26:8000/add_supplier/'), headers: {
-      'Authorization': 'Token $token',
-    }, body: {
-      'supplier_name': 'bless',
-      'phone_no': '2147483646',
-      'address': 'bleh',
-      'description': "{}"
-    });
+    final response = await post(
+        Uri.parse('http://65.1.236.26:8000/add_supplier/'),
+        headers: {
+          'Authorization': 'Token $token',
+        },
+        body: {
+          'supplier_name': name,
+          'address': address,
+          'phone_no': number,
+          'description': "{$description}",
+        });
+    print(response.body);
+  }
+
+  Future<bool> removeSuppliers({
+    @required int supplierId,
+  }) async {
+    final token = await const AccountRepository().getToken();
+    print(token);
+
+    final response = await post(
+        Uri.parse('http://65.1.236.26:8000/remove_supplier/'),
+        headers: {
+          'Authorization': 'Token $token',
+        },
+        body: {
+          'supplier_id': supplierId.toString(),
+        });
+    if (response.statusCode == 200) {
+      return true;
+    }
+    return false;
+  }
+
+  Future<void> updateSuppliers({
+    @required String supplierId,
+    @required String description,
+  }) async {
+    final token = await const AccountRepository().getToken();
+    print(token);
+
+    final response = await put(
+      Uri.parse('http://65.1.236.26:8000/update_supplier_description/'),
+      headers: {
+        'Authorization': 'Token $token',
+      },
+      body: {'supplier_id': supplierId, 'description': description},
+    );
+    print(response.body);
   }
 }

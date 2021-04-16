@@ -1,46 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:inventory_management/ui/components/delete_alert.dart';
-import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/supplier_page.dart';
-import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_controller.dart';
-import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_list_model.dart';
+import 'package:inventory_management/ui/list_details/machines_page/add_machine/add_machine_page.dart';
+import 'package:inventory_management/ui/list_details/machines_page/machines_list/warehouse_list_model.dart';
 import 'package:provider/provider.dart';
 
-import 'add_warehouse/add_warehouse_page.dart';
+import 'machines_list/machine_controller.dart';
 
-class WarehouseListPage extends StatefulWidget {
-  static const routeName = '/warehouseList';
+class MachineListPage extends StatefulWidget {
+  static const routeName = '/machineList';
   static Widget wrapped() {
     return MultiProvider(
       providers: [
-        StateNotifierProvider<WarehouseListController, WarehouseList>(
+        StateNotifierProvider<MachineListController, MachineList>(
           lazy: false,
-          create: (context) => WarehouseListController(
-            warehouseRepository: context.read(),
+          create: (context) => MachineListController(
+            machineRepository: context.read(),
           ),
         )
       ],
-      child: WarehouseListPage(),
+      child: MachineListPage(),
     );
   }
 
   @override
-  _WarehouseListPageState createState() => _WarehouseListPageState();
+  _MachineListPageState createState() => _MachineListPageState();
 }
 
-class _WarehouseListPageState extends State<WarehouseListPage> {
+class _MachineListPageState extends State<MachineListPage> {
   @override
   Widget build(BuildContext context) {
-    final vm = context.select((WarehouseList value) => value);
-    final warehouses = vm.warehouses;
+    final vm = context.select((MachineList value) => value);
+    final machines = vm.machines;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Warehouse List'),
+        title: const Text('Machine List'),
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
         onPressed: () {
-          Navigator.of(context).pushNamed(AddNewWarehouse.routeName);
+          Navigator.of(context).pushNamed(AddNewMachines.routeName);
         },
         child: const Icon(Icons.add),
       ),
@@ -48,9 +47,9 @@ class _WarehouseListPageState extends State<WarehouseListPage> {
         if (vm.loading) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (vm.warehouses == null || vm.warehouses.isEmpty) {
+        if (vm.machines == null || vm.machines.isEmpty) {
           return const Center(
-            child: Text('No warehouses'),
+            child: Text('No machines'),
           );
         }
         return Padding(
@@ -58,15 +57,10 @@ class _WarehouseListPageState extends State<WarehouseListPage> {
           child: ListView.separated(
             clipBehavior: Clip.hardEdge,
             physics: const BouncingScrollPhysics(),
-            itemCount: warehouses.length,
+            itemCount: machines.length,
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, SupplierPage.routeName,
-                      arguments: SupplierPageArgument(
-                          companyName: warehouses[index].locationName,
-                          description: warehouses[index].description));
-                },
+                onTap: () {},
                 child: Container(
                   margin: const EdgeInsets.all(4),
                   height: 76,
@@ -90,12 +84,11 @@ class _WarehouseListPageState extends State<WarehouseListPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            warehouses[index].locationName,
+                            machines[index].machineName,
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              DeleteSubProfileDialog.show(context,
-                                  onDelete: () {});
+                              DeleteDialog.show(context, onDelete: () {});
                             },
                             child: const Text('remove'),
                           )

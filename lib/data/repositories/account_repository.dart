@@ -3,15 +3,16 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:inventory_management/ui/login_page/login_failed_controller/login_failed_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum LoginStatus { successfull, failed, none }
 
 class LoginResult {
-  final String error;
   final LoginStatus status;
+  final LoginResponseModel model;
 
-  LoginResult({this.error, @required this.status});
+  LoginResult({this.model, @required this.status});
 }
 
 class AccountRepository {
@@ -28,7 +29,7 @@ class AccountRepository {
     return pref.setString('token', token);
   }
 
-  Future<LoginStatus> registerUser(
+  Future<LoginResult> registerUser(
       {@required String userName,
       @required String email,
       @required int contactNumber,
@@ -37,6 +38,8 @@ class AccountRepository {
       @required String recoveryQuestion,
       @required String recoveryAnswer,
       @required String userType}) async {
+    final user = int.parse(userType);
+
     final response =
         await post(Uri.parse("http://65.1.236.26:8000/register/"), body: {
       'username': userName,
@@ -48,23 +51,68 @@ class AccountRepository {
       'recovery_answer': recoveryAnswer,
       'user_type': userType
     });
-    print(response.body);
-    if (response.statusCode == 200) {
-      final json = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
-      final token = json["token"] as String;
+    final jsonValue = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
+    final token = jsonValue["token"] as String;
 
+    if (token == null) {
+      final map = json.decode(response.body) as Map<String, dynamic>;
+
+      return LoginResult(
+          status: LoginStatus.failed, model: LoginResponseModel.fromJson(map));
+    }
+    if (response.statusCode == 200) {
       if (token != null) {
         await setToken(token: token);
-        return LoginStatus.successfull;
+
+        Response regResponse;
+        switch (user) {
+          case 0:
+            regResponse = await post(
+                Uri.parse("http://65.1.236.26:8000/owner_ins_details/"),
+                headers: {
+                  'Authorization': 'Token $token',
+                },
+                body: {
+                  'owner_name': userName,
+                  'phone_no': contactNumber.toString(),
+                  'email': email,
+                  'address': 'lll',
+                  'description': 'hjjkjk'
+                });
+            break;
+          case 1:
+            regResponse = await post(
+              Uri.parse("http://65.1.236.26:8000/worker_insert/"),
+              headers: {
+                'Authorization': 'Token $token',
+              },
+              body: {
+                'worker_name': userName,
+                'address': 'kk',
+              },
+            );
+            break;
+        }
+        print(regResponse.body);
+        if (regResponse.statusCode == 200) {
+          final json = jsonDecode(
+            utf8.decode(regResponse.bodyBytes),
+          ) as Map;
+          print(json);
+
+          return LoginResult(status: LoginStatus.successfull);
+        }
       }
     }
-    return LoginStatus.failed;
+    return LoginResult(status: LoginStatus.failed);
   }
 
   Future<LoginResult> signIn({
     @required String username,
     @required String password,
   }) async {
+    print(username);
+    print(password);
     final response =
         await post(Uri.parse("http://65.1.236.26:8000/login/"), body: {
       'username': username,
@@ -80,21 +128,7 @@ class AccountRepository {
     } else {
       final error = json["error"] as String;
       print(error);
-      return LoginResult(status: LoginStatus.failed, error: error);
+      return LoginResult(status: LoginStatus.failed);
     }
   }
-}
-
-class NotAuthenticatedException implements Exception {
-  @override
-  String toString() => '🤓 This account is not Authenticated.';
-}
-
-class NoSuchUserException implements Exception {
-  final String userId;
-
-  NoSuchUserException(this.userId);
-
-  @override
-  String toString() => "No such user: ID = $userId";
 }

@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'model.freezed.dart';
-part 'model.g.dart';
+part 'warehouse_model.freezed.dart';
+part 'warehouse_model.g.dart';
 
 @freezed
 abstract class WarehouseModel with _$WarehouseModel {

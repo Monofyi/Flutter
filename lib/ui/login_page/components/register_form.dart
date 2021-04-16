@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inventory_management/ui/components/input_field.dart';
-import 'package:inventory_management/ui/components_new/rounded_button.dart';
-import 'package:inventory_management/ui/components_new/rounded_input.dart';
-import 'package:inventory_management/ui/components_new/rounded_password_input.dart';
 import 'package:inventory_management/ui/login_page/controller/login_model.dart';
 import 'package:inventory_management/ui/login_page/controller/login_page_controller.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +19,7 @@ class RegisterForm extends StatefulWidget {
   }) {
     return MultiProvider(
       providers: [
-        StateNotifierProvider<LoginPageController, LoginModel>(
+        ChangeNotifierProvider<LoginPageController>(
           lazy: false,
           create: (context) => LoginPageController(
               accountRepository: context.read(), appNavigator: context.read()),
@@ -122,11 +118,11 @@ class _RegisterFormState extends State<RegisterForm> {
                   SizedBox(height: 40),
                   SvgPicture.asset('assets/images/login.svg'),
                   SizedBox(height: 40),
-                  RoundedInput(icon: Icons.mail, hint: 'Username'),
-                  RoundedInput(icon: Icons.face_rounded, hint: 'Name'),
-                  RoundedPasswordInput(hint: 'Password'),
+                  //RoundedInput(icon: Icons.mail, hint: 'Username'),
+                  //RoundedInput(icon: Icons.face_rounded, hint: 'Name'),
+                  //RoundedPasswordInput(hint: 'Password'),
                   SizedBox(height: 10),
-                  RoundedButton(title: 'SIGN UP')
+                  //RoundedButton(title: 'SIGN UP')
                 ],
               ),
             ),

@@ -1,22 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:inventory_management/ui/components/choose_one_form.dart';
+import 'package:inventory_management/ui/components/error_pop_up.dart';
 import 'package:inventory_management/ui/components/input_field.dart';
 import 'package:inventory_management/ui/components_new/rounded_button.dart';
 import 'package:inventory_management/ui/login_page/controller/login_page_controller.dart';
 import 'package:provider/provider.dart';
 
-import 'controller/login_model.dart';
+enum UserType {
+  worker,
+  owner,
+}
+
+extension Type on UserType {
+  int get number {
+    switch (this) {
+      case UserType.worker:
+        return 1;
+
+      case UserType.owner:
+        return 0;
+    }
+    return -1;
+  }
+}
 
 class SignUpPage extends StatefulWidget {
   static const routeName = '/loginPage';
   static Widget wrapped() {
     return MultiProvider(
       providers: [
-        StateNotifierProvider<LoginPageController, LoginModel>(
+        ChangeNotifierProvider<LoginPageController>(
           lazy: false,
           create: (context) => LoginPageController(
-              accountRepository: context.read(), appNavigator: context.read()),
+              onError: (val) async {
+                print('kkk');
+                print(val);
+                await ErrorDialog.show(
+                  context,
+                  onTap: () {},
+                  list: val,
+                );
+              },
+              accountRepository: context.read(),
+              appNavigator: context.read()),
         )
       ],
       child: SignUpPage(),
@@ -27,25 +54,28 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignUpPageState extends State<SignUpPage>
+    with AutomaticKeepAliveClientMixin {
   static final _formKey = GlobalKey<FormState>();
   bool animate = false;
-  int _value;
+
   @override
   void initState() {
-    _value = 2;
     super.initState();
 
-    Future<int>.delayed(const Duration(milliseconds: 500))
-        .then((_) => setState(() {
-              animate = true;
-            }));
+    Future<int>.delayed(const Duration(milliseconds: 500)).then(
+      (_) => setState(
+        () {
+          animate = true;
+        },
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final vm = context.select((LoginModel value) => value);
     final controller = context.watch<LoginPageController>();
+    final vm = controller.value;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -109,13 +139,14 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: Form(
                   key: _formKey,
                   child: Padding(
-                    padding: EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     child: CustomScrollView(
                       slivers: [
                         SliverList(
                           delegate: SliverChildListDelegate(
                             [
                               BuildInputField(
+                                initialString: vm?.userName ?? '',
                                 label: 'username',
                                 icon: const Icon(Icons.person),
                                 validator: controller.validationMessageUserName,
@@ -123,11 +154,14 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                               BuildInputField(
                                   label: 'Email',
+                                  initialString: vm?.email ?? "",
                                   icon: const Icon(Icons.email),
                                   onChanged: controller.emailChanged,
                                   validator: controller.validationMessageEmail),
                               BuildInputField(
                                 label: 'phoneNumber',
+                                initialString:
+                                    vm?.contactNumber?.toString() ?? "",
                                 type: TextInputType.number,
                                 icon: const Icon(Icons.phone),
                                 onChanged: controller.phoneNumberChanged,
@@ -136,23 +170,32 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                               BuildInputField(
                                   label: 'password',
+                                  initialString: vm?.password?.toString() ?? "",
                                   icon: const Icon(Icons.remove_red_eye),
                                   onChanged: controller.passwordChanged,
                                   validator:
                                       controller.validationMessagePassword),
                               BuildInputField(
+                                initialString:
+                                    vm?.confirmPassword?.toString() ?? "",
                                 label: 'confirm password',
                                 icon: const Icon(Icons.remove_red_eye),
                                 onChanged: controller.confirmPasswordChanged,
                                 validator:
                                     controller.validationMessageConfirmPassword,
                               ),
-                              BuildInputField(
-                                label: 'recovery_question',
-                                icon: const Icon(Icons.remove_red_eye),
-                                onChanged: controller.recoveryQuestionChanged,
-                                validator: controller
-                                    .validationMessageRecoveryQuestion,
+                              BuildOneChooser(
+                                options: const [
+                                  'What primary school did you attend?',
+                                  'What were the last four digits of your childhood telephone number?',
+                                  'In what town or city did your parents meet?',
+                                  'What time of the day was your first child born?',
+                                  'What was the house number and street name you lived in as a child?',
+                                  'What were the last four digits of your childhood telephone number?'
+                                ],
+                                label: 'Recovery Question',
+                                chooseTitle: 'Recovery Question',
+                                value: controller.recoveryQuestionChanged,
                               ),
                               BuildInputField(
                                 label: 'recovery_answer',
@@ -161,31 +204,22 @@ class _SignUpPageState extends State<SignUpPage> {
                                 validator:
                                     controller.validationMessageRecoveryAnswer,
                               ),
-                              Container(
-                                padding: EdgeInsets.only(top: 20.0, bottom: 16),
-                                child: DropdownButton<int>(
-                                    value: _value,
-                                    items: [
-                                      DropdownMenuItem(
-                                        child: Text("User type"),
-                                        value: 2,
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text("Owner"),
-                                        value: 0,
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text("Employee"),
-                                        value: 1,
-                                      ),
-                                    ],
-                                    onChanged: (value) {
-                                      print(value);
-                                      setState(() {
-                                        controller.userTypeChanged(value);
-                                        _value = value;
-                                      });
-                                    }),
+                              BuildOneChooser(
+                                options: const ['Owner', 'Worker'],
+                                label: 'User type',
+                                chooseTitle: 'Choose one',
+                                value: (value) {
+                                  setState(
+                                    () {
+                                      if (value.compareTo('Owner') == 0) {
+                                        controller.userTypeChanged(0);
+                                      } else if (value.compareTo('Worker') ==
+                                          0) {
+                                        controller.userTypeChanged(1);
+                                      }
+                                    },
+                                  );
+                                },
                               ),
                             ],
                           ),
@@ -210,6 +244,9 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class _NextButtonAndAgreement extends StatelessWidget {

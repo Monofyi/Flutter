@@ -1,8 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_management/ui/components/enter_key_alert.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:inventory_management/ui/components/input_field.dart';
+import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/controller/supplier_model.dart';
+import 'package:provider/provider.dart';
+
+import 'controller/add_supplier_controller.dart';
 
 class AddNewSupplier extends StatefulWidget {
+  static Widget wrapped() {
+    return MultiProvider(
+      providers: [
+        StateNotifierProvider<AddSupplierController, SupplierModel>(
+          create: (context) {
+            return AddSupplierController(context.read());
+          },
+        )
+      ],
+      child: AddNewSupplier(),
+    );
+  }
+
   static const routeName = '/newSuplier';
   const AddNewSupplier({Key key}) : super(key: key);
   @override
@@ -21,6 +38,7 @@ class _AddNewSupplierState extends State<AddNewSupplier> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = context.watch<AddSupplierController>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add New Supplier'),
@@ -33,52 +51,26 @@ class _AddNewSupplierState extends State<AddNewSupplier> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const BuildInputField(
+                BuildInputField(
                   label: 'Supplier Name',
+                  onChanged: controller.updateSupplierName,
+                ),
+                BuildInputField(
+                  label: 'Address',
+                  onChanged: controller.updateAddress,
                 ),
                 const BuildInputField(
                   label: 'Description',
                   maxLine: 8,
                 ),
                 const SizedBox(
-                  height: 16,
-                ),
-                GestureDetector(
-                  onTap: () async {
-                    final label =
-                        await EnterKeyName.show(context, onDelete: () {});
-                    setState(
-                      () {
-                        list.add(
-                          BuildInputField(
-                            label: label,
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  child: const Text('+add'),
-                ),
-                for (var i in list)
-                  Stack(children: [
-                    i,
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            list.remove(i);
-                          });
-                        },
-                        child: const Icon(Icons.cancel),
-                      ),
-                    ),
-                  ]),
-                const SizedBox(
                   height: 36,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.addSupplier();
+                    Navigator.of(context).pop();
+                  },
                   child: const Text('Add supplier'),
                 )
               ],

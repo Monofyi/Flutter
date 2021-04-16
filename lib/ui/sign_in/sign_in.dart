@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inventory_management/ui/components/input_field.dart';
 import 'package:inventory_management/ui/login_page/login_page.dart';
+import 'package:inventory_management/ui/sign_in/controller.dart';
 import 'package:provider/provider.dart';
-
-import 'controller.dart';
 
 class SignInPage extends StatefulWidget {
   static const routeName = '/signinPage';
@@ -30,8 +29,7 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   static final _formKey = GlobalKey<FormState>();
   bool animate = false;
-  String _password;
-  String _username;
+
   @override
   void initState() {
     super.initState();
@@ -50,8 +48,6 @@ class _SignInPageState extends State<SignInPage> {
     final controller = context.watch<SignInController>();
     final vm = controller.value;
 
-    final valid =
-        vm.username == Validation.valid && vm.password == Validation.valid;
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -85,11 +81,7 @@ class _SignInPageState extends State<SignInPage> {
             Align(
               alignment: Alignment.bottomCenter,
               child: _NextButtonAndAgreement(
-                onTap: valid
-                    ? () {
-                        controller.signIn();
-                      }
-                    : null,
+                onTap: controller.signIn,
               ),
             ),
             AnimatedPositioned(
@@ -129,14 +121,13 @@ class _SignInPageState extends State<SignInPage> {
                                 BuildInputField(
                                   label: 'username',
                                   icon: const Icon(Icons.person),
-                                  validator: (_) {},
-                                  onChanged: (value) {},
+                                  onChanged: controller.setUserName,
                                 ),
                                 BuildInputField(
-                                    label: 'password',
-                                    icon: const Icon(Icons.remove_red_eye),
-                                    onChanged: (_) {},
-                                    validator: (_) {}),
+                                  label: 'password',
+                                  icon: const Icon(Icons.remove_red_eye),
+                                  onChanged: controller.setPassword,
+                                ),
                               ],
                             ),
                           ),

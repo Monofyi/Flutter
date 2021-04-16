@@ -14,4 +14,15 @@ class WarehouseListController extends StateNotifier<WarehouseList> {
     final buyers = await warehouseRepository.fetchWarehouse();
     state = state.copyWith(loading: false, warehouses: buyers);
   }
+
+  Future<void> refresh() async {
+    state = state.copyWith(loading: true);
+    final buyers = await warehouseRepository.fetchWarehouse();
+    state = state.copyWith(loading: false, warehouses: buyers);
+  }
+
+  Future<void> remove(int warehouseId) async {
+    await warehouseRepository.removeWarehouse(warehouseId: warehouseId);
+    await refresh();
+  }
 }
