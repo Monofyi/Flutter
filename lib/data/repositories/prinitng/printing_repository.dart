@@ -10,7 +10,7 @@ class PrintingRepository {
     final token = await const AccountRepository().getToken();
 
     final suppliers = await get(
-      Uri.parse('http://65.1.236.26:8000/view_printing_history/'),
+      Uri.parse('http://bitecope.co.in:8000/view_printing_history/'),
       headers: {
         "Content-Type": "application/json",
         'Authorization': 'Token $token',
@@ -30,7 +30,7 @@ class PrintingRepository {
     print(token);
 
     final response = await post(
-      Uri.parse('http://65.1.236.26:8000/stop_printing/'),
+      Uri.parse('http://bitecope.co.in:8000/stop_printing/'),
       headers: {
         'Authorization': 'Token $token',
       },
@@ -46,7 +46,7 @@ class PrintingRepository {
     print(token);
 
     final response = await get(
-      Uri.parse('http://65.1.236.26:8000/view_ongoing_printing/'),
+      Uri.parse('http://bitecope.co.in:8000/view_ongoing_printing/'),
       headers: {
         'Authorization': 'Token $token',
       },
@@ -69,7 +69,7 @@ class PrintingRepository {
     print(token);
 
     final response = await put(
-      Uri.parse('http://65.1.236.26:8000/start_printing/'),
+      Uri.parse('http://bitecope.co.in:8000/start_printing/'),
       headers: {
         'Authorization': 'Token $token',
       },
