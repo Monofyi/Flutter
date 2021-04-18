@@ -11,7 +11,7 @@ class GoodsRepository {
     print(token);
 
     final response = await http.post(
-      Uri.parse('http://65.1.236.26:8000/goods_view/'),
+      Uri.parse('http://bitecope.co.in:8000/goods_view/'),
       headers: {
         'Authorization': 'Token $token',
       },
@@ -33,7 +33,7 @@ class GoodsRepository {
     print(token);
 
     final response = await http.post(
-      Uri.parse('http://65.1.236.26:8000/add_goods/'),
+      Uri.parse('http://bitecope.co.in:8000/add_goods/'),
       headers: {
         'Authorization': 'Token $token',
       },
@@ -53,7 +53,7 @@ class GoodsRepository {
     print(token);
 
     final response = await http
-        .post(Uri.parse('http://65.1.236.26:8000/remove_buyer/'), headers: {
+        .post(Uri.parse('http://bitecope.co.in:8000/remove_buyer/'), headers: {
       'Authorization': 'Token $token',
     }, body: {
       'buyer_id': buyerId.toString(),
@@ -71,7 +71,7 @@ class GoodsRepository {
     print(token);
 
     final response = await http.post(
-        Uri.parse('http://65.1.236.26:8000/update_buyer_description/'),
+        Uri.parse('http://bitecope.co.in:8000/update_buyer_description/'),
         headers: {
           'Authorization': 'Token $token',
         },

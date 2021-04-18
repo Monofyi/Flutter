@@ -10,7 +10,7 @@ class ProductionRepository {
     final token = await const AccountRepository().getToken();
 
     final suppliers = await get(
-      Uri.parse('http://65.1.236.26:8000/start_production/'),
+      Uri.parse('http://bitecope.co.in:8000/start_production/'),
       headers: {
         "Content-Type": "application/json",
         'Authorization': 'Token $token',
@@ -27,7 +27,7 @@ class ProductionRepository {
     final token = await const AccountRepository().getToken();
 
     final suppliers = await get(
-      Uri.parse('http://65.1.236.26:8000/view_ongoing_production/'),
+      Uri.parse('http://bitecope.co.in:8000/view_ongoing_production/'),
       headers: {
         "Content-Type": "application/json",
         'Authorization': 'Token $token',
@@ -49,7 +49,7 @@ class ProductionRepository {
     print(token);
 
     final response = await post(
-      Uri.parse('http://65.1.236.26:8000/add_buyer/'),
+      Uri.parse('http://bitecope.co.in:8000/add_buyer/'),
       headers: {
         'Authorization': 'Token $token',
       },
@@ -69,7 +69,7 @@ class ProductionRepository {
     print(token);
 
     final response = await post(
-        Uri.parse('http://65.1.236.26:8000/remove_buyer/'),
+        Uri.parse('http://bitecope.co.in:8000/remove_buyer/'),
         headers: {
           'Authorization': 'Token $token',
         },
@@ -89,7 +89,7 @@ class ProductionRepository {
     print(token);
 
     final response = await post(
-        Uri.parse('http://65.1.236.26:8000/update_buyer_description/'),
+        Uri.parse('http://bitecope.co.in:8000/update_buyer_description/'),
         headers: {
           'Authorization': 'Token $token',
         },
