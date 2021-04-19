@@ -5,12 +5,14 @@ import 'package:http/http.dart';
 import 'package:inventory_management/data/repositories/account_repository.dart';
 import 'package:inventory_management/ui/list_details/buyers_page/add_buyer/controller/buyer_model.dart';
 
+import '../../constants.dart';
+
 class ProductionRepository {
   Future<List<BuyerModel>> newProduction() async {
     final token = await const AccountRepository().getToken();
 
     final suppliers = await get(
-      Uri.parse('http://bitecope.co.in:8000/start_production/'),
+      Uri.parse('$port/start_production/'),
       headers: {
         "Content-Type": "application/json",
         'Authorization': 'Token $token',
@@ -27,7 +29,7 @@ class ProductionRepository {
     final token = await const AccountRepository().getToken();
 
     final suppliers = await get(
-      Uri.parse('http://bitecope.co.in:8000/view_ongoing_production/'),
+      Uri.parse('$port/view_ongoing_production/'),
       headers: {
         "Content-Type": "application/json",
         'Authorization': 'Token $token',
@@ -49,7 +51,7 @@ class ProductionRepository {
     print(token);
 
     final response = await post(
-      Uri.parse('http://bitecope.co.in:8000/add_buyer/'),
+      Uri.parse('$port/add_buyer/'),
       headers: {
         'Authorization': 'Token $token',
       },
@@ -68,14 +70,11 @@ class ProductionRepository {
     final token = await const AccountRepository().getToken();
     print(token);
 
-    final response = await post(
-        Uri.parse('http://bitecope.co.in:8000/remove_buyer/'),
-        headers: {
-          'Authorization': 'Token $token',
-        },
-        body: {
-          'buyer_id': buyerId.toString(),
-        });
+    final response = await post(Uri.parse('$port/remove_buyer/'), headers: {
+      'Authorization': 'Token $token',
+    }, body: {
+      'buyer_id': buyerId.toString(),
+    });
     if (response.statusCode == 200) {
       return true;
     }
@@ -88,14 +87,12 @@ class ProductionRepository {
     final token = await const AccountRepository().getToken();
     print(token);
 
-    final response = await post(
-        Uri.parse('http://bitecope.co.in:8000/update_buyer_description/'),
-        headers: {
-          'Authorization': 'Token $token',
-        },
-        body: {
-          'buyer_name': buyerId,
-        });
+    final response =
+        await post(Uri.parse('$port/update_buyer_description/'), headers: {
+      'Authorization': 'Token $token',
+    }, body: {
+      'buyer_name': buyerId,
+    });
     print(response.body);
   }
 }

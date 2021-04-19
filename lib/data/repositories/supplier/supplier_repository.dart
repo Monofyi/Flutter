@@ -5,12 +5,14 @@ import 'package:http/http.dart';
 import 'package:inventory_management/data/repositories/account_repository.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/controller/supplier_model.dart';
 
+import '../../constants.dart';
+
 class SupplierRepository {
   Future<List<SupplierModel>> fetchSuppliers() async {
     final token = await const AccountRepository().getToken();
 
     final suppliers = await get(
-      Uri.parse('http://bitecope.co.in:8000/supplier/'),
+      Uri.parse('$port/supplier/'),
       headers: {
         "Content-Type": "application/json",
         'Authorization': 'Token $token',
@@ -32,17 +34,14 @@ class SupplierRepository {
     final token = await const AccountRepository().getToken();
     print(token);
 
-    final response = await post(
-        Uri.parse('http://bitecope.co.in:8000/add_supplier/'),
-        headers: {
-          'Authorization': 'Token $token',
-        },
-        body: {
-          'supplier_name': name,
-          'address': address,
-          'phone_no': number,
-          'description': "{$description}",
-        });
+    final response = await post(Uri.parse('$port/add_supplier/'), headers: {
+      'Authorization': 'Token $token',
+    }, body: {
+      'supplier_name': name,
+      'address': address,
+      'phone_no': number,
+      'description': "{$description}",
+    });
     print(response.body);
   }
 
@@ -52,14 +51,11 @@ class SupplierRepository {
     final token = await const AccountRepository().getToken();
     print(token);
 
-    final response = await post(
-        Uri.parse('http://bitecope.co.in:8000/remove_supplier/'),
-        headers: {
-          'Authorization': 'Token $token',
-        },
-        body: {
-          'supplier_id': supplierId.toString(),
-        });
+    final response = await post(Uri.parse('$port/remove_supplier/'), headers: {
+      'Authorization': 'Token $token',
+    }, body: {
+      'supplier_id': supplierId.toString(),
+    });
     if (response.statusCode == 200) {
       return true;
     }
@@ -74,7 +70,7 @@ class SupplierRepository {
     print(token);
 
     final response = await put(
-      Uri.parse('http://bitecope.co.in:8000/update_supplier_description/'),
+      Uri.parse('$port/update_supplier_description/'),
       headers: {
         'Authorization': 'Token $token',
       },

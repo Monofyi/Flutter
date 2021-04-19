@@ -69,7 +69,7 @@ class _GoodsListPageState extends State<GoodsListPage> {
                   goodsController.fetch(value.locationName);
                 },
                 label: 'Choose warehouse location',
-                chooseTitle: 'title',
+                chooseTitle: 'Choose warehouse',
               ),
             ),
             if (goodsModel.loading)

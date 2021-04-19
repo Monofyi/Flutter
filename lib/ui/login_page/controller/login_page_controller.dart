@@ -98,7 +98,7 @@ class LoginPageController extends ValueNotifier<LoginModel> {
         resultError.add(result.model.userName[0]);
       } else if (result.model.password != null) {
         resultError.add(result.model.password[0]);
-      } else if (result.model.contactNumber[0] != null) {
+      } else if (result.model.contactNumber != null) {
         resultError.add(result.model.password[0]);
       } else if (result.model.email != null) {
         resultError.add(result.model.email[0]);
