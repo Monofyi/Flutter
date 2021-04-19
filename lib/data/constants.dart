@@ -1,1 +1,1 @@
-const port = 'http://65.1.236.26:8000/';
+const port = 'http://bitecope.co.in:8080/';

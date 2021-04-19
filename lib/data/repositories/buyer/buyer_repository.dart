@@ -10,7 +10,7 @@ class BuyerRepository {
     final token = await const AccountRepository().getToken();
 
     final suppliers = await get(
-      Uri.parse('http://65.1.236.26:8000/buyer/'),
+      Uri.parse('http://bitecope.co.in:8000/buyer/'),
       headers: {
         "Content-Type": "application/json",
         'Authorization': 'Token $token',
@@ -32,7 +32,7 @@ class BuyerRepository {
     print(token);
 
     final response = await post(
-      Uri.parse('http://65.1.236.26:8000/add_buyer/'),
+      Uri.parse('http://bitecope.co.in:8000/add_buyer/'),
       headers: {
         'Authorization': 'Token $token',
       },
@@ -52,7 +52,7 @@ class BuyerRepository {
     print(token);
 
     final response = await post(
-        Uri.parse('http://65.1.236.26:8000/remove_buyer/'),
+        Uri.parse('http://bitecope.co.in:8000/remove_buyer/'),
         headers: {
           'Authorization': 'Token $token',
         },
@@ -73,7 +73,7 @@ class BuyerRepository {
     print(token);
 
     final response = await post(
-        Uri.parse('http://65.1.236.26:8000/update_buyer_description/'),
+        Uri.parse('http://bitecope.co.in:8000/update_buyer_description/'),
         headers: {
           'Authorization': 'Token $token',
         },

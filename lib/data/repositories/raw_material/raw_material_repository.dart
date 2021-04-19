@@ -10,7 +10,7 @@ class RawMaterialRepository {
     final token = await const AccountRepository().getToken();
 
     final rawMaterials = await get(
-      Uri.parse('http://65.1.236.26:8000/view_raw_material/'),
+      Uri.parse('http://bitecope.co.in:8000/view_raw_material/'),
       headers: {
         'Authorization': 'Token $token',
       },
@@ -32,15 +32,17 @@ class RawMaterialRepository {
     final token = await const AccountRepository().getToken();
     print(token);
 
-    final response =
-        await post(Uri.parse('http://65.1.236.26:8000/add_items/'), headers: {
-      'Authorization': 'Token $token',
-    }, body: {
-      'item_name': material,
-      'quantity': quanity.toString(),
-      'tag': tag,
-      'warehouse_name': location
-    });
+    final response = await post(
+        Uri.parse('http://bitecope.co.in:8000/add_items/'),
+        headers: {
+          'Authorization': 'Token $token',
+        },
+        body: {
+          'item_name': material,
+          'quantity': quanity.toString(),
+          'tag': tag,
+          'warehouse_name': location
+        });
     print(response.body);
   }
 }

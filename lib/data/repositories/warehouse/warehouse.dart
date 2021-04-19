@@ -10,7 +10,7 @@ class WarehouseRepository {
     final token = await const AccountRepository().getToken();
 
     final warehouses = await get(
-      Uri.parse('http://65.1.236.26:8000/warehouse/'),
+      Uri.parse('http://bitecope.co.in:8000/warehouse/'),
       headers: {
         "Content-Type": "application/json",
         'Authorization': 'Token $token',
@@ -29,7 +29,7 @@ class WarehouseRepository {
     final token = await const AccountRepository().getToken();
 
     final response = await post(
-      Uri.parse('http://65.1.236.26:8000/add_warehouse/'),
+      Uri.parse('http://bitecope.co.in:8000/add_warehouse/'),
       headers: {
         'Authorization': 'Token $token',
       },
@@ -47,7 +47,7 @@ class WarehouseRepository {
     final token = await const AccountRepository().getToken();
 
     final response = await post(
-        Uri.parse('http://65.1.236.26:8000/remove_warehouse/'),
+        Uri.parse('http://bitecope.co.in:8000/remove_warehouse/'),
         headers: {
           'Authorization': 'Token $token',
         },
@@ -67,7 +67,7 @@ class WarehouseRepository {
     print(token);
 
     final response = await post(
-      Uri.parse('http://65.1.236.26:8000/update_buyer_description/'),
+      Uri.parse('http://bitecope.co.in:8000/update_buyer_description/'),
       headers: {
         'Authorization': 'Token $token',
       },
