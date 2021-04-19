@@ -8,8 +8,8 @@ name: Dart
 on:
   push:
     branches: [ deploy ]
-  pull_request:
-    branches: [ deploy ]
+#  pull_request:
+#    branches: [ deploy ]
 
 jobs:
   # flutter_test:
