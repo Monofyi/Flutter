@@ -15,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen>
   bool isLogin = true;
   Animation<double> containerSize;
   AnimationController animationController;
-  Duration animationDuration = Duration(milliseconds: 270);
+  Duration animationDuration = const Duration(milliseconds: 270);
 
   @override
   void initState() {
@@ -34,13 +34,13 @@ class _LoginScreenState extends State<LoginScreen>
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
 
-    double viewInset = MediaQuery.of(context)
+    final viewInset = MediaQuery.of(context)
         .viewInsets
         .bottom; // we are using this to determine Keyboard is opened or not
-    double defaultLoginSize = size.height - (size.height * 0.2);
-    double defaultRegisterSize = size.height - (size.height * 0.1);
+    final defaultLoginSize = size.height - (size.height * 0.2);
+    final defaultRegisterSize = size.height - (size.height * 0.1);
 
     containerSize = Tween<double>(
             begin: size.height * 0.1, end: defaultRegisterSize)
@@ -145,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen>
         width: double.infinity,
         height: containerSize.value,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(100),
               topRight: Radius.circular(100),
             ),
@@ -162,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen>
                   });
                 },
           child: isLogin
-              ? Text(
+              ? const Text(
                   "Don't have an account? Sign up",
                   style: TextStyle(color: Colors.blue, fontSize: 18),
                 )

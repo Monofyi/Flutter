@@ -5,7 +5,8 @@ import 'warehouse_model.dart';
 
 class AddWarehouseController extends StateNotifier<WarehouseModel> {
   final WarehouseRepository warehouseRepository;
-  AddWarehouseController(this.warehouseRepository) : super(WarehouseModel());
+  AddWarehouseController(this.warehouseRepository)
+      : super(const WarehouseModel());
 
   void addWarehouse() {
     warehouseRepository.addWarehouse(locationName: state.locationName);

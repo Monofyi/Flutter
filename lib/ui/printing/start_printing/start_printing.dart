@@ -17,7 +17,7 @@ class StartPrinting extends StatefulWidget {
           },
         )
       ],
-      child: StartPrinting(),
+      child: const StartPrinting(),
     );
   }
 

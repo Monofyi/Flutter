@@ -14,12 +14,12 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Setting Page'),
+        title: const Text('Setting Page'),
       ),
       body: ListView(
         children: [
           ListTile(
-            title: Text('change password'),
+            title: const Text('change password'),
             onTap: () {
               Navigator.of(context).pushNamed(ChangePassword.routeName);
             },

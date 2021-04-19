@@ -28,7 +28,7 @@ class CancelButton extends StatelessWidget {
           height: size.height * 0.1,
           alignment: Alignment.bottomCenter,
           child: IconButton(
-            icon: Icon(Icons.close),
+            icon: const Icon(Icons.close),
             onPressed: tapEvent,
             color: Colors.blue,
           ),

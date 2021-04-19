@@ -16,11 +16,11 @@ class RawMaterialRepository {
       },
     );
     print(rawMaterials.body);
-    final raw_material = (json.decode(rawMaterials.body) as List)
+    final rawMaterial = (json.decode(rawMaterials.body) as List)
         .map(
             (dynamic e) => RawMaterialModel.fromJson(e as Map<String, dynamic>))
         .toList();
-    return raw_material;
+    return rawMaterial;
   }
 
   Future<void> addRawMaterial({
