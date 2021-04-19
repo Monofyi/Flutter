@@ -5,13 +5,15 @@ import 'package:http/http.dart' as http;
 import 'package:inventory_management/data/repositories/account_repository.dart';
 import 'package:inventory_management/ui/list_details/goods_page/add_goods/controller/goods_model.dart';
 
+import '../../constants.dart';
+
 class GoodsRepository {
   Future<List<GoodsModel>> fetchGoods({@required String locName}) async {
     final token = await const AccountRepository().getToken();
     print(token);
 
     final response = await http.post(
-      Uri.parse('http://bitecope.co.in:8000/goods_view/'),
+      Uri.parse('$port/goods_view/'),
       headers: {
         'Authorization': 'Token $token',
       },
@@ -33,7 +35,7 @@ class GoodsRepository {
     print(token);
 
     final response = await http.post(
-      Uri.parse('http://bitecope.co.in:8000/add_goods/'),
+      Uri.parse('$port/add_goods/'),
       headers: {
         'Authorization': 'Token $token',
       },
@@ -52,8 +54,8 @@ class GoodsRepository {
     final token = await const AccountRepository().getToken();
     print(token);
 
-    final response = await http
-        .post(Uri.parse('http://bitecope.co.in:8000/remove_buyer/'), headers: {
+    final response =
+        await http.post(Uri.parse('$port/remove_buyer/'), headers: {
       'Authorization': 'Token $token',
     }, body: {
       'buyer_id': buyerId.toString(),
@@ -70,14 +72,12 @@ class GoodsRepository {
     final token = await const AccountRepository().getToken();
     print(token);
 
-    final response = await http.post(
-        Uri.parse('http://bitecope.co.in:8000/update_buyer_description/'),
-        headers: {
-          'Authorization': 'Token $token',
-        },
-        body: {
-          'buyer_name': buyerId,
-        });
+    final response =
+        await http.post(Uri.parse('$port/update_buyer_description/'), headers: {
+      'Authorization': 'Token $token',
+    }, body: {
+      'buyer_name': buyerId,
+    });
     print(response.body);
   }
 }

@@ -5,12 +5,14 @@ import 'package:http/http.dart';
 import 'package:inventory_management/data/repositories/account_repository.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/add_warehouse/controller/warehouse_model.dart';
 
+import '../../constants.dart';
+
 class WarehouseRepository {
   Future<List<WarehouseModel>> fetchWarehouse() async {
     final token = await const AccountRepository().getToken();
 
     final warehouses = await get(
-      Uri.parse('http://bitecope.co.in:8000/warehouse/'),
+      Uri.parse('$port/warehouse/'),
       headers: {
         "Content-Type": "application/json",
         'Authorization': 'Token $token',
@@ -29,7 +31,7 @@ class WarehouseRepository {
     final token = await const AccountRepository().getToken();
 
     final response = await post(
-      Uri.parse('http://bitecope.co.in:8000/add_warehouse/'),
+      Uri.parse('$port/add_warehouse/'),
       headers: {
         'Authorization': 'Token $token',
       },
@@ -46,14 +48,11 @@ class WarehouseRepository {
   }) async {
     final token = await const AccountRepository().getToken();
 
-    final response = await post(
-        Uri.parse('http://bitecope.co.in:8000/remove_warehouse/'),
-        headers: {
-          'Authorization': 'Token $token',
-        },
-        body: {
-          'buyer_id': warehouseId.toString(),
-        });
+    final response = await post(Uri.parse('$port/remove_warehouse/'), headers: {
+      'Authorization': 'Token $token',
+    }, body: {
+      'buyer_id': warehouseId.toString(),
+    });
     if (response.statusCode == 200) {
       return true;
     }
@@ -67,7 +66,7 @@ class WarehouseRepository {
     print(token);
 
     final response = await post(
-      Uri.parse('http://bitecope.co.in:8000/update_buyer_description/'),
+      Uri.parse('$port/update_buyer_description/'),
       headers: {
         'Authorization': 'Token $token',
       },

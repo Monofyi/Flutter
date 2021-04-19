@@ -41,7 +41,7 @@ class AccountRepository {
     final user = int.parse(userType);
 
     final response =
-        await post(Uri.parse("http://65.1.236.26:8000/register/"), body: {
+        await post(Uri.parse("http://bitecope.co.in:8080/register/"), body: {
       'username': userName,
       'phone_no': contactNumber.toString(),
       'email': email,
@@ -68,7 +68,7 @@ class AccountRepository {
         switch (user) {
           case 0:
             regResponse = await post(
-                Uri.parse("http://65.1.236.26:8000/owner_ins_details/"),
+                Uri.parse("http://bitecope.co.in:8080/owner_ins_details/"),
                 headers: {
                   'Authorization': 'Token $token',
                 },
@@ -82,7 +82,7 @@ class AccountRepository {
             break;
           case 1:
             regResponse = await post(
-              Uri.parse("http://65.1.236.26:8000/worker_insert/"),
+              Uri.parse("http://bitecope.co.in:8080/worker_insert/"),
               headers: {
                 'Authorization': 'Token $token',
               },
@@ -114,7 +114,7 @@ class AccountRepository {
     print(username);
     print(password);
     final response =
-        await post(Uri.parse("http://65.1.236.26:8000/login/"), body: {
+        await post(Uri.parse("http://bitecope.co.in:8080/login/"), body: {
       'username': username,
       'password': password,
     });
