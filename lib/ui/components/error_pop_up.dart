@@ -47,17 +47,7 @@ class ErrorDialog extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const Text("cancel"),
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-            onDelete?.call();
-            Navigator.pop(context);
-          },
-          child: Text(
-            "delete",
-            style: TextStyle(color: Theme.of(context).colorScheme.primary),
+            child: const Text("ok"),
           ),
         ),
       ],

@@ -5,6 +5,8 @@ import 'package:http/http.dart';
 import 'package:inventory_management/data/repositories/account_repository.dart';
 import 'package:inventory_management/ui/list_details/machines_page/add_machine/controller/machine_model.dart';
 
+import '../../constants.dart';
+
 class MachineRepository {
   Future<List<MachineModel>> fetchMachines() async {
     final token = await const AccountRepository().getToken();
@@ -31,7 +33,7 @@ class MachineRepository {
     print(token);
 
     final response = await post(
-      Uri.parse('http://bitecope.co.in:8000/add_machines/'),
+      Uri.parse('$port/add_machines/'),
       headers: {
         'Authorization': 'Token $token',
       },
@@ -48,14 +50,11 @@ class MachineRepository {
     final token = await const AccountRepository().getToken();
     print(token);
 
-    final response = await post(
-        Uri.parse('http://bitecope.co.in:8000/remove_buyer/'),
-        headers: {
-          'Authorization': 'Token $token',
-        },
-        body: {
-          'buyer_id': buyerId.toString(),
-        });
+    final response = await post(Uri.parse('$port/remove_buyer/'), headers: {
+      'Authorization': 'Token $token',
+    }, body: {
+      'buyer_id': buyerId.toString(),
+    });
     if (response.statusCode == 200) {
       return true;
     }
@@ -68,14 +67,12 @@ class MachineRepository {
     final token = await const AccountRepository().getToken();
     print(token);
 
-    final response = await post(
-        Uri.parse('http://bitecope.co.in:8000/update_buyer_description/'),
-        headers: {
-          'Authorization': 'Token $token',
-        },
-        body: {
-          'buyer_name': buyerId,
-        });
+    final response =
+        await post(Uri.parse('$port/update_buyer_description/'), headers: {
+      'Authorization': 'Token $token',
+    }, body: {
+      'buyer_name': buyerId,
+    });
     print(response.body);
   }
 }

@@ -5,12 +5,14 @@ import 'package:http/http.dart';
 import 'package:inventory_management/data/repositories/account_repository.dart';
 import 'package:inventory_management/ui/list_details/buyers_page/add_buyer/controller/buyer_model.dart';
 
+import '../../constants.dart';
+
 class BuyerRepository {
   Future<List<BuyerModel>> fetchBuyers() async {
     final token = await const AccountRepository().getToken();
 
     final suppliers = await get(
-      Uri.parse('http://bitecope.co.in:8000/buyer/'),
+      Uri.parse('$port/buyer/'),
       headers: {
         "Content-Type": "application/json",
         'Authorization': 'Token $token',
@@ -32,7 +34,7 @@ class BuyerRepository {
     print(token);
 
     final response = await post(
-      Uri.parse('http://bitecope.co.in:8000/add_buyer/'),
+      Uri.parse('$port/add_buyer/'),
       headers: {
         'Authorization': 'Token $token',
       },
@@ -51,14 +53,11 @@ class BuyerRepository {
     final token = await const AccountRepository().getToken();
     print(token);
 
-    final response = await post(
-        Uri.parse('http://bitecope.co.in:8000/remove_buyer/'),
-        headers: {
-          'Authorization': 'Token $token',
-        },
-        body: {
-          'buyer_id': buyerId.toString(),
-        });
+    final response = await post(Uri.parse('$port/remove_buyer/'), headers: {
+      'Authorization': 'Token $token',
+    }, body: {
+      'buyer_id': buyerId.toString(),
+    });
     if (response.statusCode == 200) {
       return true;
     }
@@ -72,15 +71,13 @@ class BuyerRepository {
     final token = await const AccountRepository().getToken();
     print(token);
 
-    final response = await post(
-        Uri.parse('http://bitecope.co.in:8000/update_buyer_description/'),
-        headers: {
-          'Authorization': 'Token $token',
-        },
-        body: {
-          'buyer_id': buyerId,
-          'description': description
-        });
+    final response =
+        await post(Uri.parse('$port/update_buyer_description/'), headers: {
+      'Authorization': 'Token $token',
+    }, body: {
+      'buyer_id': buyerId,
+      'description': description
+    });
     print(response.body);
   }
 }
