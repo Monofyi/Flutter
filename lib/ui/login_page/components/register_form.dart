@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inventory_management/ui/components/input_field.dart';
-import 'package:inventory_management/ui/login_page/controller/login_model.dart';
 import 'package:inventory_management/ui/login_page/controller/login_page_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +21,9 @@ class RegisterForm extends StatefulWidget {
         ChangeNotifierProvider<LoginPageController>(
           lazy: false,
           create: (context) => LoginPageController(
-              accountRepository: context.read(), appNavigator: context.read()),
+              onError: (value) {},
+              accountRepository: context.read(),
+              appNavigator: context.read()),
         )
       ],
       child: RegisterForm(
@@ -48,7 +49,6 @@ class RegisterForm extends StatefulWidget {
 class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
-    final vm = context.select((LoginModel value) => value);
     final controller = context.watch<LoginPageController>();
     return AnimatedOpacity(
       opacity: widget.isLogin ? 0.0 : 1.0,
@@ -58,13 +58,13 @@ class _RegisterFormState extends State<RegisterForm> {
         child: Align(
           alignment: Alignment.center,
           child: SingleChildScrollView(
-            child: Container(
+            child: SizedBox(
               width: widget.size.width,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Welcome',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
@@ -115,13 +115,13 @@ class _RegisterFormState extends State<RegisterForm> {
                     //onChanged: controller.userTypeChanged,
                     validator: controller.validationMessageUserType,
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   SvgPicture.asset('assets/images/login.svg'),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   //RoundedInput(icon: Icons.mail, hint: 'Username'),
                   //RoundedInput(icon: Icons.face_rounded, hint: 'Name'),
                   //RoundedPasswordInput(hint: 'Password'),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   //RoundedButton(title: 'SIGN UP')
                 ],
               ),

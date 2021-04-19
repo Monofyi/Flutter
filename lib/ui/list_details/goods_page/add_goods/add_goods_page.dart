@@ -16,7 +16,7 @@ class AddNewGoods extends StatefulWidget {
           },
         )
       ],
-      child: AddNewGoods(),
+      child: const AddNewGoods(),
     );
   }
 

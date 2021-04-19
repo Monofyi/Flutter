@@ -97,7 +97,7 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
     ),
     EditBuyerPage.routeName: _standardRoute(
       (context, settings) => EditBuyerPage.wrapped(
-        settings.arguments as EditSupplierPageArgument,
+        settings.arguments as EditBuyerPageArgument,
       ),
     ),
     SignInPage.routeName: _standardRoute(
@@ -134,10 +134,10 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
       (context, settings) => StartPrinting.wrapped(),
     ),
     SettingsPage.routeName: _standardRoute(
-      (context, settings) => SettingsPage(),
+      (context, settings) => const SettingsPage(),
     ),
     ChangePassword.routeName: _standardRoute(
-      (context, settings) => ChangePassword(),
+      (context, settings) => const ChangePassword(),
     ),
   };
 

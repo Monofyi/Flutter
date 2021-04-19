@@ -5,7 +5,7 @@ import 'machine_model.dart';
 
 class AddMachineController extends StateNotifier<MachineModel> {
   final MachineRepository machineRepository;
-  AddMachineController(this.machineRepository) : super(MachineModel());
+  AddMachineController(this.machineRepository) : super(const MachineModel());
 
   void addMachine() {
     machineRepository.addMachines(machineName: state.machineName);

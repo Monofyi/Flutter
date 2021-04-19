@@ -5,7 +5,7 @@ import 'package:state_notifier/state_notifier.dart';
 
 class AddSupplierController extends StateNotifier<SupplierModel> {
   final SupplierRepository supplierRepository;
-  AddSupplierController(this.supplierRepository) : super(SupplierModel());
+  AddSupplierController(this.supplierRepository) : super(const SupplierModel());
 
   void addSupplier() {
     supplierRepository.addSuppliers(

@@ -16,7 +16,7 @@ class AddNewSupplier extends StatefulWidget {
           },
         )
       ],
-      child: AddNewSupplier(),
+      child: const AddNewSupplier(),
     );
   }
 

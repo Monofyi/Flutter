@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:inventory_management/ui/components/delete_alert.dart';
-import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/supplier_page.dart';
+import 'package:inventory_management/ui/list_details/buyers_page/buyer_edit_page.dart';
 import 'package:provider/provider.dart';
 
 import 'add_buyer/add_buyers_page.dart';
@@ -65,9 +65,10 @@ class _BuyerListPageState extends State<BuyerListPage> {
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, SupplierPage.routeName,
-                      arguments: SupplierPageArgument(
-                          supplierName: buyers[index].buyerName,
+                  Navigator.pushNamed(context, EditBuyerPage.routeName,
+                      arguments: EditBuyerPageArgument(
+                          buyerId: buyers[index].buyerId.toString(),
+                          buyerName: buyers[index].buyerName,
                           description: buyers[index].description));
                 },
                 child: Container(

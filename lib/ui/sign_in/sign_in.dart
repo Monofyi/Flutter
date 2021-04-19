@@ -46,7 +46,7 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     final controller = context.watch<SignInController>();
-    final vm = controller.value;
+
 
     return SafeArea(
       child: Scaffold(
@@ -112,7 +112,7 @@ class _SignInPageState extends State<SignInPage> {
                   child: Form(
                     key: _formKey,
                     child: Padding(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       child: CustomScrollView(
                         slivers: [
                           SliverList(

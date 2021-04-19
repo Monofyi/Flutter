@@ -203,27 +203,6 @@ class HomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           DrawerHeader(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      image: DecorationImage(
-                        image: AssetImage("images/logo.jpg"),
-                        fit: BoxFit.contain,
-                      ),
-                      shape: BoxShape.circle,
-                    ),
-                    height: 80,
-                    width: 80,
-                  ),
-                  Text(
-                    'BiteCope',
-                    style: Theme.of(context).textTheme.headline5.copyWith(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
-                ]),
             decoration: const BoxDecoration(
               gradient: RadialGradient(
                 center: Alignment.topRight,
@@ -233,6 +212,28 @@ class HomePage extends StatelessWidget {
                   Color(0xff30AAFF),
                 ],
               ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    image: DecorationImage(
+                      image: AssetImage("images/logo.jpg"),
+                      fit: BoxFit.contain,
+                    ),
+                    shape: BoxShape.circle,
+                  ),
+                  height: 80,
+                  width: 80,
+                ),
+                Text(
+                  'BiteCope',
+                  style: Theme.of(context).textTheme.headline5.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
           ),
           Expanded(

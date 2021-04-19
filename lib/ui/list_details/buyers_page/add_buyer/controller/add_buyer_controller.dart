@@ -6,7 +6,7 @@ import 'buyer_model.dart';
 
 class AddBuyerController extends StateNotifier<BuyerModel> {
   final BuyerRepository buyerRepository;
-  AddBuyerController(this.buyerRepository) : super(BuyerModel());
+  AddBuyerController(this.buyerRepository) : super(const BuyerModel());
 
   void addBuyer() {
     buyerRepository.addBuyers(

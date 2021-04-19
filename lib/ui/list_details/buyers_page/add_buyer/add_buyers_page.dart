@@ -16,7 +16,7 @@ class AddNewBuyer extends StatefulWidget {
           },
         )
       ],
-      child: AddNewBuyer(),
+      child: const AddNewBuyer(),
     );
   }
 

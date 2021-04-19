@@ -250,6 +250,7 @@ class _AnalyticsCardState extends State<AnalyticsCard>
           children: [
             Expanded(
               child: SizedBox(
+                width: width / 2,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -269,7 +270,6 @@ class _AnalyticsCardState extends State<AnalyticsCard>
                     )
                   ],
                 ),
-                width: width / 2,
               ),
             ),
             Expanded(
@@ -278,14 +278,6 @@ class _AnalyticsCardState extends State<AnalyticsCard>
                 child: SizedBox(
                   width: width / 2,
                   child: CountDownAnimation(
-                    child: LayoutBuilder(
-                      builder: (c, b) {
-                        return Text(
-                          '60%',
-                          style: TextStyle(fontSize: b.maxHeight / 4),
-                        );
-                      },
-                    ),
                     controller: countTriggerController,
                     initialCounterIndex: 1,
                     operation: Operation.Decrement,
@@ -295,6 +287,14 @@ class _AnalyticsCardState extends State<AnalyticsCard>
                     onChanged: (index) {},
                     backgroundColor: Colors.lightBlue,
                     strokeWidth: widget.height,
+                    child: LayoutBuilder(
+                      builder: (c, b) {
+                        return Text(
+                          '60%',
+                          style: TextStyle(fontSize: b.maxHeight / 4),
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
