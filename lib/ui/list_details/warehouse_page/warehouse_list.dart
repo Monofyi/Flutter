@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:inventory_management/ui/components/delete_alert.dart';
-import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/supplier_page.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_controller.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_list_model.dart';
 import 'package:provider/provider.dart';
@@ -65,12 +64,7 @@ class _WarehouseListPageState extends State<WarehouseListPage> {
             itemCount: warehouses.length,
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, SupplierPage.routeName,
-                      arguments: SupplierPageArgument(
-                          supplierName: warehouses[index].locationName,
-                          description: warehouses[index].description));
-                },
+                onTap: () {},
                 child: Container(
                   margin: const EdgeInsets.all(4),
                   height: 76,

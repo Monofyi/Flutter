@@ -13,8 +13,6 @@ class LengthCountingTextField extends FormField<String> {
     ValueChanged<String> onChanged,
     FormFieldValidator<String> validator,
     TextInputType type = TextInputType.text,
-    Widget icon,
-    String hintText,
     Key key,
   }) : super(
           key: key,
@@ -57,7 +55,7 @@ class LengthCountingTextField extends FormField<String> {
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
-                          Radius.circular(10.0),
+                          Radius.circular(10),
                         ),
                       ),
                     ),
@@ -169,12 +167,10 @@ class BuildInputField extends StatelessWidget {
       initialString,
       maxLine: maxLine,
       label: label,
-      icon: icon,
       type: type,
       maxLength: maxLength,
       onSaved: onChanged,
       validator: validator,
-      hintText: hintText,
       onChanged: onChanged,
     );
   }

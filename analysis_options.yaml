@@ -30,6 +30,7 @@ analyzer:
     prefer_single_quotes: ignore
     sort_constructors_first: ignore
     lines_longer_than_80_chars: ignore
+    sort_pub_dependencies: ignore
     use_setters_to_change_properties: ignore
     comment_references: ignore
     avoid_setters_without_getters: ignore

@@ -23,7 +23,7 @@ class RoundedInput extends StatelessWidget {
         onChanged: onChanged,
         cursorColor: Colors.blue,
         decoration: InputDecoration(
-            icon: Icon(Icons.mail, color: Colors.blue),
+            icon: const Icon(Icons.mail, color: Colors.blue),
             hintText: hint,
             border: InputBorder.none),
       ),

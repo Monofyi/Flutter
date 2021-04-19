@@ -93,12 +93,12 @@ class LoginPageController extends ValueNotifier<LoginModel> {
       appNavigator.pushAndRemoveAllPage(HomePage.routeName);
     } else {
       print(result.model);
-      var resultError = <String>[];
+      final resultError = <String>[];
       if (result.model.userName != null) {
         resultError.add(result.model.userName[0]);
       } else if (result.model.password != null) {
         resultError.add(result.model.password[0]);
-      } else if (result.model.password != null) {
+      } else if (result.model.contactNumber[0] != null) {
         resultError.add(result.model.password[0]);
       } else if (result.model.email != null) {
         resultError.add(result.model.email[0]);

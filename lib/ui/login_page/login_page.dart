@@ -74,6 +74,7 @@ class _SignUpPageState extends State<SignUpPage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final controller = context.watch<LoginPageController>();
     final vm = controller.value;
 
@@ -237,7 +238,7 @@ class _SignUpPageState extends State<SignUpPage>
             ),
           ),
           if (vm.loading)
-            Center(
+            const Center(
               child: CircularProgressIndicator(),
             ),
         ],
@@ -268,6 +269,7 @@ class _NextButtonAndAgreement extends StatelessWidget {
     );
   }
 }
+/*
 
 class _BottomCheckBox extends StatelessWidget {
   const _BottomCheckBox({Key key}) : super(key: key);
@@ -289,3 +291,5 @@ class _BottomCheckBox extends StatelessWidget {
     );
   }
 }
+
+ */

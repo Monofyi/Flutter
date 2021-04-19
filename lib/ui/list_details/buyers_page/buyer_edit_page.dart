@@ -5,14 +5,14 @@ import 'package:inventory_management/ui/components/edit_pop_up.dart';
 import 'package:inventory_management/ui/components/input_field.dart';
 import 'package:provider/provider.dart';
 
-class EditSupplierPageArgument {
-  final String supplierName;
+class EditBuyerPageArgument {
+  final String buyerName;
   final String description;
-  final String supplierId;
+  final String buyerId;
 
-  EditSupplierPageArgument({
-    @required this.supplierName,
-    @required this.supplierId,
+  EditBuyerPageArgument({
+    @required this.buyerName,
+    @required this.buyerId,
     @required this.description,
   });
 }
@@ -31,10 +31,10 @@ class EditBuyerPage extends StatefulWidget {
       : super(key: key);
   @override
   _EditBuyerPageState createState() => _EditBuyerPageState();
-  static Widget wrapped(EditSupplierPageArgument supplierPageArgument) {
+  static Widget wrapped(EditBuyerPageArgument supplierPageArgument) {
     return EditBuyerPage(
-      supplierId: supplierPageArgument.supplierId,
-      supplierName: supplierPageArgument.supplierName,
+      supplierId: supplierPageArgument.buyerId,
+      supplierName: supplierPageArgument.buyerName,
       description: supplierPageArgument.description,
     );
   }

@@ -4,7 +4,7 @@ import 'package:state_notifier/state_notifier.dart';
 
 class AddGoodsController extends StateNotifier<GoodsModel> {
   final GoodsRepository goodsRepository;
-  AddGoodsController(this.goodsRepository) : super(GoodsModel());
+  AddGoodsController(this.goodsRepository) : super(const GoodsModel());
 
   void addGoods() {
     goodsRepository.addGoods(

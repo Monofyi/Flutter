@@ -16,7 +16,7 @@ class AddNewWarehouse extends StatefulWidget {
           },
         )
       ],
-      child: AddNewWarehouse(),
+      child: const AddNewWarehouse(),
     );
   }
 

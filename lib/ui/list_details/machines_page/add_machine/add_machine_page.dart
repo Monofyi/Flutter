@@ -16,7 +16,7 @@ class AddNewMachines extends StatefulWidget {
           },
         )
       ],
-      child: AddNewMachines(),
+      child: const AddNewMachines(),
     );
   }
 

@@ -21,41 +21,46 @@ environment:
   sdk: ">=2.10.3 <3.0.0"
 
 dependencies:
+
   flutter:
     sdk: flutter
-  freezed_annotation: 0.12.0
 
-dev_dependencies:
-  disposable_provider: 2.2.0
-  flutter_test:
-    sdk: flutter
-  json_serializable: 3.5.1
-  provider: 4.3.2+3
-  recase: 3.0.1
-
-  shared_preferences: 2.0.5
-  freezed: 0.12.7
-  simple_animations: 2.5.0
-  flutter_svg: ^0.20.0-nullsafety.3
-  countdown_animation : 0.0.5+2
-  pedantic_mono: 1.10.0+3
-  rxdart: 0.23.1
-  build_runner: 1.11.1
-  http: 0.13.0
-  flutter_state_notifier: 0.6.1
-  email_validator: 1.0.6
   animations: 1.1.2
   auto_size_text: 2.1.0
+  countdown_animation: 0.0.5+2
+  disposable_provider: 2.2.0
+  email_validator: 1.0.6
+  freezed: 0.12.7
+  freezed_annotation: 0.12.0
+  http: 0.13.0
+  provider: 4.3.2+3
+
+
+  recase: 3.0.1
+  rxdart: 0.23.1
+  shared_preferences: 2.0.5
+  simple_animations: 2.5.0
+
+dev_dependencies:
+
+  flutter_test:
+    sdk: flutter
+  flutter_svg: ^0.20.0-nullsafety.3
+  flutter_state_notifier: 0.6.1
+  json_serializable: 3.5.1
+
+  pedantic_mono: 1.10.0+3
+  build_runner: 1.11.1
+
+
+
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
 
   assets:

@@ -63,33 +63,33 @@ class _LoginFormState extends State<LoginForm> {
           alignment: Alignment.center,
           child: () {
             if (vm.loading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
             return Form(
               key: _formKey,
               child: SingleChildScrollView(
-                child: Container(
+                child: SizedBox(
                   width: widget.size.width,
                   height: widget.defaultLoginSize,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Center(
-                        child: const Text(
+                      const Center(
+                        child: Text(
                           'BitCope\nConnecting every bit',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 24),
                         ),
                       ),
-                      SizedBox(height: 40),
+                      const SizedBox(height: 40),
                       SvgPicture.asset(
                         'images/analytics.svg',
                         height: 150,
                       ),
-                      SizedBox(height: 40),
+                      const SizedBox(height: 40),
                       RoundedInput(
                           validation: (value) {
                             if (value.isEmpty) {
@@ -115,9 +115,9 @@ class _LoginFormState extends State<LoginForm> {
                             controller.setPassword(value);
                           },
                           hint: 'Password'),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       if (vm.status == LoginStatus.failed)
-                        Text(
+                        const Text(
                           'No account found',
                           style: TextStyle(color: Colors.red),
                         ),
