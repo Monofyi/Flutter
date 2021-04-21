@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:inventory_management/ui/list_details/items_page/add_raw_material/add_goods_page.dart';
-import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_controller.dart';
-import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_list_model.dart';
 import 'package:inventory_management/ui/printing/printing_list/printing_list_model/printing_list_controller.dart';
 import 'package:inventory_management/ui/printing/printing_list/printing_list_model/printing_list_model.dart';
 import 'package:provider/provider.dart';
@@ -17,12 +15,6 @@ class PrintingList extends StatefulWidget {
           create: (context) =>
               PrintingListController(printingRepository: context.read()),
         ),
-        StateNotifierProvider<WarehouseListController, WarehouseList>(
-          lazy: false,
-          create: (context) => WarehouseListController(
-            warehouseRepository: context.read(),
-          ),
-        )
       ],
       child: PrintingList(),
     );

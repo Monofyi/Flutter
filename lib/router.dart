@@ -19,6 +19,7 @@ import 'package:inventory_management/ui/list_details/warehouse_page/add_warehous
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list.dart';
 import 'package:inventory_management/ui/login_page/login_page.dart';
 import 'package:inventory_management/ui/printing/ongoing_printing/ongoing_printing.dart';
+import 'package:inventory_management/ui/printing/printing_list/printing_history_list.dart';
 import 'package:inventory_management/ui/printing/start_printing/start_printing.dart';
 import 'package:inventory_management/ui/settings/change_password/change_password.dart';
 import 'package:inventory_management/ui/settings/settings_page.dart';
@@ -150,6 +151,9 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
     ),
     ProductionHistoryPage.routeName: _standardRoute(
       (context, settings) => ProductionHistoryPage.wrapped(),
+    ),
+    PrintingList.routeName: _standardRoute(
+      (context, settings) => PrintingList.wrapped(),
     ),
   };
 

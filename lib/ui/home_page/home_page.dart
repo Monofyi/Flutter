@@ -9,6 +9,7 @@ import 'package:inventory_management/ui/list_details/production_page/production_
 import 'package:inventory_management/ui/list_details/production_page/start_production/start_production.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/supplier_list.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list.dart';
+import 'package:inventory_management/ui/printing/printing_list/printing_history_list.dart';
 import 'package:inventory_management/ui/printing/start_printing/start_printing.dart';
 import 'package:inventory_management/ui/settings/settings_page.dart';
 
@@ -129,10 +130,10 @@ class HomePage extends StatelessWidget {
               },
             ),
             ListItem(
-              title: 'Buyers',
+              title: 'Printing history',
               icon: null,
               onTap: () {
-                Navigator.of(context).popAndPushNamed(BuyerListPage.routeName);
+                Navigator.of(context).pushNamed(PrintingList.routeName);
               },
             ),
           ]),
