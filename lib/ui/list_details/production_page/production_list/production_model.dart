@@ -25,8 +25,8 @@ abstract class Production with _$Production {
       @Default('')
           String status,
       @JsonKey(name: "finished_goods")
-      @Default('')
-          String finishedGoods}) = _ProductionModel;
+      @Default(0)
+          int finishedGoods}) = _ProductionModel;
   factory Production.fromJson(Map<String, dynamic> json) =>
       _$_$_ProductionModelFromJson(json);
 }

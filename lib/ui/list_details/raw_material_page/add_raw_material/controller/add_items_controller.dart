@@ -2,10 +2,9 @@ import 'package:inventory_management/data/repositories/raw_material/raw_material
 import 'package:inventory_management/ui/list_details/raw_material_page/add_raw_material/controller/items_model.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-class AddRawMaterialController extends StateNotifier<ItemsModel> {
+class AddItemsController extends StateNotifier<ItemsModel> {
   final ItemsRepository rawMaterialRepository;
-  AddRawMaterialController(this.rawMaterialRepository)
-      : super(const ItemsModel());
+  AddItemsController(this.rawMaterialRepository) : super(const ItemsModel());
 
   void addRawMaterial() {
     rawMaterialRepository.addItems(

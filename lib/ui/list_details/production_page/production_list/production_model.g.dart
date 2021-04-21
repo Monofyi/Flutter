@@ -14,7 +14,7 @@ _$_ProductionModel _$_$_ProductionModelFromJson(Map<String, dynamic> json) {
     remainingGoodQty: json['remaining_goods_qty'] as int,
     remainingItemsQty: json['remaining_items_qty'] as int,
     status: json['status'] as String,
-    finishedGoods: json['finished_goods'] as String,
+    finishedGoods: json['finished_goods'] as int,
   );
 }
 

@@ -7,6 +7,8 @@ import 'package:inventory_management/ui/list_details/goods_page/add_goods/add_go
 import 'package:inventory_management/ui/list_details/goods_page/goods_list.dart';
 import 'package:inventory_management/ui/list_details/machines_page/add_machine/add_machine_page.dart';
 import 'package:inventory_management/ui/list_details/machines_page/machines_list.dart';
+import 'package:inventory_management/ui/list_details/production_page/production_list/on_going_production/ongoing_production_list.dart';
+import 'package:inventory_management/ui/list_details/production_page/production_list/production_history/production_history_list.dart';
 import 'package:inventory_management/ui/list_details/production_page/start_production/start_production.dart';
 import 'package:inventory_management/ui/list_details/raw_material_page/add_raw_material/add_goods_page.dart';
 import 'package:inventory_management/ui/list_details/raw_material_page/raw_material_page.dart';
@@ -71,8 +73,8 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
     AddRawMaterials.routeName: _standardRoute(
       (context, settings) => AddRawMaterials.wrapped(),
     ),
-    RawMaterialListPage.routeName: _standardRoute(
-      (context, settings) => RawMaterialListPage.wrapped(),
+    ItemsListPage.routeName: _standardRoute(
+      (context, settings) => ItemsListPage.wrapped(),
     ),
     AddNewGoods.routeName: _standardRoute(
       (context, settings) => AddNewGoods.wrapped(),
@@ -142,6 +144,12 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
     ),
     StartProduction.routeName: _standardRoute(
       (context, settings) => StartProduction.wrapped(),
+    ),
+    OnGoingProductionPage.routeName: _standardRoute(
+      (context, settings) => OnGoingProductionPage.wrapped(),
+    ),
+    ProductionHistoryPage.routeName: _standardRoute(
+      (context, settings) => ProductionHistoryPage.wrapped(),
     ),
   };
 

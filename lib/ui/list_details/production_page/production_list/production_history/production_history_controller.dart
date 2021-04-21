@@ -3,14 +3,14 @@ import 'package:inventory_management/data/repositories/production/production_rep
 import 'package:inventory_management/ui/list_details/production_page/production_list/production_list_model/production_list_model.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-class OnGoingProductionController extends StateNotifier<ProductionList> {
+class ProductionHistoryController extends StateNotifier<ProductionList> {
   final ProductionRepository productionRepository;
-  OnGoingProductionController({@required this.productionRepository})
+  ProductionHistoryController({@required this.productionRepository})
       : super(const ProductionList()) {
     initialize();
   }
   Future<void> initialize() async {
-    final production = await productionRepository.fetchOnGoingProductions();
+    final production = await productionRepository.fetchProductionsHistory();
     state = state.copyWith(
       loading: false,
       productions: production,
@@ -21,7 +21,7 @@ class OnGoingProductionController extends StateNotifier<ProductionList> {
     state = state.copyWith(
       loading: true,
     );
-    final productions = await productionRepository.fetchOnGoingProductions();
+    final productions = await productionRepository.fetchProductionsHistory();
     state = state.copyWith(
       loading: false,
       productions: productions,

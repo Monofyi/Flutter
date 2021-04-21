@@ -5,13 +5,13 @@ import 'package:state_notifier/state_notifier.dart';
 import 'raw_material_list_model.dart';
 
 class RawMaterialController extends StateNotifier<RawMaterialList> {
-  final RawMaterialRepository rawMaterialRepository;
+  final ItemsRepository rawMaterialRepository;
   RawMaterialController({@required this.rawMaterialRepository})
       : super(const RawMaterialList()) {
     initialize();
   }
   Future<void> initialize() async {
-    final rawMaterial = await rawMaterialRepository.fetchRawMaterials();
+    final rawMaterial = await rawMaterialRepository.fetchItems();
     state = state.copyWith(
       loading: false,
       rawMaterials: rawMaterial,
@@ -22,7 +22,7 @@ class RawMaterialController extends StateNotifier<RawMaterialList> {
     state = state.copyWith(
       loading: true,
     );
-    final rawMaterials = await rawMaterialRepository.fetchRawMaterials();
+    final rawMaterials = await rawMaterialRepository.fetchItems();
     state = state.copyWith(loading: false, rawMaterials: rawMaterials);
   }
 }

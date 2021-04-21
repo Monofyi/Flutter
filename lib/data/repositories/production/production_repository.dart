@@ -19,16 +19,15 @@ class ProductionRepository {
     final token = await const AccountRepository().getToken();
 
     final start = await post(Uri.parse('$port/start_production/'), headers: {
-      "Content-Type": "application/json",
       'Authorization': 'Token $token',
     }, body: {
-      'items_qty': qnty,
-      'expected_good_output': expectedOutput,
+      'items_qty': qnty.toString(),
+      'expected_good_output': expectedOutput.toString(),
       "goods_name": goodsName,
       "input_items": inputItems,
       "machine_name": machineName
     });
-    print(start.body);
+
     final supplierList = (json.decode(start.body) as List)
         .map((dynamic e) => BuyerModel.fromJson(e as Map<String, dynamic>))
         .toList();
@@ -38,8 +37,25 @@ class ProductionRepository {
   Future<List<Production>> fetchOnGoingProductions() async {
     final token = await const AccountRepository().getToken();
 
-    final suppliers = await get(
+    final production = await get(
       Uri.parse('$port/view_ongoing_production/'),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Token $token',
+      },
+    );
+    print(production.body);
+    final productions = (json.decode(production.body) as List)
+        .map((dynamic e) => Production.fromJson(e as Map<String, dynamic>))
+        .toList();
+    return productions;
+  }
+
+  Future<List<Production>> fetchProductionsHistory() async {
+    final token = await const AccountRepository().getToken();
+
+    final suppliers = await get(
+      Uri.parse('$port/view_production_history/'),
       headers: {
         "Content-Type": "application/json",
         'Authorization': 'Token $token',
@@ -50,59 +66,5 @@ class ProductionRepository {
         .map((dynamic e) => Production.fromJson(e as Map<String, dynamic>))
         .toList();
     return supplierList;
-  }
-
-  Future<void> addBuyers({
-    @required String name,
-    @required String number,
-    @required String address,
-  }) async {
-    final token = await const AccountRepository().getToken();
-    print(token);
-
-    final response = await post(
-      Uri.parse('$port/add_buyer/'),
-      headers: {
-        'Authorization': 'Token $token',
-      },
-      body: {
-        'buyer_name': name,
-        'address': address,
-        'phone_no': number,
-      },
-    );
-    print(response.body);
-  }
-
-  Future<bool> removeBuyers({
-    @required int buyerId,
-  }) async {
-    final token = await const AccountRepository().getToken();
-    print(token);
-
-    final response = await post(Uri.parse('$port/remove_buyer/'), headers: {
-      'Authorization': 'Token $token',
-    }, body: {
-      'buyer_id': buyerId.toString(),
-    });
-    if (response.statusCode == 200) {
-      return true;
-    }
-    return false;
-  }
-
-  Future<void> updateBuyers({
-    @required String buyerId,
-  }) async {
-    final token = await const AccountRepository().getToken();
-    print(token);
-
-    final response =
-        await post(Uri.parse('$port/update_buyer_description/'), headers: {
-      'Authorization': 'Token $token',
-    }, body: {
-      'buyer_name': buyerId,
-    });
-    print(response.body);
   }
 }

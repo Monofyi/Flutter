@@ -28,7 +28,7 @@ class RepositoriesProvider extends SingleChildStatelessWidget {
         Provider.value(value: WarehouseRepository()),
         Provider.value(value: GoodsRepository()),
         Provider.value(value: MachineRepository()),
-        Provider.value(value: RawMaterialRepository()),
+        Provider.value(value: ItemsRepository()),
         Provider.value(value: PrintingRepository()),
         Provider.value(value: ProductionRepository()),
       ],
