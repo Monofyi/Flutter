@@ -7,7 +7,7 @@ import 'package:inventory_management/ui/waste/wastage_list_model.dart';
 import 'package:provider/provider.dart';
 
 class WastageListPage extends StatefulWidget {
-  static const routeName = '/supplierList';
+  static const routeName = '/wastageList';
   static Widget wrapped() {
     return MultiProvider(
       providers: [
@@ -33,7 +33,7 @@ class _WastageListPageState extends State<WastageListPage> {
     final wastage = vm.wastage;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Suppliers List'),
+        title: const Text('Wastage List'),
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
@@ -49,7 +49,7 @@ class _WastageListPageState extends State<WastageListPage> {
           return const Center(child: CircularProgressIndicator());
         }
         if (vm.wastage.isEmpty) {
-          return const Center(child: Text('No suppliers'));
+          return const Center(child: Text('No wastage'));
         }
         return Padding(
           padding: const EdgeInsets.all(16),

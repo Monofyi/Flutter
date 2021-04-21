@@ -12,6 +12,7 @@ import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_li
 import 'package:inventory_management/ui/printing/printing_list/printing_history_list.dart';
 import 'package:inventory_management/ui/printing/start_printing/start_printing.dart';
 import 'package:inventory_management/ui/settings/settings_page.dart';
+import 'package:inventory_management/ui/waste/wastage_list.dart';
 
 import '../../colors.dart';
 
@@ -140,6 +141,9 @@ class HomePage extends StatelessWidget {
       ListItem(
         title: 'Wastage',
         icon: 'images/icons/wastage.jpg',
+        onTap: () {
+          Navigator.of(context).pushNamed(WastageListPage.routeName);
+        },
       ),
       ListItem(
         title: 'Shipment',

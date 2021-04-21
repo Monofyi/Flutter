@@ -25,6 +25,7 @@ import 'package:inventory_management/ui/settings/change_password/change_password
 import 'package:inventory_management/ui/settings/settings_page.dart';
 import 'package:inventory_management/ui/sign_in/sign_in.dart';
 import 'package:inventory_management/ui/splash_page.dart';
+import 'package:inventory_management/ui/waste/wastage_list.dart';
 import 'package:recase/recase.dart';
 
 import 'new_login.dart';
@@ -154,6 +155,9 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
     ),
     PrintingList.routeName: _standardRoute(
       (context, settings) => PrintingList.wrapped(),
+    ),
+    WastageListPage.routeName: _standardRoute(
+      (context, settings) => WastageListPage.wrapped(),
     ),
   };
 

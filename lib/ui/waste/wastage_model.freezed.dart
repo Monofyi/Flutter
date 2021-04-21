@@ -143,10 +143,7 @@ class _$_WastageModel implements _WastageModel {
       {@JsonKey(name: "wastage_id") this.wastageId = 0,
       @JsonKey(name: "goods_id") this.goodsId = 0,
       @JsonKey(name: "tag") this.tag = '',
-      @JsonKey(name: "last_updated") @nullable this.lastUpdated})
-      : assert(wastageId != null),
-        assert(goodsId != null),
-        assert(tag != null);
+      @JsonKey(name: "last_updated") @nullable this.lastUpdated});
 
   factory _$_WastageModel.fromJson(Map<String, dynamic> json) =>
       _$_$_WastageModelFromJson(json);
