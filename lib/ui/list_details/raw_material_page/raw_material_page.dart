@@ -7,8 +7,8 @@ import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_li
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_list_model.dart';
 import 'package:provider/provider.dart';
 
-class RawMaterialListPage extends StatefulWidget {
-  static const routeName = '/rawMaterialList';
+class ItemsListPage extends StatefulWidget {
+  static const routeName = '/itemsList';
   static Widget wrapped() {
     return MultiProvider(
       providers: [
@@ -24,15 +24,15 @@ class RawMaterialListPage extends StatefulWidget {
           ),
         )
       ],
-      child: RawMaterialListPage(),
+      child: ItemsListPage(),
     );
   }
 
   @override
-  _RawMaterialListPageState createState() => _RawMaterialListPageState();
+  _ItemsListPageState createState() => _ItemsListPageState();
 }
 
-class _RawMaterialListPageState extends State<RawMaterialListPage> {
+class _ItemsListPageState extends State<ItemsListPage> {
   @override
   Widget build(BuildContext context) {
     final rawMaterialModel = context.select((RawMaterialList value) => value);
@@ -40,7 +40,7 @@ class _RawMaterialListPageState extends State<RawMaterialListPage> {
     final goods = rawMaterialModel.rawMaterials;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('RawMaterial List'),
+        title: const Text('Items List'),
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
@@ -53,7 +53,9 @@ class _RawMaterialListPageState extends State<RawMaterialListPage> {
         if (rawMaterialModel.loading) {
           return const Center(child: CircularProgressIndicator());
         }
-
+        if (rawMaterialModel.rawMaterials.isEmpty) {
+          return const Center(child: Text('No items'));
+        }
         return Padding(
           padding: const EdgeInsets.all(16),
           child: ListView.separated(
