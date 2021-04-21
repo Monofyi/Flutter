@@ -44,23 +44,19 @@ class _StartPrintingState extends State<StartPrinting> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 BuildInputField(
-                  label: 'goods Name',
-                  onChanged: controller.updateGoodsName,
+                  label: 'Items Quantity',
+                  onChanged: controller.updateQuantity,
                 ),
                 BuildInputField(
-                  label: 'Expected Good Output',
-                  onChanged: controller.updateExpectedGoodOutput,
+                  label: 'Expected Output',
+                  onChanged: controller.description,
                 ),
                 BuildInputField(
-                  label: 'Raw Material Input',
-                  onChanged: controller.rawInput,
+                  label: 'Item name',
+                  onChanged: controller.updateItemName,
                 ),
                 BuildInputField(
-                  label: 'Raw Material',
-                  onChanged: controller.rawMaterial,
-                ),
-                BuildInputField(
-                  label: 'Machine Name',
+                  label: 'Machine name',
                   onChanged: controller.machineName,
                 ),
                 BuildInputField(

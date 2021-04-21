@@ -13,41 +13,25 @@ class StartPrintingController extends StateNotifier<StartPrintingModel> {
   }
   Future<void> startPrinting() async {
     await printingRepository.startPrinting(
-      goodsName: state.goodsName,
-      expectedGoodOutput: state.expectedGoodOutput,
-      rawMatInput: state.rawMatInput,
-      rawMaterial: state.rawMaterial,
+      itemName: state.itemName,
+      itemQty: state.itemsQty,
       machineName: state.machineName,
       description: state.description,
     );
   }
 
-  void updateGoodsName(String name) {
+  void updateQuantity(String name) {
     if (name != null) {
       state = state.copyWith(
-        goodsName: name,
+        itemsQty: int.parse(name),
       );
     }
   }
 
-  void updateExpectedGoodOutput(String number) {
-    final output = int.parse(number);
-
-    if (number != null) {
-      state = state.copyWith(expectedGoodOutput: output);
+  void updateItemName(String itemName) {
+    if (itemName != null) {
+      state = state.copyWith(itemName: itemName);
     }
-  }
-
-  void rawInput(String number) {
-    final output = int.parse(number);
-
-    if (number != null) {
-      state = state.copyWith(rawMatInput: output);
-    }
-  }
-
-  void rawMaterial(String material) {
-    state = state.copyWith(rawMaterial: material);
   }
 
   void machineName(String name) {
@@ -59,6 +43,12 @@ class StartPrintingController extends StateNotifier<StartPrintingModel> {
   void description(String name) {
     if (name != null) {
       state = state.copyWith(description: name);
+    }
+  }
+
+  void expectedOutput(String name) {
+    if (name != null) {
+      state = state.copyWith(expectedGoodOutput: int.parse(name));
     }
   }
 }

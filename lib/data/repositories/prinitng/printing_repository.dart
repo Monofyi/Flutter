@@ -5,6 +5,8 @@ import 'package:http/http.dart';
 import 'package:inventory_management/data/repositories/account_repository.dart';
 import 'package:inventory_management/ui/list_details/buyers_page/add_buyer/controller/buyer_model.dart';
 
+import '../../constants.dart';
+
 class PrintingRepository {
   Future<List<BuyerModel>> printingHistory() async {
     final token = await const AccountRepository().getToken();
@@ -58,28 +60,24 @@ class PrintingRepository {
   }
 
   Future<void> startPrinting({
-    @required String goodsName,
-    @required int expectedGoodOutput,
-    @required int rawMatInput,
-    @required String rawMaterial,
+    @required int itemQty,
+    @required String itemName,
     @required String machineName,
     @required String description,
   }) async {
     final token = await const AccountRepository().getToken();
     print(token);
 
-    final response = await put(
-      Uri.parse('http://bitecope.co.in:8000/start_printing/'),
+    final response = await post(
+      Uri.parse('$port/start_printing/'),
       headers: {
         'Authorization': 'Token $token',
       },
       body: {
-        'goods_name': goodsName,
-        'expected_good_output': expectedGoodOutput.toString(),
-        'raw_mat_input': rawMatInput.toString(),
-        'raw_material': rawMaterial,
+        'items_qty': itemQty.toString(),
         'machine_name': machineName,
-        'description': description
+        'description': description,
+        'item_name': itemName
       },
     );
     print(response.body);
