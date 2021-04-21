@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:inventory_management/ui/components/delete_alert.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/add_new_supplier.dart';
-import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/supplier_page.dart';
-import 'package:inventory_management/ui/list_details/supplier_page/controller/supplier_controller/supplier_controller.dart';
-import 'package:inventory_management/ui/list_details/supplier_page/controller/supplier_controller/supplier_list/supplier_list_model.dart';
+import 'package:inventory_management/ui/waste/wastage_controller.dart';
+import 'package:inventory_management/ui/waste/wastage_list_model.dart';
 import 'package:provider/provider.dart';
 
 class WastageListPage extends StatefulWidget {
@@ -12,10 +11,10 @@ class WastageListPage extends StatefulWidget {
   static Widget wrapped() {
     return MultiProvider(
       providers: [
-        StateNotifierProvider<SupplierListController, SupplierList>(
+        StateNotifierProvider<WastageController, WastageList>(
           lazy: false,
           create: (context) =>
-              SupplierListController(supplierRepository: context.read()),
+              WastageController(wastageRepository: context.read()),
         )
       ],
       child: WastageListPage(),
@@ -29,9 +28,9 @@ class WastageListPage extends StatefulWidget {
 class _WastageListPageState extends State<WastageListPage> {
   @override
   Widget build(BuildContext context) {
-    final vm = context.select((SupplierList value) => value);
-    final controller = context.watch<SupplierListController>();
-    final suppliers = vm.suppliers;
+    final vm = context.select((WastageList value) => value);
+    final controller = context.watch<WastageController>();
+    final wastage = vm.wastage;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Suppliers List'),
@@ -49,7 +48,7 @@ class _WastageListPageState extends State<WastageListPage> {
         if (vm.loading) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (vm.suppliers.isEmpty) {
+        if (vm.wastage.isEmpty) {
           return const Center(child: Text('No suppliers'));
         }
         return Padding(
@@ -57,16 +56,10 @@ class _WastageListPageState extends State<WastageListPage> {
           child: ListView.separated(
             clipBehavior: Clip.hardEdge,
             physics: const BouncingScrollPhysics(),
-            itemCount: suppliers.length,
+            itemCount: wastage.length,
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, SupplierPage.routeName,
-                      arguments: SupplierPageArgument(
-                          supplierId: suppliers[index].supplierId.toString(),
-                          supplierName: suppliers[index].supplierName,
-                          description: suppliers[index].description));
-                },
+                onTap: () {},
                 child: Container(
                   margin: const EdgeInsets.all(4),
                   height: 76,
@@ -90,17 +83,13 @@ class _WastageListPageState extends State<WastageListPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            suppliers[index].supplierName,
+                            wastage[index].wastageId.toString(),
                           ),
                           ElevatedButton(
                             onPressed: () {
                               DeleteDialog.show(
                                 context,
-                                onDelete: () {
-                                  controller.deleteSupplier(
-                                    supplierId: suppliers[index].supplierId,
-                                  );
-                                },
+                                onDelete: () {},
                               );
                             },
                             child: const Text('remove'),
