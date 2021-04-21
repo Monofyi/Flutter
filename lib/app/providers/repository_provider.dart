@@ -4,6 +4,7 @@ import 'package:inventory_management/data/repositories/buyer/buyer_repository.da
 import 'package:inventory_management/data/repositories/goods_repository/goods_repository.dart';
 import 'package:inventory_management/data/repositories/machines/machines_repository.dart';
 import 'package:inventory_management/data/repositories/prinitng/printing_repository.dart';
+import 'package:inventory_management/data/repositories/production/production_repository.dart';
 import 'package:inventory_management/data/repositories/raw_material/raw_material_repository.dart';
 import 'package:inventory_management/data/repositories/supplier/supplier_repository.dart';
 import 'package:inventory_management/data/repositories/warehouse/warehouse.dart';
@@ -29,6 +30,7 @@ class RepositoriesProvider extends SingleChildStatelessWidget {
         Provider.value(value: MachineRepository()),
         Provider.value(value: RawMaterialRepository()),
         Provider.value(value: PrintingRepository()),
+        Provider.value(value: ProductionRepository()),
       ],
       child: child,
     );

@@ -1,40 +1,39 @@
-import 'package:inventory_management/data/repositories/raw_material/raw_material_repository.dart';
-import 'package:inventory_management/ui/list_details/raw_material_page/add_raw_material/controller/raw_material_model.dart';
+import 'package:inventory_management/data/repositories/production/production_repository.dart';
+import 'package:inventory_management/ui/list_details/production_page/start_production/controller/start_production_model.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-class StartProductionController extends StateNotifier<RawMaterialModel> {
-  final RawMaterialRepository rawMaterialRepository;
-  StartProductionController(this.rawMaterialRepository)
-      : super(const RawMaterialModel());
+class StartProductionController extends StateNotifier<StartProductionModel> {
+  final ProductionRepository productionRepository;
+  StartProductionController(this.productionRepository)
+      : super(const StartProductionModel());
 
-  void addRawMaterial() {
-    rawMaterialRepository.addRawMaterial(
-        quanity: state.quantity,
-        material: state.itemName,
-        tag: state.tag,
-        location: state.location);
+  void startProduction() {
+    productionRepository.newProduction(
+      expectedOutput: state.expectedGoodOutput,
+      qnty: state.itemsQty,
+      goodsName: state.goodsName,
+      inputItems: state.inputItems,
+      machineName: state.machineName,
+    );
   }
 
-  void updateName(String newValue) {
-    state = state.copyWith(itemName: newValue);
+  void updateGoodsName(String newValue) {
+    state = state.copyWith(goodsName: newValue);
   }
 
-  void updateQuantity(String newValue) {
-    state = state.copyWith(quantity: int.parse(newValue));
+  void updateInputItems(String newValue) {
+    state = state.copyWith(inputItems: newValue);
   }
 
-  void updateTag(int newValue) {
-    String val;
-    if (newValue == 0) {
-      val = 'O';
-    }
-    if (newValue == 1) {
-      val = 'R';
-    }
-    state = state.copyWith(tag: val);
+  void updateQnty(String newValue) {
+    state = state.copyWith(itemsQty: int.parse(newValue));
   }
 
-  void updateLocation(String newValue) {
-    state = state.copyWith(location: newValue);
+  void updateExpectedOutput(String newValue) {
+    state = state.copyWith(expectedGoodOutput: int.parse(newValue));
+  }
+
+  void updateMachineName(String newValue) {
+    state = state.copyWith(machineName: newValue);
   }
 }

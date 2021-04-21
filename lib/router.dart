@@ -7,6 +7,7 @@ import 'package:inventory_management/ui/list_details/goods_page/add_goods/add_go
 import 'package:inventory_management/ui/list_details/goods_page/goods_list.dart';
 import 'package:inventory_management/ui/list_details/machines_page/add_machine/add_machine_page.dart';
 import 'package:inventory_management/ui/list_details/machines_page/machines_list.dart';
+import 'package:inventory_management/ui/list_details/production_page/start_production/start_production.dart';
 import 'package:inventory_management/ui/list_details/raw_material_page/add_raw_material/add_goods_page.dart';
 import 'package:inventory_management/ui/list_details/raw_material_page/raw_material_page.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/add_new_supplier.dart';
@@ -138,6 +139,9 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
     ),
     ChangePassword.routeName: _standardRoute(
       (context, settings) => const ChangePassword(),
+    ),
+    StartProduction.routeName: _standardRoute(
+      (context, settings) => StartProduction.wrapped(),
     ),
   };
 

@@ -3,6 +3,7 @@ import 'package:inventory_management/ui/home_page/custom_app_bar.dart';
 import 'package:inventory_management/ui/list_details/buyers_page/buyer_list.dart';
 import 'package:inventory_management/ui/list_details/goods_page/goods_list.dart';
 import 'package:inventory_management/ui/list_details/machines_page/machines_list.dart';
+import 'package:inventory_management/ui/list_details/production_page/start_production/start_production.dart';
 import 'package:inventory_management/ui/list_details/raw_material_page/raw_material_page.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/supplier_list.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list.dart';
@@ -83,6 +84,15 @@ class HomePage extends StatelessWidget {
       ListItem(
         title: 'Production',
         icon: 'images/icons/production.jpg',
+        subCategory: [
+          ListItem(
+            title: 'Start Production',
+            icon: null,
+            onTap: () {
+              Navigator.of(context).pushNamed(StartProduction.routeName);
+            },
+          ),
+        ],
       ),
       ListItem(
         title: 'Goods',

@@ -9,10 +9,10 @@ part of 'start_production_model.dart';
 _$_StartProductionModel _$_$_StartProductionModelFromJson(
     Map<String, dynamic> json) {
   return _$_StartProductionModel(
-    rawMatInput: json['raw_mat_input'] as int,
+    itemsQty: json['items_qty'] as int,
     expectedGoodOutput: json['expected_good_output'] as int,
     goodsName: json['goods_name'] as String,
-    rawMaterial: json['raw_material'] as String,
+    inputItems: json['input_items'] as String,
     machineName: json['machine_name'] as String,
   );
 }
@@ -20,9 +20,9 @@ _$_StartProductionModel _$_$_StartProductionModelFromJson(
 Map<String, dynamic> _$_$_StartProductionModelToJson(
         _$_StartProductionModel instance) =>
     <String, dynamic>{
-      'raw_mat_input': instance.rawMatInput,
+      'items_qty': instance.itemsQty,
       'expected_good_output': instance.expectedGoodOutput,
       'goods_name': instance.goodsName,
-      'raw_material': instance.rawMaterial,
+      'input_items': instance.inputItems,
       'machine_name': instance.machineName,
     };
