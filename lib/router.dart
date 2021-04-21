@@ -5,13 +5,13 @@ import 'package:inventory_management/ui/list_details/buyers_page/buyer_edit_page
 import 'package:inventory_management/ui/list_details/buyers_page/buyer_list.dart';
 import 'package:inventory_management/ui/list_details/goods_page/add_goods/add_goods_page.dart';
 import 'package:inventory_management/ui/list_details/goods_page/goods_list.dart';
+import 'package:inventory_management/ui/list_details/items_page/add_raw_material/add_goods_page.dart';
+import 'package:inventory_management/ui/list_details/items_page/raw_material_page.dart';
 import 'package:inventory_management/ui/list_details/machines_page/add_machine/add_machine_page.dart';
 import 'package:inventory_management/ui/list_details/machines_page/machines_list.dart';
 import 'package:inventory_management/ui/list_details/production_page/production_list/on_going_production/ongoing_production_list.dart';
 import 'package:inventory_management/ui/list_details/production_page/production_list/production_history/production_history_list.dart';
 import 'package:inventory_management/ui/list_details/production_page/start_production/start_production.dart';
-import 'package:inventory_management/ui/list_details/raw_material_page/add_raw_material/add_goods_page.dart';
-import 'package:inventory_management/ui/list_details/raw_material_page/raw_material_page.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/add_new_supplier.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/supplier_page.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/supplier_list.dart';

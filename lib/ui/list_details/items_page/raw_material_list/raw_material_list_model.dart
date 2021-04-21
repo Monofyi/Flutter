@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:inventory_management/ui/list_details/raw_material_page/add_raw_material/controller/items_model.dart';
+import 'package:inventory_management/ui/list_details/items_page/add_raw_material/controller/items_model.dart';
 
 part 'raw_material_list_model.freezed.dart';
 

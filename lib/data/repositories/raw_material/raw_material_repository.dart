@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:inventory_management/data/repositories/account_repository.dart';
-import 'package:inventory_management/ui/list_details/raw_material_page/add_raw_material/controller/items_model.dart';
+import 'package:inventory_management/ui/list_details/items_page/add_raw_material/controller/items_model.dart';
 
 import '../../constants.dart';
 

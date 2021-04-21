@@ -1,6 +1,7 @@
 import 'package:inventory_management/data/repositories/raw_material/raw_material_repository.dart';
-import 'package:inventory_management/ui/list_details/raw_material_page/add_raw_material/controller/items_model.dart';
 import 'package:state_notifier/state_notifier.dart';
+
+import 'items_model.dart';
 
 class AddItemsController extends StateNotifier<ItemsModel> {
   final ItemsRepository rawMaterialRepository;
