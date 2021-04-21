@@ -72,7 +72,6 @@ class _StartPrintingState extends State<StartPrinting> {
                 ElevatedButton(
                   onPressed: () {
                     controller.startPrinting();
-                    Navigator.pop(context);
                   },
                   child: const Text('start printing'),
                 )

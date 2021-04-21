@@ -139,11 +139,7 @@ class _$_ItemsModel implements _ItemsModel {
       {@JsonKey(name: "item_name") this.itemName = '',
       @JsonKey(name: "warehouse_name") this.location = '',
       @JsonKey(name: "quantity") this.quantity = 0,
-      @JsonKey(name: "tag") this.tag = ''})
-      : assert(itemName != null),
-        assert(location != null),
-        assert(quantity != null),
-        assert(tag != null);
+      @JsonKey(name: "tag") this.tag = ''});
 
   factory _$_ItemsModel.fromJson(Map<String, dynamic> json) =>
       _$_$_ItemsModelFromJson(json);

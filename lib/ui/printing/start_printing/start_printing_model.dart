@@ -10,7 +10,7 @@ abstract class StartPrintingModel with _$StartPrintingModel {
     @Default('') String itemName,
     @Default('') String machineName,
     @Default('') String description,
-    @Default('') String expectedGoodOutput,
+    @Default(0) int expectedGoodOutput,
   }) = _StartPrintingModel;
   factory StartPrintingModel.fromJson(Map<String, dynamic> json) =>
       _$_$_StartPrintingModelFromJson(json);

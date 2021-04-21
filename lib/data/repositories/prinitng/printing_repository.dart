@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:inventory_management/data/repositories/account_repository.dart';
-import 'package:inventory_management/ui/list_details/buyers_page/add_buyer/controller/buyer_model.dart';
+import 'package:inventory_management/ui/printing/printing_list/printing_model.dart';
 
 import '../../constants.dart';
 
 class PrintingRepository {
-  Future<List<BuyerModel>> printingHistory() async {
+  Future<List<Printing>> printingHistory() async {
     final token = await const AccountRepository().getToken();
 
     final suppliers = await get(
@@ -20,7 +20,7 @@ class PrintingRepository {
     );
 
     final supplierList = (json.decode(suppliers.body) as List)
-        .map((dynamic e) => BuyerModel.fromJson(e as Map<String, dynamic>))
+        .map((dynamic e) => Printing.fromJson(e as Map<String, dynamic>))
         .toList();
     return supplierList;
   }
@@ -61,6 +61,7 @@ class PrintingRepository {
 
   Future<void> startPrinting({
     @required int itemQty,
+    @required int expectedOutput,
     @required String itemName,
     @required String machineName,
     @required String description,
@@ -77,7 +78,8 @@ class PrintingRepository {
         'items_qty': itemQty.toString(),
         'machine_name': machineName,
         'description': description,
-        'item_name': itemName
+        'item_name': itemName,
+        'expected_good_output': expectedOutput.toString()
       },
     );
     print(response.body);

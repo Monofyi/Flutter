@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:inventory_management/ui/list_details/items_page/add_raw_material/add_goods_page.dart';
-import 'package:inventory_management/ui/list_details/items_page/raw_material_list/raw_material_controller.dart';
-import 'package:inventory_management/ui/list_details/items_page/raw_material_list/raw_material_list_model.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_controller.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_list_model.dart';
+import 'package:inventory_management/ui/printing/printing_list/printing_list_model/printing_list_controller.dart';
+import 'package:inventory_management/ui/printing/printing_list/printing_list_model/printing_list_model.dart';
 import 'package:provider/provider.dart';
 
 class PrintingList extends StatefulWidget {
-  static const routeName = '/rawMaterialList';
+  static const routeName = '/printingList';
   static Widget wrapped() {
     return MultiProvider(
       providers: [
-        StateNotifierProvider<RawMaterialController, RawMaterialList>(
+        StateNotifierProvider<PrintingListController, PrintingListModel>(
           lazy: false,
           create: (context) =>
-              RawMaterialController(rawMaterialRepository: context.read()),
+              PrintingListController(printingRepository: context.read()),
         ),
         StateNotifierProvider<WarehouseListController, WarehouseList>(
           lazy: false,
@@ -35,12 +35,12 @@ class PrintingList extends StatefulWidget {
 class _PrintingListState extends State<PrintingList> {
   @override
   Widget build(BuildContext context) {
-    final rawMaterialModel = context.select((RawMaterialList value) => value);
+    final printing = context.select((PrintingListModel value) => value);
 
-    final goods = rawMaterialModel.rawMaterials;
+    final goods = printing.printings;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('RawMaterial List'),
+        title: const Text('Printing List'),
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
@@ -50,8 +50,11 @@ class _PrintingListState extends State<PrintingList> {
         child: const Icon(Icons.add),
       ),
       body: () {
-        if (rawMaterialModel.loading) {
+        if (printing.loading) {
           return const Center(child: CircularProgressIndicator());
+        }
+        if (printing.printings.isEmpty) {
+          return const Center(child: Text('No printings yet'));
         }
 
         return Padding(
@@ -86,7 +89,7 @@ class _PrintingListState extends State<PrintingList> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            goods[index].itemName,
+                            goods[index].productionId.toString(),
                           ),
                         ],
                       ),

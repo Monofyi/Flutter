@@ -22,7 +22,7 @@ class _$StartPrintingModelTearOff {
       String itemName = '',
       String machineName = '',
       String description = '',
-      String expectedGoodOutput = ''}) {
+      int expectedGoodOutput = 0}) {
     return _StartPrintingModel(
       itemsQty: itemsQty,
       itemName: itemName,
@@ -48,7 +48,7 @@ mixin _$StartPrintingModel {
   String get itemName;
   String get machineName;
   String get description;
-  String get expectedGoodOutput;
+  int get expectedGoodOutput;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -65,7 +65,7 @@ abstract class $StartPrintingModelCopyWith<$Res> {
       String itemName,
       String machineName,
       String description,
-      String expectedGoodOutput});
+      int expectedGoodOutput});
 }
 
 /// @nodoc
@@ -94,7 +94,7 @@ class _$StartPrintingModelCopyWithImpl<$Res>
           description == freezed ? _value.description : description as String,
       expectedGoodOutput: expectedGoodOutput == freezed
           ? _value.expectedGoodOutput
-          : expectedGoodOutput as String,
+          : expectedGoodOutput as int,
     ));
   }
 }
@@ -111,7 +111,7 @@ abstract class _$StartPrintingModelCopyWith<$Res>
       String itemName,
       String machineName,
       String description,
-      String expectedGoodOutput});
+      int expectedGoodOutput});
 }
 
 /// @nodoc
@@ -142,7 +142,7 @@ class __$StartPrintingModelCopyWithImpl<$Res>
           description == freezed ? _value.description : description as String,
       expectedGoodOutput: expectedGoodOutput == freezed
           ? _value.expectedGoodOutput
-          : expectedGoodOutput as String,
+          : expectedGoodOutput as int,
     ));
   }
 }
@@ -156,7 +156,7 @@ class _$_StartPrintingModel implements _StartPrintingModel {
       this.itemName = '',
       this.machineName = '',
       this.description = '',
-      this.expectedGoodOutput = ''})
+      this.expectedGoodOutput = 0})
       : assert(itemsQty != null),
         assert(itemName != null),
         assert(machineName != null),
@@ -178,9 +178,9 @@ class _$_StartPrintingModel implements _StartPrintingModel {
   @JsonKey(defaultValue: '')
   @override
   final String description;
-  @JsonKey(defaultValue: '')
+  @JsonKey(defaultValue: 0)
   @override
-  final String expectedGoodOutput;
+  final int expectedGoodOutput;
 
   @override
   String toString() {
@@ -234,7 +234,7 @@ abstract class _StartPrintingModel implements StartPrintingModel {
       String itemName,
       String machineName,
       String description,
-      String expectedGoodOutput}) = _$_StartPrintingModel;
+      int expectedGoodOutput}) = _$_StartPrintingModel;
 
   factory _StartPrintingModel.fromJson(Map<String, dynamic> json) =
       _$_StartPrintingModel.fromJson;
@@ -248,7 +248,7 @@ abstract class _StartPrintingModel implements StartPrintingModel {
   @override
   String get description;
   @override
-  String get expectedGoodOutput;
+  int get expectedGoodOutput;
   @override
   @JsonKey(ignore: true)
   _$StartPrintingModelCopyWith<_StartPrintingModel> get copyWith;

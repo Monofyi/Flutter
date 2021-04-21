@@ -13,11 +13,11 @@ class StartPrintingController extends StateNotifier<StartPrintingModel> {
   }
   Future<void> startPrinting() async {
     await printingRepository.startPrinting(
-      itemName: state.itemName,
-      itemQty: state.itemsQty,
-      machineName: state.machineName,
-      description: state.description,
-    );
+        itemName: state.itemName,
+        itemQty: state.itemsQty,
+        machineName: state.machineName,
+        description: state.description,
+        expectedOutput: state.expectedGoodOutput);
   }
 
   void updateQuantity(String name) {

@@ -13,7 +13,7 @@ _$_StartPrintingModel _$_$_StartPrintingModelFromJson(
     itemName: json['itemName'] as String ?? '',
     machineName: json['machineName'] as String ?? '',
     description: json['description'] as String ?? '',
-    expectedGoodOutput: json['expectedGoodOutput'] as String ?? '',
+    expectedGoodOutput: json['expectedGoodOutput'] as int ?? 0,
   );
 }
 
