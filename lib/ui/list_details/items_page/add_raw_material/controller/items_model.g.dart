@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'raw_material_model.dart';
+part of 'items_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_RawMaterialModel _$_$_RawMaterialModelFromJson(Map<String, dynamic> json) {
-  return _$_RawMaterialModel(
+_$_ItemsModel _$_$_ItemsModelFromJson(Map<String, dynamic> json) {
+  return _$_ItemsModel(
     itemName: json['item_name'] as String,
     location: json['warehouse_name'] as String,
     quantity: json['quantity'] as int,
@@ -15,8 +15,7 @@ _$_RawMaterialModel _$_$_RawMaterialModelFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$_$_RawMaterialModelToJson(
-        _$_RawMaterialModel instance) =>
+Map<String, dynamic> _$_$_ItemsModelToJson(_$_ItemsModel instance) =>
     <String, dynamic>{
       'item_name': instance.itemName,
       'warehouse_name': instance.location,

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:inventory_management/ui/list_details/items_page/add_raw_material/add_goods_page.dart';
 import 'package:inventory_management/ui/list_details/items_page/raw_material_list/raw_material_controller.dart';
 import 'package:inventory_management/ui/list_details/items_page/raw_material_list/raw_material_list_model.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_controller.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_list_model.dart';
 import 'package:provider/provider.dart';
 
-class OnGoingPrintingList extends StatefulWidget {
-  static const routeName = '/onGoingPrintingList';
+import 'add_raw_material/add_goods_page.dart';
+
+class ItemsListPage extends StatefulWidget {
+  static const routeName = '/itemsList';
   static Widget wrapped() {
     return MultiProvider(
       providers: [
@@ -24,15 +25,15 @@ class OnGoingPrintingList extends StatefulWidget {
           ),
         )
       ],
-      child: OnGoingPrintingList(),
+      child: ItemsListPage(),
     );
   }
 
   @override
-  _OnGoingPrintingListState createState() => _OnGoingPrintingListState();
+  _ItemsListPageState createState() => _ItemsListPageState();
 }
 
-class _OnGoingPrintingListState extends State<OnGoingPrintingList> {
+class _ItemsListPageState extends State<ItemsListPage> {
   @override
   Widget build(BuildContext context) {
     final rawMaterialModel = context.select((RawMaterialList value) => value);
@@ -40,7 +41,7 @@ class _OnGoingPrintingListState extends State<OnGoingPrintingList> {
     final goods = rawMaterialModel.rawMaterials;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('OnGoing Printing'),
+        title: const Text('Items List'),
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
@@ -53,7 +54,9 @@ class _OnGoingPrintingListState extends State<OnGoingPrintingList> {
         if (rawMaterialModel.loading) {
           return const Center(child: CircularProgressIndicator());
         }
-
+        if (rawMaterialModel.rawMaterials.isEmpty) {
+          return const Center(child: Text('No items'));
+        }
         return Padding(
           padding: const EdgeInsets.all(16),
           child: ListView.separated(

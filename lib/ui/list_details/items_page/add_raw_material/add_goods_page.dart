@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:inventory_management/ui/components/input_field.dart';
-import 'package:inventory_management/ui/list_details/raw_material_page/add_raw_material/controller/raw_material_model.dart';
 import 'package:provider/provider.dart';
 
-import 'controller/start_production.dart';
+import 'controller/add_items_controller.dart';
+import 'controller/items_model.dart';
 
 class AddRawMaterials extends StatefulWidget {
   static Widget wrapped() {
     return MultiProvider(
       providers: [
-        StateNotifierProvider<AddRawMaterialController, RawMaterialModel>(
+        StateNotifierProvider<AddItemsController, ItemsModel>(
           create: (context) {
-            return AddRawMaterialController(context.read());
+            return AddItemsController(context.read());
           },
         )
       ],
@@ -36,7 +36,7 @@ class _AddRawMaterialsState extends State<AddRawMaterials> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = context.watch<AddRawMaterialController>();
+    final controller = context.watch<AddItemsController>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Raw Material'),

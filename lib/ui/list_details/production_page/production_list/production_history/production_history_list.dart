@@ -1,65 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:inventory_management/ui/list_details/raw_material_page/add_raw_material/add_goods_page.dart';
-import 'package:inventory_management/ui/list_details/raw_material_page/raw_material_list/raw_material_controller.dart';
-import 'package:inventory_management/ui/list_details/raw_material_page/raw_material_list/raw_material_list_model.dart';
-import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_controller.dart';
-import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_list_model.dart';
+import 'package:inventory_management/ui/components/delete_alert.dart';
+import 'package:inventory_management/ui/list_details/production_page/production_list/production_history/production_history_controller.dart';
+import 'package:inventory_management/ui/list_details/production_page/production_list/production_list_model/production_list_model.dart';
 import 'package:provider/provider.dart';
 
-class RawMaterialListPage extends StatefulWidget {
-  static const routeName = '/rawMaterialList';
+class ProductionHistoryPage extends StatefulWidget {
+  static const routeName = '/productionHistoryList';
   static Widget wrapped() {
     return MultiProvider(
       providers: [
-        StateNotifierProvider<RawMaterialController, RawMaterialList>(
+        StateNotifierProvider<ProductionHistoryController, ProductionList>(
           lazy: false,
-          create: (context) =>
-              RawMaterialController(rawMaterialRepository: context.read()),
-        ),
-        StateNotifierProvider<WarehouseListController, WarehouseList>(
-          lazy: false,
-          create: (context) => WarehouseListController(
-            warehouseRepository: context.read(),
+          create: (context) => ProductionHistoryController(
+            productionRepository: context.read(),
           ),
         )
       ],
-      child: RawMaterialListPage(),
+      child: ProductionHistoryPage(),
     );
   }
 
   @override
-  _RawMaterialListPageState createState() => _RawMaterialListPageState();
+  _ProductionHistoryPageState createState() => _ProductionHistoryPageState();
 }
 
-class _RawMaterialListPageState extends State<RawMaterialListPage> {
+class _ProductionHistoryPageState extends State<ProductionHistoryPage> {
   @override
   Widget build(BuildContext context) {
-    final rawMaterialModel = context.select((RawMaterialList value) => value);
+    final vm = context.select((ProductionList value) => value);
 
-    final goods = rawMaterialModel.rawMaterials;
+    final productions = vm.productions;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('RawMaterial List'),
-      ),
-      floatingActionButton: FloatingActionButton(
-        elevation: 0,
-        onPressed: () {
-          Navigator.of(context).pushNamed(AddRawMaterials.routeName);
-        },
-        child: const Icon(Icons.add),
+        title: const Text('Production History'),
       ),
       body: () {
-        if (rawMaterialModel.loading) {
+        if (vm.loading) {
           return const Center(child: CircularProgressIndicator());
         }
-
+        if (vm.productions.isEmpty) {
+          return const Center(child: Text('No Productions yet'));
+        }
         return Padding(
           padding: const EdgeInsets.all(16),
           child: ListView.separated(
             clipBehavior: Clip.hardEdge,
             physics: const BouncingScrollPhysics(),
-            itemCount: goods.length,
+            itemCount: productions.length,
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () {},
@@ -86,8 +74,17 @@ class _RawMaterialListPageState extends State<RawMaterialListPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            goods[index].itemName,
+                            productions[index].productionId.toString(),
                           ),
+                          ElevatedButton(
+                            onPressed: () {
+                              DeleteDialog.show(
+                                context,
+                                onDelete: () {},
+                              );
+                            },
+                            child: const Text('remove'),
+                          )
                         ],
                       ),
                     ),

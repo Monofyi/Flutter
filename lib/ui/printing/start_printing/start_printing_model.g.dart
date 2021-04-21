@@ -9,22 +9,20 @@ part of 'start_printing_model.dart';
 _$_StartPrintingModel _$_$_StartPrintingModelFromJson(
     Map<String, dynamic> json) {
   return _$_StartPrintingModel(
-    goodsName: json['goodsName'] as String ?? '',
-    expectedGoodOutput: json['expectedGoodOutput'] as int ?? 0,
-    rawMatInput: json['rawMatInput'] as int ?? 0,
-    rawMaterial: json['rawMaterial'] as String ?? '',
+    itemsQty: json['itemsQty'] as int ?? 0,
+    itemName: json['itemName'] as String ?? '',
     machineName: json['machineName'] as String ?? '',
     description: json['description'] as String ?? '',
+    expectedGoodOutput: json['expectedGoodOutput'] as int ?? 0,
   );
 }
 
 Map<String, dynamic> _$_$_StartPrintingModelToJson(
         _$_StartPrintingModel instance) =>
     <String, dynamic>{
-      'goodsName': instance.goodsName,
-      'expectedGoodOutput': instance.expectedGoodOutput,
-      'rawMatInput': instance.rawMatInput,
-      'rawMaterial': instance.rawMaterial,
+      'itemsQty': instance.itemsQty,
+      'itemName': instance.itemName,
       'machineName': instance.machineName,
       'description': instance.description,
+      'expectedGoodOutput': instance.expectedGoodOutput,
     };

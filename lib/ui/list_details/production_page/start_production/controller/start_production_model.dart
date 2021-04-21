@@ -6,18 +6,18 @@ part 'start_production_model.g.dart';
 @freezed
 abstract class StartProductionModel with _$StartProductionModel {
   const factory StartProductionModel(
-      {@JsonKey(name: "raw_mat_input")
-      @Default('')
-          int rawMatInput,
+      {@JsonKey(name: "items_qty")
+      @Default(0)
+          int itemsQty,
       @JsonKey(name: "expected_good_output")
-      @Default('')
+      @Default(0)
           int expectedGoodOutput,
       @JsonKey(name: "goods_name")
       @Default('')
           String goodsName,
-      @JsonKey(name: "raw_material")
+      @JsonKey(name: "input_items")
       @Default('')
-          String rawMaterial,
+          String inputItems,
       @JsonKey(name: "machine_name")
       @Default('')
           String machineName}) = _StartProductionModel;

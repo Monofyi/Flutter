@@ -15,7 +15,7 @@ class _$RawMaterialListTearOff {
 
 // ignore: unused_element
   _RawMaterialList call(
-      {List<RawMaterialModel> rawMaterials = const <RawMaterialModel>[],
+      {List<ItemsModel> rawMaterials = const <ItemsModel>[],
       bool loading = true}) {
     return _RawMaterialList(
       rawMaterials: rawMaterials,
@@ -30,7 +30,7 @@ const $RawMaterialList = _$RawMaterialListTearOff();
 
 /// @nodoc
 mixin _$RawMaterialList {
-  List<RawMaterialModel> get rawMaterials;
+  List<ItemsModel> get rawMaterials;
   bool get loading;
 
   @JsonKey(ignore: true)
@@ -42,7 +42,7 @@ abstract class $RawMaterialListCopyWith<$Res> {
   factory $RawMaterialListCopyWith(
           RawMaterialList value, $Res Function(RawMaterialList) then) =
       _$RawMaterialListCopyWithImpl<$Res>;
-  $Res call({List<RawMaterialModel> rawMaterials, bool loading});
+  $Res call({List<ItemsModel> rawMaterials, bool loading});
 }
 
 /// @nodoc
@@ -62,7 +62,7 @@ class _$RawMaterialListCopyWithImpl<$Res>
     return _then(_value.copyWith(
       rawMaterials: rawMaterials == freezed
           ? _value.rawMaterials
-          : rawMaterials as List<RawMaterialModel>,
+          : rawMaterials as List<ItemsModel>,
       loading: loading == freezed ? _value.loading : loading as bool,
     ));
   }
@@ -75,7 +75,7 @@ abstract class _$RawMaterialListCopyWith<$Res>
           _RawMaterialList value, $Res Function(_RawMaterialList) then) =
       __$RawMaterialListCopyWithImpl<$Res>;
   @override
-  $Res call({List<RawMaterialModel> rawMaterials, bool loading});
+  $Res call({List<ItemsModel> rawMaterials, bool loading});
 }
 
 /// @nodoc
@@ -97,7 +97,7 @@ class __$RawMaterialListCopyWithImpl<$Res>
     return _then(_RawMaterialList(
       rawMaterials: rawMaterials == freezed
           ? _value.rawMaterials
-          : rawMaterials as List<RawMaterialModel>,
+          : rawMaterials as List<ItemsModel>,
       loading: loading == freezed ? _value.loading : loading as bool,
     ));
   }
@@ -106,13 +106,13 @@ class __$RawMaterialListCopyWithImpl<$Res>
 /// @nodoc
 class _$_RawMaterialList implements _RawMaterialList {
   const _$_RawMaterialList(
-      {this.rawMaterials = const <RawMaterialModel>[], this.loading = true})
+      {this.rawMaterials = const <ItemsModel>[], this.loading = true})
       : assert(rawMaterials != null),
         assert(loading != null);
 
-  @JsonKey(defaultValue: const <RawMaterialModel>[])
+  @JsonKey(defaultValue: const <ItemsModel>[])
   @override
-  final List<RawMaterialModel> rawMaterials;
+  final List<ItemsModel> rawMaterials;
   @JsonKey(defaultValue: true)
   @override
   final bool loading;
@@ -147,10 +147,10 @@ class _$_RawMaterialList implements _RawMaterialList {
 
 abstract class _RawMaterialList implements RawMaterialList {
   const factory _RawMaterialList(
-      {List<RawMaterialModel> rawMaterials, bool loading}) = _$_RawMaterialList;
+      {List<ItemsModel> rawMaterials, bool loading}) = _$_RawMaterialList;
 
   @override
-  List<RawMaterialModel> get rawMaterials;
+  List<ItemsModel> get rawMaterials;
   @override
   bool get loading;
   @override

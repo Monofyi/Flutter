@@ -1,65 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:inventory_management/ui/list_details/raw_material_page/add_raw_material/add_goods_page.dart';
-import 'package:inventory_management/ui/list_details/raw_material_page/raw_material_list/raw_material_controller.dart';
-import 'package:inventory_management/ui/list_details/raw_material_page/raw_material_list/raw_material_list_model.dart';
-import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_controller.dart';
-import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_list_model.dart';
+import 'package:inventory_management/ui/components/delete_alert.dart';
+import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/add_new_supplier.dart';
+import 'package:inventory_management/ui/waste/wastage_controller.dart';
+import 'package:inventory_management/ui/waste/wastage_list_model.dart';
 import 'package:provider/provider.dart';
 
-class PrintingList extends StatefulWidget {
-  static const routeName = '/rawMaterialList';
+class WastageListPage extends StatefulWidget {
+  static const routeName = '/wastageList';
   static Widget wrapped() {
     return MultiProvider(
       providers: [
-        StateNotifierProvider<RawMaterialController, RawMaterialList>(
+        StateNotifierProvider<WastageController, WastageList>(
           lazy: false,
           create: (context) =>
-              RawMaterialController(rawMaterialRepository: context.read()),
-        ),
-        StateNotifierProvider<WarehouseListController, WarehouseList>(
-          lazy: false,
-          create: (context) => WarehouseListController(
-            warehouseRepository: context.read(),
-          ),
+              WastageController(wastageRepository: context.read()),
         )
       ],
-      child: PrintingList(),
+      child: WastageListPage(),
     );
   }
 
   @override
-  _PrintingListState createState() => _PrintingListState();
+  _WastageListPageState createState() => _WastageListPageState();
 }
 
-class _PrintingListState extends State<PrintingList> {
+class _WastageListPageState extends State<WastageListPage> {
   @override
   Widget build(BuildContext context) {
-    final rawMaterialModel = context.select((RawMaterialList value) => value);
-
-    final goods = rawMaterialModel.rawMaterials;
+    final vm = context.select((WastageList value) => value);
+    final controller = context.watch<WastageController>();
+    final wastage = vm.wastage;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('RawMaterial List'),
+        title: const Text('Wastage List'),
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
         onPressed: () {
-          Navigator.of(context).pushNamed(AddRawMaterials.routeName);
+          Navigator.of(context)
+              .pushNamed(AddNewSupplier.routeName)
+              .whenComplete(controller.initialize);
         },
         child: const Icon(Icons.add),
       ),
       body: () {
-        if (rawMaterialModel.loading) {
+        if (vm.loading) {
           return const Center(child: CircularProgressIndicator());
         }
-
+        if (vm.wastage.isEmpty) {
+          return const Center(child: Text('No wastage'));
+        }
         return Padding(
           padding: const EdgeInsets.all(16),
           child: ListView.separated(
             clipBehavior: Clip.hardEdge,
             physics: const BouncingScrollPhysics(),
-            itemCount: goods.length,
+            itemCount: wastage.length,
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () {},
@@ -86,8 +83,17 @@ class _PrintingListState extends State<PrintingList> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            goods[index].itemName,
+                            wastage[index].wastageId.toString(),
                           ),
+                          ElevatedButton(
+                            onPressed: () {
+                              DeleteDialog.show(
+                                context,
+                                onDelete: () {},
+                              );
+                            },
+                            child: const Text('remove'),
+                          )
                         ],
                       ),
                     ),
