@@ -3,6 +3,8 @@ import 'package:inventory_management/ui/home_page/custom_app_bar.dart';
 import 'package:inventory_management/ui/list_details/buyers_page/buyer_list.dart';
 import 'package:inventory_management/ui/list_details/goods_page/goods_list.dart';
 import 'package:inventory_management/ui/list_details/machines_page/machines_list.dart';
+import 'package:inventory_management/ui/list_details/production_page/production_list/on_going_production/ongoing_production_list.dart';
+import 'package:inventory_management/ui/list_details/production_page/production_list/production_history/production_history_list.dart';
 import 'package:inventory_management/ui/list_details/production_page/start_production/start_production.dart';
 import 'package:inventory_management/ui/list_details/raw_material_page/raw_material_page.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/supplier_list.dart';
@@ -79,7 +81,7 @@ class HomePage extends StatelessWidget {
           title: 'Raw Material',
           icon: 'images/icons/raw_material.jpg',
           onTap: () {
-            Navigator.of(context).pushNamed(RawMaterialListPage.routeName);
+            Navigator.of(context).pushNamed(ItemsListPage.routeName);
           }),
       ListItem(
         title: 'Production',
@@ -90,6 +92,20 @@ class HomePage extends StatelessWidget {
             icon: null,
             onTap: () {
               Navigator.of(context).pushNamed(StartProduction.routeName);
+            },
+          ),
+          ListItem(
+            title: 'Production History',
+            icon: null,
+            onTap: () {
+              Navigator.of(context).pushNamed(ProductionHistoryPage.routeName);
+            },
+          ),
+          ListItem(
+            title: 'OnGoing Production',
+            icon: null,
+            onTap: () {
+              Navigator.of(context).pushNamed(OnGoingProductionPage.routeName);
             },
           ),
         ],

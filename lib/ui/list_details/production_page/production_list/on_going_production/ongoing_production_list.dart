@@ -7,7 +7,7 @@ import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/
 import 'package:provider/provider.dart';
 
 class OnGoingProductionPage extends StatefulWidget {
-  static const routeName = '/supplierList';
+  static const routeName = '/onGoingProductionList';
   static Widget wrapped() {
     return MultiProvider(
       providers: [

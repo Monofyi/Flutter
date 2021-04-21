@@ -1,49 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:inventory_management/ui/components/delete_alert.dart';
-import 'package:inventory_management/ui/list_details/production_page/production_list/on_going_production/on_going_production_controller.dart';
+import 'package:inventory_management/ui/list_details/production_page/production_list/production_history/production_history_controller.dart';
 import 'package:inventory_management/ui/list_details/production_page/production_list/production_list_model/production_list_model.dart';
-import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/add_new_supplier.dart';
 import 'package:provider/provider.dart';
 
-class OnGoingProductionPage extends StatefulWidget {
-  static const routeName = '/supplierList';
+class ProductionHistoryPage extends StatefulWidget {
+  static const routeName = '/productionHistoryList';
   static Widget wrapped() {
     return MultiProvider(
       providers: [
-        StateNotifierProvider<OnGoingProductionController, ProductionList>(
+        StateNotifierProvider<ProductionHistoryController, ProductionList>(
           lazy: false,
-          create: (context) => OnGoingProductionController(
+          create: (context) => ProductionHistoryController(
             productionRepository: context.read(),
           ),
         )
       ],
-      child: OnGoingProductionPage(),
+      child: ProductionHistoryPage(),
     );
   }
 
   @override
-  _OnGoingProductionPageState createState() => _OnGoingProductionPageState();
+  _ProductionHistoryPageState createState() => _ProductionHistoryPageState();
 }
 
-class _OnGoingProductionPageState extends State<OnGoingProductionPage> {
+class _ProductionHistoryPageState extends State<ProductionHistoryPage> {
   @override
   Widget build(BuildContext context) {
     final vm = context.select((ProductionList value) => value);
-    final controller = context.watch<OnGoingProductionController>();
+
     final productions = vm.productions;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('On-Going Production List'),
-      ),
-      floatingActionButton: FloatingActionButton(
-        elevation: 0,
-        onPressed: () {
-          Navigator.of(context)
-              .pushNamed(AddNewSupplier.routeName)
-              .whenComplete(controller.initialize);
-        },
-        child: const Icon(Icons.add),
+        title: const Text('Production History'),
       ),
       body: () {
         if (vm.loading) {

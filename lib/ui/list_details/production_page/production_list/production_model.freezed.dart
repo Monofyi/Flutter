@@ -24,7 +24,7 @@ class _$ProductionTearOff {
       @JsonKey(name: "remaining_goods_qty") int remainingGoodQty = 0,
       @JsonKey(name: "remaining_items_qty") int remainingItemsQty = 0,
       @JsonKey(name: "status") String status = '',
-      @JsonKey(name: "finished_goods") String finishedGoods = ''}) {
+      @JsonKey(name: "finished_goods") int finishedGoods = 0}) {
     return _ProductionModel(
       itemsQty: itemsQty,
       productionId: productionId,
@@ -61,7 +61,7 @@ mixin _$Production {
   @JsonKey(name: "status")
   String get status;
   @JsonKey(name: "finished_goods")
-  String get finishedGoods;
+  int get finishedGoods;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -80,7 +80,7 @@ abstract class $ProductionCopyWith<$Res> {
       @JsonKey(name: "remaining_goods_qty") int remainingGoodQty,
       @JsonKey(name: "remaining_items_qty") int remainingItemsQty,
       @JsonKey(name: "status") String status,
-      @JsonKey(name: "finished_goods") String finishedGoods});
+      @JsonKey(name: "finished_goods") int finishedGoods});
 }
 
 /// @nodoc
@@ -117,7 +117,7 @@ class _$ProductionCopyWithImpl<$Res> implements $ProductionCopyWith<$Res> {
       status: status == freezed ? _value.status : status as String,
       finishedGoods: finishedGoods == freezed
           ? _value.finishedGoods
-          : finishedGoods as String,
+          : finishedGoods as int,
     ));
   }
 }
@@ -136,7 +136,7 @@ abstract class _$ProductionModelCopyWith<$Res>
       @JsonKey(name: "remaining_goods_qty") int remainingGoodQty,
       @JsonKey(name: "remaining_items_qty") int remainingItemsQty,
       @JsonKey(name: "status") String status,
-      @JsonKey(name: "finished_goods") String finishedGoods});
+      @JsonKey(name: "finished_goods") int finishedGoods});
 }
 
 /// @nodoc
@@ -176,7 +176,7 @@ class __$ProductionModelCopyWithImpl<$Res>
       status: status == freezed ? _value.status : status as String,
       finishedGoods: finishedGoods == freezed
           ? _value.finishedGoods
-          : finishedGoods as String,
+          : finishedGoods as int,
     ));
   }
 }
@@ -192,7 +192,7 @@ class _$_ProductionModel implements _ProductionModel {
       @JsonKey(name: "remaining_goods_qty") this.remainingGoodQty = 0,
       @JsonKey(name: "remaining_items_qty") this.remainingItemsQty = 0,
       @JsonKey(name: "status") this.status = '',
-      @JsonKey(name: "finished_goods") this.finishedGoods = ''})
+      @JsonKey(name: "finished_goods") this.finishedGoods = 0})
       : assert(itemsQty != null),
         assert(productionId != null),
         assert(expectedGoodOutput != null),
@@ -224,7 +224,7 @@ class _$_ProductionModel implements _ProductionModel {
   final String status;
   @override
   @JsonKey(name: "finished_goods")
-  final String finishedGoods;
+  final int finishedGoods;
 
   @override
   String toString() {
@@ -281,14 +281,13 @@ class _$_ProductionModel implements _ProductionModel {
 
 abstract class _ProductionModel implements Production {
   const factory _ProductionModel(
-          {@JsonKey(name: "items_qty") int itemsQty,
-          @JsonKey(name: "production_id") int productionId,
-          @JsonKey(name: "expected_good_output") int expectedGoodOutput,
-          @JsonKey(name: "remaining_goods_qty") int remainingGoodQty,
-          @JsonKey(name: "remaining_items_qty") int remainingItemsQty,
-          @JsonKey(name: "status") String status,
-          @JsonKey(name: "finished_goods") String finishedGoods}) =
-      _$_ProductionModel;
+      {@JsonKey(name: "items_qty") int itemsQty,
+      @JsonKey(name: "production_id") int productionId,
+      @JsonKey(name: "expected_good_output") int expectedGoodOutput,
+      @JsonKey(name: "remaining_goods_qty") int remainingGoodQty,
+      @JsonKey(name: "remaining_items_qty") int remainingItemsQty,
+      @JsonKey(name: "status") String status,
+      @JsonKey(name: "finished_goods") int finishedGoods}) = _$_ProductionModel;
 
   factory _ProductionModel.fromJson(Map<String, dynamic> json) =
       _$_ProductionModel.fromJson;
@@ -313,7 +312,7 @@ abstract class _ProductionModel implements Production {
   String get status;
   @override
   @JsonKey(name: "finished_goods")
-  String get finishedGoods;
+  int get finishedGoods;
   @override
   @JsonKey(ignore: true)
   _$ProductionModelCopyWith<_ProductionModel> get copyWith;
