@@ -137,10 +137,7 @@ class _$_WarehouseModel implements _WarehouseModel {
   const _$_WarehouseModel(
       {@JsonKey(name: "location_id") this.locationId = 0,
       @JsonKey(name: "location_name") this.locationName = '',
-      @JsonKey(name: "description") this.description = ''})
-      : assert(locationId != null),
-        assert(locationName != null),
-        assert(description != null);
+      @JsonKey(name: "description") this.description = ''});
 
   factory _$_WarehouseModel.fromJson(Map<String, dynamic> json) =>
       _$_$_WarehouseModelFromJson(json);
