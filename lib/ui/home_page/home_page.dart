@@ -11,6 +11,9 @@ import 'package:inventory_management/ui/list_details/supplier_page/supplier_list
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list.dart';
 import 'package:inventory_management/ui/printing/printing_list/printing_history_list.dart';
 import 'package:inventory_management/ui/printing/start_printing/start_printing.dart';
+import 'package:inventory_management/ui/purchase/purchase/purchase.dart';
+import 'package:inventory_management/ui/purchase/purchase_history/purchase_history.dart';
+import 'package:inventory_management/ui/reutilization/reutil.dart';
 import 'package:inventory_management/ui/settings/settings_page.dart';
 import 'package:inventory_management/ui/waste/wastage_list.dart';
 
@@ -78,6 +81,22 @@ class HomePage extends StatelessWidget {
       ListItem(
         title: 'Purchase',
         icon: 'images/icons/purchase.jpg',
+        subCategory: [
+          ListItem(
+            title: 'Purchase items',
+            icon: null,
+            onTap: () {
+              Navigator.of(context).pushNamed(Purchase.routeName);
+            },
+          ),
+          ListItem(
+            title: 'Purchase history',
+            icon: null,
+            onTap: () {
+              Navigator.of(context).pushNamed(PurchaseHistoryPage.routeName);
+            },
+          ),
+        ],
       ),
       ListItem(
           title: 'Raw Material',
@@ -143,6 +162,13 @@ class HomePage extends StatelessWidget {
         icon: 'images/icons/wastage.jpg',
         onTap: () {
           Navigator.of(context).pushNamed(WastageListPage.routeName);
+        },
+      ),
+      ListItem(
+        title: 'Re-Utilization',
+        icon: 'images/icons/raw_material.jpg',
+        onTap: () {
+          Navigator.of(context).pushNamed(ReUtilListPage.routeName);
         },
       ),
       ListItem(
