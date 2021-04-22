@@ -2,35 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:inventory_management/ui/components/delete_alert.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/add_new_supplier.dart';
-import 'package:inventory_management/ui/waste/wastage_controller.dart';
-import 'package:inventory_management/ui/waste/wastage_list_model.dart';
+import 'package:inventory_management/ui/reutilization/resutilization_list_model.dart';
+import 'package:inventory_management/ui/reutilization/reutil_controller.dart';
 import 'package:provider/provider.dart';
 
-class ReutilListPage extends StatefulWidget {
+class ReUtilListPage extends StatefulWidget {
   static const routeName = '/reutilList';
   static Widget wrapped() {
     return MultiProvider(
       providers: [
-        StateNotifierProvider<WastageController, WastageList>(
+        StateNotifierProvider<ReUtilizationController, ReutilizationList>(
           lazy: false,
           create: (context) =>
-              WastageController(wastageRepository: context.read()),
+              ReUtilizationController(reutilizationRepository: context.read()),
         )
       ],
-      child: ReutilListPage(),
+      child: ReUtilListPage(),
     );
   }
 
   @override
-  _ReutilListPageState createState() => _ReutilListPageState();
+  _ReUtilListPageState createState() => _ReUtilListPageState();
 }
 
-class _ReutilListPageState extends State<ReutilListPage> {
+class _ReUtilListPageState extends State<ReUtilListPage> {
   @override
   Widget build(BuildContext context) {
-    final vm = context.select((WastageList value) => value);
-    final controller = context.watch<WastageController>();
-    final wastage = vm.wastage;
+    final vm = context.select((ReutilizationList value) => value);
+    final controller = context.watch<ReUtilizationController>();
+    final wastage = vm.reutiization;
     return Scaffold(
       appBar: AppBar(
         title: const Text('ReUtilization List'),
@@ -48,7 +48,7 @@ class _ReutilListPageState extends State<ReutilListPage> {
         if (vm.loading) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (vm.wastage.isEmpty) {
+        if (vm.reutiization.isEmpty) {
           return const Center(child: Text('Nothing to display'));
         }
         return Padding(
@@ -83,7 +83,7 @@ class _ReutilListPageState extends State<ReutilListPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            wastage[index].wastageId.toString(),
+                            wastage[index].reutilizationId.toString(),
                           ),
                           ElevatedButton(
                             onPressed: () {

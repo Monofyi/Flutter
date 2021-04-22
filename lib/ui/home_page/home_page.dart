@@ -150,7 +150,7 @@ class HomePage extends StatelessWidget {
         title: 'Re-Utilization',
         icon: 'images/icons/raw_material.jpg',
         onTap: () {
-          Navigator.of(context).pushNamed(ReutilListPage.routeName);
+          Navigator.of(context).pushNamed(ReUtilListPage.routeName);
         },
       ),
       ListItem(
