@@ -19,6 +19,7 @@ class GoodsRepository {
       },
       body: {'loc_name': locName},
     );
+    print(response.body);
     final goodsList = (json.decode(response.body) as List)
         .map((dynamic e) => GoodsModel.fromJson(e as Map<String, dynamic>))
         .toList();

@@ -6,12 +6,11 @@ part 'start_printing_model.g.dart';
 @freezed
 abstract class StartPrintingModel with _$StartPrintingModel {
   const factory StartPrintingModel({
-    @Default('') String goodsName,
-    @Default(0) int expectedGoodOutput,
-    @Default(0) int rawMatInput,
-    @Default('') String rawMaterial,
+    @Default(0) int itemsQty,
+    @Default('') String itemName,
     @Default('') String machineName,
     @Default('') String description,
+    @Default(0) int expectedGoodOutput,
   }) = _StartPrintingModel;
   factory StartPrintingModel.fromJson(Map<String, dynamic> json) =>
       _$_$_StartPrintingModelFromJson(json);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:inventory_management/ui/list_details/raw_material_page/add_raw_material/add_goods_page.dart';
-import 'package:inventory_management/ui/list_details/raw_material_page/raw_material_list/raw_material_controller.dart';
-import 'package:inventory_management/ui/list_details/raw_material_page/raw_material_list/raw_material_list_model.dart';
+import 'package:inventory_management/ui/list_details/items_page/add_raw_material/add_goods_page.dart';
+import 'package:inventory_management/ui/list_details/items_page/raw_material_list/raw_material_controller.dart';
+import 'package:inventory_management/ui/list_details/items_page/raw_material_list/raw_material_list_model.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_controller.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list/warehouse_list_model.dart';
 import 'package:provider/provider.dart';

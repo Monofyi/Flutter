@@ -2,12 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:inventory_management/ui/home_page/custom_app_bar.dart';
 import 'package:inventory_management/ui/list_details/buyers_page/buyer_list.dart';
 import 'package:inventory_management/ui/list_details/goods_page/goods_list.dart';
+import 'package:inventory_management/ui/list_details/items_page/raw_material_page.dart';
 import 'package:inventory_management/ui/list_details/machines_page/machines_list.dart';
-import 'package:inventory_management/ui/list_details/raw_material_page/raw_material_page.dart';
+import 'package:inventory_management/ui/list_details/production_page/production_list/on_going_production/ongoing_production_list.dart';
+import 'package:inventory_management/ui/list_details/production_page/production_list/production_history/production_history_list.dart';
+import 'package:inventory_management/ui/list_details/production_page/start_production/start_production.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/supplier_list.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list.dart';
+import 'package:inventory_management/ui/printing/printing_list/printing_history_list.dart';
 import 'package:inventory_management/ui/printing/start_printing/start_printing.dart';
+import 'package:inventory_management/ui/purchase/purchase/purchase.dart';
+import 'package:inventory_management/ui/purchase/purchase_history/purchase_history.dart';
+import 'package:inventory_management/ui/reutilization/reutil.dart';
 import 'package:inventory_management/ui/settings/settings_page.dart';
+import 'package:inventory_management/ui/waste/wastage_list.dart';
 
 import '../../colors.dart';
 
@@ -73,16 +81,55 @@ class HomePage extends StatelessWidget {
       ListItem(
         title: 'Purchase',
         icon: 'images/icons/purchase.jpg',
+        subCategory: [
+          ListItem(
+            title: 'Purchase items',
+            icon: null,
+            onTap: () {
+              Navigator.of(context).pushNamed(Purchase.routeName);
+            },
+          ),
+          ListItem(
+            title: 'Purchase history',
+            icon: null,
+            onTap: () {
+              Navigator.of(context).pushNamed(PurchaseHistoryPage.routeName);
+            },
+          ),
+        ],
       ),
       ListItem(
           title: 'Raw Material',
           icon: 'images/icons/raw_material.jpg',
           onTap: () {
-            Navigator.of(context).pushNamed(RawMaterialListPage.routeName);
+            Navigator.of(context).pushNamed(ItemsListPage.routeName);
           }),
       ListItem(
         title: 'Production',
         icon: 'images/icons/production.jpg',
+        subCategory: [
+          ListItem(
+            title: 'Start Production',
+            icon: null,
+            onTap: () {
+              Navigator.of(context).pushNamed(StartProduction.routeName);
+            },
+          ),
+          ListItem(
+            title: 'Production History',
+            icon: null,
+            onTap: () {
+              Navigator.of(context).pushNamed(ProductionHistoryPage.routeName);
+            },
+          ),
+          ListItem(
+            title: 'OnGoing Production',
+            icon: null,
+            onTap: () {
+              Navigator.of(context).pushNamed(OnGoingProductionPage.routeName);
+            },
+          ),
+        ],
       ),
       ListItem(
         title: 'Goods',
@@ -103,16 +150,26 @@ class HomePage extends StatelessWidget {
               },
             ),
             ListItem(
-              title: 'Buyers',
+              title: 'Printing history',
               icon: null,
               onTap: () {
-                Navigator.of(context).popAndPushNamed(BuyerListPage.routeName);
+                Navigator.of(context).pushNamed(PrintingList.routeName);
               },
             ),
           ]),
       ListItem(
         title: 'Wastage',
         icon: 'images/icons/wastage.jpg',
+        onTap: () {
+          Navigator.of(context).pushNamed(WastageListPage.routeName);
+        },
+      ),
+      ListItem(
+        title: 'Re-Utilization',
+        icon: 'images/icons/raw_material.jpg',
+        onTap: () {
+          Navigator.of(context).pushNamed(ReUtilListPage.routeName);
+        },
       ),
       ListItem(
         title: 'Shipment',

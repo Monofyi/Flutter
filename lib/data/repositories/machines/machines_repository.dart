@@ -12,7 +12,7 @@ class MachineRepository {
     final token = await const AccountRepository().getToken();
 
     final goods = await get(
-      Uri.parse('http://bitecope.co.in:8000/machines_view/'),
+      Uri.parse('http://bitecope.co.in:8080/machines_view/'),
       headers: {
         "Content-Type": "application/json",
         'Authorization': 'Token $token',
