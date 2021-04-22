@@ -18,7 +18,7 @@ class _$ReutilizationModelTearOff {
 
 // ignore: unused_element
   _ReutilizationModel call(
-      {@JsonKey(name: "reutilization_id") int reutilizationId = '',
+      {@JsonKey(name: "reutilization_id") int reutilizationId = 0,
       @JsonKey(name: "last_updated") @nullable DateTime lastUpdated}) {
     return _ReutilizationModel(
       reutilizationId: reutilizationId,
@@ -126,7 +126,7 @@ class __$ReutilizationModelCopyWithImpl<$Res>
 /// @nodoc
 class _$_ReutilizationModel implements _ReutilizationModel {
   const _$_ReutilizationModel(
-      {@JsonKey(name: "reutilization_id") this.reutilizationId = '',
+      {@JsonKey(name: "reutilization_id") this.reutilizationId = 0,
       @JsonKey(name: "last_updated") @nullable this.lastUpdated})
       : assert(reutilizationId != null);
 

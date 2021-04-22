@@ -1,52 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:inventory_management/ui/components/delete_alert.dart';
-import 'package:inventory_management/ui/reutilization/resutilization_list_model.dart';
-import 'package:inventory_management/ui/reutilization/reutil_controller.dart';
+import 'package:inventory_management/ui/list_details/production_page/production_list/production_history/production_history_controller.dart';
+import 'package:inventory_management/ui/list_details/production_page/production_list/production_list_model/production_list_model.dart';
 import 'package:provider/provider.dart';
 
-class ReUtilListPage extends StatefulWidget {
-  static const routeName = '/reutilList';
+class ProductionHistoryPage extends StatefulWidget {
+  static const routeName = '/productionHistoryList';
   static Widget wrapped() {
     return MultiProvider(
       providers: [
-        StateNotifierProvider<ReUtilizationController, ReutilizationList>(
+        StateNotifierProvider<ProductionHistoryController, ProductionList>(
           lazy: false,
-          create: (context) =>
-              ReUtilizationController(reutilizationRepository: context.read()),
+          create: (context) => ProductionHistoryController(
+            productionRepository: context.read(),
+          ),
         )
       ],
-      child: ReUtilListPage(),
+      child: ProductionHistoryPage(),
     );
   }
 
   @override
-  _ReUtilListPageState createState() => _ReUtilListPageState();
+  _ProductionHistoryPageState createState() => _ProductionHistoryPageState();
 }
 
-class _ReUtilListPageState extends State<ReUtilListPage> {
+class _ProductionHistoryPageState extends State<ProductionHistoryPage> {
   @override
   Widget build(BuildContext context) {
-    final vm = context.select((ReutilizationList value) => value);
-    final controller = context.watch<ReUtilizationController>();
-    final wastage = vm.reutiization;
+    final vm = context.select((ProductionList value) => value);
+
+    final productions = vm.productions;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ReUtilization List'),
+        title: const Text('Production History'),
       ),
       body: () {
         if (vm.loading) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (vm.reutiization.isEmpty) {
-          return const Center(child: Text('Nothing to display'));
+        if (vm.productions.isEmpty) {
+          return const Center(child: Text('No Productions yet'));
         }
         return Padding(
           padding: const EdgeInsets.all(16),
           child: ListView.separated(
             clipBehavior: Clip.hardEdge,
             physics: const BouncingScrollPhysics(),
-            itemCount: wastage.length,
+            itemCount: productions.length,
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () {},
@@ -73,7 +74,7 @@ class _ReUtilListPageState extends State<ReUtilListPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            wastage[index].reutilizationId.toString(),
+                            productions[index].productionId.toString(),
                           ),
                           ElevatedButton(
                             onPressed: () {
