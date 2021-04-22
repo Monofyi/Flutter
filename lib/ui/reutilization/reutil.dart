@@ -6,8 +6,8 @@ import 'package:inventory_management/ui/waste/wastage_controller.dart';
 import 'package:inventory_management/ui/waste/wastage_list_model.dart';
 import 'package:provider/provider.dart';
 
-class WastageListPage extends StatefulWidget {
-  static const routeName = '/wastageList';
+class ReutilListPage extends StatefulWidget {
+  static const routeName = '/reutilList';
   static Widget wrapped() {
     return MultiProvider(
       providers: [
@@ -17,15 +17,15 @@ class WastageListPage extends StatefulWidget {
               WastageController(wastageRepository: context.read()),
         )
       ],
-      child: WastageListPage(),
+      child: ReutilListPage(),
     );
   }
 
   @override
-  _WastageListPageState createState() => _WastageListPageState();
+  _ReutilListPageState createState() => _ReutilListPageState();
 }
 
-class _WastageListPageState extends State<WastageListPage> {
+class _ReutilListPageState extends State<ReutilListPage> {
   @override
   Widget build(BuildContext context) {
     final vm = context.select((WastageList value) => value);
@@ -33,7 +33,7 @@ class _WastageListPageState extends State<WastageListPage> {
     final wastage = vm.wastage;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Wastage List'),
+        title: const Text('ReUtilization List'),
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
@@ -49,7 +49,7 @@ class _WastageListPageState extends State<WastageListPage> {
           return const Center(child: CircularProgressIndicator());
         }
         if (vm.wastage.isEmpty) {
-          return const Center(child: Text('No wastage'));
+          return const Center(child: Text('Nothing to display'));
         }
         return Padding(
           padding: const EdgeInsets.all(16),
