@@ -6,21 +6,19 @@ part of 'reutilization_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_WastageModel _$_$_WastageModelFromJson(Map<String, dynamic> json) {
-  return _$_WastageModel(
-    wastageId: json['wastage_id'] as int,
-    goodsId: json['goods_id'] as int,
-    tag: json['tag'] as String,
+_$_ReutilizationModel _$_$_ReutilizationModelFromJson(
+    Map<String, dynamic> json) {
+  return _$_ReutilizationModel(
+    reutilizationId: json['reutilization_id'] as int,
     lastUpdated: json['last_updated'] == null
         ? null
         : DateTime.parse(json['last_updated'] as String),
   );
 }
 
-Map<String, dynamic> _$_$_WastageModelToJson(_$_WastageModel instance) =>
+Map<String, dynamic> _$_$_ReutilizationModelToJson(
+        _$_ReutilizationModel instance) =>
     <String, dynamic>{
-      'wastage_id': instance.wastageId,
-      'goods_id': instance.goodsId,
-      'tag': instance.tag,
+      'reutilization_id': instance.reutilizationId,
       'last_updated': instance.lastUpdated?.toIso8601String(),
     };
