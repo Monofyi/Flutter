@@ -3,23 +3,24 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:inventory_management/data/repositories/account_repository.dart';
-import 'package:inventory_management/ui/list_details/items_page/add_raw_material/controller/items_model.dart';
+import 'package:inventory_management/ui/purchase/purchase_history/purchase_list_model/purchase_list_model.dart';
 
 import '../../constants.dart';
 
 class PurchaseRepository {
-  Future<List<ItemsModel>> fetchItems() async {
+  Future<List<PurchaseListModel>> fetchItems() async {
     final token = await const AccountRepository().getToken();
 
     final rawMaterials = await get(
-      Uri.parse('$port/view_items/'),
+      Uri.parse('$port/purchase_history/'),
       headers: {
         'Authorization': 'Token $token',
       },
     );
     print(rawMaterials.body);
     final rawMaterial = (json.decode(rawMaterials.body) as List)
-        .map((dynamic e) => ItemsModel.fromJson(e as Map<String, dynamic>))
+        .map((dynamic e) =>
+            PurchaseListModel.fromJson(e as Map<String, dynamic>))
         .toList();
     return rawMaterial;
   }

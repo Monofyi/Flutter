@@ -1,5 +1,5 @@
 import 'package:inventory_management/data/repositories/purchase/purchase_repository.dart';
-import 'package:inventory_management/ui/purchase_page/purchase/controller/purchase_items_model.dart';
+import 'package:inventory_management/ui/purchase/purchase/controller/purchase_items_model.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 class PurchaseController extends StateNotifier<PurchaseModel> {

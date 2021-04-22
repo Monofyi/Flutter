@@ -7,7 +7,7 @@ part 'purchase_items_model.g.dart';
 abstract class PurchaseModel with _$PurchaseModel {
   const factory PurchaseModel(
       {@JsonKey(name: "quantity") @Default(0) int quantity,
-      @JsonKey(name: "supplier_name") @Default('') String supplierName,
+      @JsonKey(name: "supplier_name") @nullable String supplierName,
       @JsonKey(name: "tag") @Default('') String tag,
       @JsonKey(name: "item_name") @Default('') String itemName,
       @JsonKey(name: "loc") @Default('') String loc}) = _PurchaseModel;

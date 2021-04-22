@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:inventory_management/ui/components/input_field.dart';
-import 'package:inventory_management/ui/purchase_page/purchase/controller/purchase_controller.dart';
-import 'package:inventory_management/ui/purchase_page/purchase/controller/purchase_items_model.dart';
 import 'package:provider/provider.dart';
+
+import 'controller/purchase_controller.dart';
+import 'controller/purchase_items_model.dart';
 
 class Purchase extends StatefulWidget {
   static Widget wrapped() {

@@ -19,7 +19,7 @@ class _$PurchaseModelTearOff {
 // ignore: unused_element
   _PurchaseModel call(
       {@JsonKey(name: "quantity") int quantity = 0,
-      @JsonKey(name: "supplier_name") String supplierName = '',
+      @JsonKey(name: "supplier_name") @nullable String supplierName,
       @JsonKey(name: "tag") String tag = '',
       @JsonKey(name: "item_name") String itemName = '',
       @JsonKey(name: "loc") String loc = ''}) {
@@ -47,6 +47,7 @@ mixin _$PurchaseModel {
   @JsonKey(name: "quantity")
   int get quantity;
   @JsonKey(name: "supplier_name")
+  @nullable
   String get supplierName;
   @JsonKey(name: "tag")
   String get tag;
@@ -67,7 +68,7 @@ abstract class $PurchaseModelCopyWith<$Res> {
       _$PurchaseModelCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: "quantity") int quantity,
-      @JsonKey(name: "supplier_name") String supplierName,
+      @JsonKey(name: "supplier_name") @nullable String supplierName,
       @JsonKey(name: "tag") String tag,
       @JsonKey(name: "item_name") String itemName,
       @JsonKey(name: "loc") String loc});
@@ -111,7 +112,7 @@ abstract class _$PurchaseModelCopyWith<$Res>
   @override
   $Res call(
       {@JsonKey(name: "quantity") int quantity,
-      @JsonKey(name: "supplier_name") String supplierName,
+      @JsonKey(name: "supplier_name") @nullable String supplierName,
       @JsonKey(name: "tag") String tag,
       @JsonKey(name: "item_name") String itemName,
       @JsonKey(name: "loc") String loc});
@@ -154,12 +155,11 @@ class __$PurchaseModelCopyWithImpl<$Res>
 class _$_PurchaseModel implements _PurchaseModel {
   const _$_PurchaseModel(
       {@JsonKey(name: "quantity") this.quantity = 0,
-      @JsonKey(name: "supplier_name") this.supplierName = '',
+      @JsonKey(name: "supplier_name") @nullable this.supplierName,
       @JsonKey(name: "tag") this.tag = '',
       @JsonKey(name: "item_name") this.itemName = '',
       @JsonKey(name: "loc") this.loc = ''})
       : assert(quantity != null),
-        assert(supplierName != null),
         assert(tag != null),
         assert(itemName != null),
         assert(loc != null);
@@ -172,6 +172,7 @@ class _$_PurchaseModel implements _PurchaseModel {
   final int quantity;
   @override
   @JsonKey(name: "supplier_name")
+  @nullable
   final String supplierName;
   @override
   @JsonKey(name: "tag")
@@ -230,7 +231,7 @@ class _$_PurchaseModel implements _PurchaseModel {
 abstract class _PurchaseModel implements PurchaseModel {
   const factory _PurchaseModel(
       {@JsonKey(name: "quantity") int quantity,
-      @JsonKey(name: "supplier_name") String supplierName,
+      @JsonKey(name: "supplier_name") @nullable String supplierName,
       @JsonKey(name: "tag") String tag,
       @JsonKey(name: "item_name") String itemName,
       @JsonKey(name: "loc") String loc}) = _$_PurchaseModel;
@@ -243,6 +244,7 @@ abstract class _PurchaseModel implements PurchaseModel {
   int get quantity;
   @override
   @JsonKey(name: "supplier_name")
+  @nullable
   String get supplierName;
   @override
   @JsonKey(name: "tag")
