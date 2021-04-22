@@ -11,6 +11,7 @@ import 'package:inventory_management/ui/list_details/supplier_page/supplier_list
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list.dart';
 import 'package:inventory_management/ui/printing/printing_list/printing_history_list.dart';
 import 'package:inventory_management/ui/printing/start_printing/start_printing.dart';
+import 'package:inventory_management/ui/purchase_page/purchase/purchase.dart';
 import 'package:inventory_management/ui/reutilization/reutil.dart';
 import 'package:inventory_management/ui/settings/settings_page.dart';
 import 'package:inventory_management/ui/waste/wastage_list.dart';
@@ -79,6 +80,15 @@ class HomePage extends StatelessWidget {
       ListItem(
         title: 'Purchase',
         icon: 'images/icons/purchase.jpg',
+        subCategory: [
+          ListItem(
+            title: 'Purchase items',
+            icon: null,
+            onTap: () {
+              Navigator.of(context).pushNamed(Purchase.routeName);
+            },
+          ),
+        ],
       ),
       ListItem(
           title: 'Raw Material',

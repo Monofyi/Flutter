@@ -53,6 +53,10 @@ class _PurchaseState extends State<Purchase> {
                   onChanged: controller.updateItemNameName,
                 ),
                 BuildInputField(
+                  label: 'Supplier name',
+                  onChanged: controller.updateSupplierName,
+                ),
+                BuildInputField(
                     label: 'Quantity', onChanged: controller.updateQuantity),
                 BuildInputField(
                   label: 'Location',

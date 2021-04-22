@@ -7,7 +7,7 @@ import 'package:inventory_management/ui/list_details/items_page/add_raw_material
 
 import '../../constants.dart';
 
-class ItemsRepository {
+class PurchaseRepository {
   Future<List<ItemsModel>> fetchItems() async {
     final token = await const AccountRepository().getToken();
 
@@ -24,22 +24,24 @@ class ItemsRepository {
     return rawMaterial;
   }
 
-  Future<void> addItems({
-    @required String material,
-    @required int quanity,
+  Future<void> purchase({
+    @required String itemName,
+    @required int quantity,
     @required String tag,
     @required String location,
+    @required String supplierName,
   }) async {
     final token = await const AccountRepository().getToken();
     print(token);
 
-    final response = await post(Uri.parse('$port/add_items/'), headers: {
+    final response = await post(Uri.parse('$port/buy_items/'), headers: {
       'Authorization': 'Token $token',
     }, body: {
-      'item_name': material,
-      'quantity': quanity.toString(),
+      'item_name': itemName,
+      'quantity': quantity.toString(),
       'tag': tag,
-      'warehouse_name': location
+      'loc': location,
+      'supplier_name': supplierName
     });
     print(response.body);
   }

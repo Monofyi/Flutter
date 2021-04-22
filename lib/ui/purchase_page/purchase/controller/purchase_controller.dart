@@ -1,17 +1,18 @@
-import 'package:inventory_management/data/repositories/raw_material/raw_material_repository.dart';
+import 'package:inventory_management/data/repositories/purchase/purchase_repository.dart';
 import 'package:inventory_management/ui/purchase_page/purchase/controller/purchase_items_model.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 class PurchaseController extends StateNotifier<PurchaseModel> {
-  final ItemsRepository rawMaterialRepository;
-  PurchaseController(this.rawMaterialRepository) : super(const PurchaseModel());
+  final PurchaseRepository purchaseRepository;
+  PurchaseController(this.purchaseRepository) : super(const PurchaseModel());
 
   void addRawMaterial() {
-    rawMaterialRepository.addItems(
-        quanity: state.quantity,
-        material: state.itemName,
+    purchaseRepository.purchase(
+        quantity: state.quantity,
+        itemName: state.itemName,
         tag: state.tag,
-        itemName: state.location);
+        location: state.loc,
+        supplierName: state.supplierName);
   }
 
   void updateQuantity(String newValue) {
