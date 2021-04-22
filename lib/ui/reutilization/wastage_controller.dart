@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_management/data/repositories/wastage/wastage_repository.dart';
+import 'package:inventory_management/data/repositories/reutilization/reutilization_repository.dart';
 import 'package:inventory_management/ui/reutilization/resutilization_list_model.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-class ReutilizationController extends StateNotifier<ReutilizationList> {
-  final WastageRepository wastageRepository;
-  ReutilizationController({@required this.wastageRepository})
+class ReUtilizationController extends StateNotifier<ReutilizationList> {
+  final ReutilizationRepository reutilizationRepository;
+  ReUtilizationController({@required this.reutilizationRepository})
       : super(const ReutilizationList()) {
     initialize();
   }
   Future<void> initialize() async {
-    final suppliers = await wastageRepository.fetchWastage();
-    //state = state.copyWith(loading: false, wastage: suppliers);
+    final history = await reutilizationRepository.fetchHistory();
+    state = state.copyWith(loading: false, reutiization: history);
   }
 
   Future<void> refresh() async {
-    //state = state.copyWith(loading: true);
-    final suppliers = await wastageRepository.fetchWastage();
-    //state = state.copyWith(loading: false, wastage: suppliers);
+    state = state.copyWith(loading: true);
+    final history = await reutilizationRepository.fetchHistory();
+    state = state.copyWith(loading: false, reutiization: history);
   }
 }

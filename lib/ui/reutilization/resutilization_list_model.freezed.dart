@@ -15,10 +15,10 @@ class _$ReutilizationListTearOff {
 
 // ignore: unused_element
   _ReutilizationList call(
-      {List<ReutilizationModel> wastage = const <ReutilizationModel>[],
+      {List<ReutilizationModel> reutiization = const <ReutilizationModel>[],
       bool loading = true}) {
     return _ReutilizationList(
-      wastage: wastage,
+      reutiization: reutiization,
       loading: loading,
     );
   }
@@ -30,7 +30,7 @@ const $ReutilizationList = _$ReutilizationListTearOff();
 
 /// @nodoc
 mixin _$ReutilizationList {
-  List<ReutilizationModel> get wastage;
+  List<ReutilizationModel> get reutiization;
   bool get loading;
 
   @JsonKey(ignore: true)
@@ -42,7 +42,7 @@ abstract class $ReutilizationListCopyWith<$Res> {
   factory $ReutilizationListCopyWith(
           ReutilizationList value, $Res Function(ReutilizationList) then) =
       _$ReutilizationListCopyWithImpl<$Res>;
-  $Res call({List<ReutilizationModel> wastage, bool loading});
+  $Res call({List<ReutilizationModel> reutiization, bool loading});
 }
 
 /// @nodoc
@@ -56,13 +56,13 @@ class _$ReutilizationListCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object wastage = freezed,
+    Object reutiization = freezed,
     Object loading = freezed,
   }) {
     return _then(_value.copyWith(
-      wastage: wastage == freezed
-          ? _value.wastage
-          : wastage as List<ReutilizationModel>,
+      reutiization: reutiization == freezed
+          ? _value.reutiization
+          : reutiization as List<ReutilizationModel>,
       loading: loading == freezed ? _value.loading : loading as bool,
     ));
   }
@@ -75,7 +75,7 @@ abstract class _$ReutilizationListCopyWith<$Res>
           _ReutilizationList value, $Res Function(_ReutilizationList) then) =
       __$ReutilizationListCopyWithImpl<$Res>;
   @override
-  $Res call({List<ReutilizationModel> wastage, bool loading});
+  $Res call({List<ReutilizationModel> reutiization, bool loading});
 }
 
 /// @nodoc
@@ -91,13 +91,13 @@ class __$ReutilizationListCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object wastage = freezed,
+    Object reutiization = freezed,
     Object loading = freezed,
   }) {
     return _then(_ReutilizationList(
-      wastage: wastage == freezed
-          ? _value.wastage
-          : wastage as List<ReutilizationModel>,
+      reutiization: reutiization == freezed
+          ? _value.reutiization
+          : reutiization as List<ReutilizationModel>,
       loading: loading == freezed ? _value.loading : loading as bool,
     ));
   }
@@ -106,29 +106,29 @@ class __$ReutilizationListCopyWithImpl<$Res>
 /// @nodoc
 class _$_ReutilizationList implements _ReutilizationList {
   const _$_ReutilizationList(
-      {this.wastage = const <ReutilizationModel>[], this.loading = true})
-      : assert(wastage != null),
+      {this.reutiization = const <ReutilizationModel>[], this.loading = true})
+      : assert(reutiization != null),
         assert(loading != null);
 
   @JsonKey(defaultValue: const <ReutilizationModel>[])
   @override
-  final List<ReutilizationModel> wastage;
+  final List<ReutilizationModel> reutiization;
   @JsonKey(defaultValue: true)
   @override
   final bool loading;
 
   @override
   String toString() {
-    return 'ReutilizationList(wastage: $wastage, loading: $loading)';
+    return 'ReutilizationList(reutiization: $reutiization, loading: $loading)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _ReutilizationList &&
-            (identical(other.wastage, wastage) ||
+            (identical(other.reutiization, reutiization) ||
                 const DeepCollectionEquality()
-                    .equals(other.wastage, wastage)) &&
+                    .equals(other.reutiization, reutiization)) &&
             (identical(other.loading, loading) ||
                 const DeepCollectionEquality().equals(other.loading, loading)));
   }
@@ -136,7 +136,7 @@ class _$_ReutilizationList implements _ReutilizationList {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(wastage) ^
+      const DeepCollectionEquality().hash(reutiization) ^
       const DeepCollectionEquality().hash(loading);
 
   @JsonKey(ignore: true)
@@ -147,10 +147,11 @@ class _$_ReutilizationList implements _ReutilizationList {
 
 abstract class _ReutilizationList implements ReutilizationList {
   const factory _ReutilizationList(
-      {List<ReutilizationModel> wastage, bool loading}) = _$_ReutilizationList;
+      {List<ReutilizationModel> reutiization,
+      bool loading}) = _$_ReutilizationList;
 
   @override
-  List<ReutilizationModel> get wastage;
+  List<ReutilizationModel> get reutiization;
   @override
   bool get loading;
   @override

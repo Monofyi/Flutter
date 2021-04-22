@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'reutilization_model.dart';
+part of 'wastage_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
