@@ -92,7 +92,8 @@ class _SupplierListPageState extends State<SupplierListPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top:18.0),
+                            padding: const EdgeInsets.only(top:18),
+                            // ignore: sized_box_for_whitespace
                             child: Container(
                               width:120,
                               child: Column(

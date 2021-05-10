@@ -264,7 +264,7 @@ class _NextButtonAndAgreement extends StatelessWidget {
         children: [
           const _BottomCheckBox(),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal:28.0),
+            padding: const EdgeInsets.symmetric(horizontal:28),
             child: RoundedButton(onTap: onTap, title: 'Sign up'),
           )
         ],

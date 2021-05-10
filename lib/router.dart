@@ -17,7 +17,7 @@ import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/
 import 'package:inventory_management/ui/list_details/supplier_page/supplier_list.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/add_warehouse/add_warehouse_page.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list.dart';
-import 'package:inventory_management/ui/login_page/email_verification.dart';
+
 import 'package:inventory_management/ui/login_page/login_page.dart';
 import 'package:inventory_management/ui/login_page/phone_verification.dart';
 import 'package:inventory_management/ui/login_page/verify_screen.dart';

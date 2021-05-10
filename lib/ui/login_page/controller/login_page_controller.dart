@@ -2,9 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/data/repositories/account_repository.dart';
 import 'package:inventory_management/domain/app_navigator.dart';
-import 'package:inventory_management/ui/home_page/home_page.dart';
 import 'package:inventory_management/ui/login_page/controller/login_model.dart';
-import 'package:inventory_management/ui/login_page/email_verification.dart';
 import 'package:inventory_management/ui/login_page/verify_screen.dart';
 
 enum ValidationResult {

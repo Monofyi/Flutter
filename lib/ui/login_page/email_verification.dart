@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inventory_management/ui/components/input_field.dart';
+
 import 'package:inventory_management/ui/login_page/login_page.dart';
 import 'package:inventory_management/ui/sign_in/controller.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +29,6 @@ class EmailVerfiy extends StatefulWidget {
 
 class EmailVerfiyState extends State<EmailVerfiy> {
  bool radiobutton= true;
-  static final _formKey = GlobalKey<FormState>();
   bool animate = false;
 
   @override
@@ -98,6 +97,7 @@ class EmailVerfiyState extends State<EmailVerfiy> {
               child: InkWell(
                 onTap: (){
                   setState(() {
+                    // ignore: unnecessary_statements
                     radiobutton==false;
                   });
 
@@ -122,23 +122,23 @@ class EmailVerfiyState extends State<EmailVerfiy> {
                       padding: EdgeInsets.only(
                           bottom: MediaQuery.of(context).viewInsets.bottom /3.5),
                       child: Padding(
-                        padding: const EdgeInsets.all(18.0),
+                        padding: const EdgeInsets.all(18),
                         child: Row(children: [
-                          radiobutton==false?Icon(Icons.radio_button_on,color: Colors.lightBlue,):Icon(Icons.radio_button_off,color: Colors.grey,),
+                          radiobutton==false?const Icon(Icons.radio_button_on,color: Colors.lightBlue,):const Icon(Icons.radio_button_off,color: Colors.grey,),
 
 
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal:14.0),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal:14),
                             child: Icon(Icons.phone,color: Colors.lightBlue,size: 42,),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal:8.0),
+                            padding: const EdgeInsets.symmetric(horizontal:8),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Phone:",style: GoogleFonts.aBeeZee(fontSize: 16),)
                                 ,   Padding(
-                                  padding: const EdgeInsets.only(top:3.0),
+                                  padding: const EdgeInsets.only(top:3),
                                   child: Text("+918233081931",style: GoogleFonts.aBeeZee(fontSize: 18,color: Colors.blueAccent,fontWeight: FontWeight.bold),),
                                 )
 
@@ -160,6 +160,7 @@ class EmailVerfiyState extends State<EmailVerfiy> {
               child: InkWell(
                 onTap: (){
                   setState(() {
+                    // ignore: unnecessary_statements
                     radiobutton==true;
                   });
 
@@ -184,22 +185,22 @@ class EmailVerfiyState extends State<EmailVerfiy> {
                       padding: EdgeInsets.only(
                           bottom: MediaQuery.of(context).viewInsets.bottom / 4),
                       child:  Padding(
-                        padding: const EdgeInsets.all(18.0),
+                        padding: const EdgeInsets.all(18),
                         child: Row(children: [
-                          radiobutton==true?Icon(Icons.radio_button_on,color: Colors.lightBlue,):Icon(Icons.radio_button_off,color: Colors.grey,),
+                          radiobutton==true?const Icon(Icons.radio_button_on,color: Colors.lightBlue,):const Icon(Icons.radio_button_off,color: Colors.grey,),
 
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal:14.0),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal:14),
                             child: Icon(Icons.email,color: Colors.lightBlue,size: 42,),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal:8.0),
+                            padding: const EdgeInsets.symmetric(horizontal:8),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Email:",style: GoogleFonts.aBeeZee(fontSize: 16),)
                                 ,   Padding(
-                                  padding: const EdgeInsets.only(top:3.0),
+                                  padding: const EdgeInsets.only(top:3),
                                   child: Text("infoemail@gmail.com",style: GoogleFonts.aBeeZee(fontSize: 16,color: Colors.blueAccent,fontWeight: FontWeight.bold),),
                                 )
 
@@ -266,6 +267,7 @@ class _NextButtonAndAgreement extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 class _BottomTextBox extends StatelessWidget {
   const _BottomTextBox({Key key}) : super(key: key);
 

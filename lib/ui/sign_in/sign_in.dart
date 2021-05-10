@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inventory_management/ui/components/input_field.dart';
-import 'package:inventory_management/ui/login_page/login_page.dart';
 import 'package:inventory_management/ui/login_page/verify_screen.dart';
 import 'package:inventory_management/ui/sign_in/controller.dart';
 import 'package:provider/provider.dart';

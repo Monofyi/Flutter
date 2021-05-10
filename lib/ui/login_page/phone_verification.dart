@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inventory_management/ui/components/input_field.dart';
 import 'package:inventory_management/ui/login_page/login_page.dart';
 import 'package:inventory_management/ui/sign_in/controller.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -29,7 +28,6 @@ class PhonevrificationScreen extends StatefulWidget {
 }
 
 class PhonevrificationScreenState extends State<PhonevrificationScreen> {
-  static final _formKey = GlobalKey<FormState>();
   bool animate = false;
   bool radiobutton = true;
 
@@ -49,7 +47,6 @@ class PhonevrificationScreenState extends State<PhonevrificationScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    final controller = context.watch<SignInController>();
 
 
     return SafeArea(
@@ -58,11 +55,11 @@ class PhonevrificationScreenState extends State<PhonevrificationScreen> {
 
 
         resizeToAvoidBottomInset: false,
-        backgroundColor:Color(0xFFD6D6D6),
+        backgroundColor:const Color(0xFFD6D6D6),
         body: Stack(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              padding: const EdgeInsets.symmetric(horizontal: 18),
               child: Container(
                 decoration: const BoxDecoration(
 
@@ -111,6 +108,7 @@ class PhonevrificationScreenState extends State<PhonevrificationScreen> {
                       child: InkWell(
                         onTap: (){
                           setState(() {
+                            // ignore: unnecessary_statements
                             radiobutton==false;
                           });
 
@@ -124,13 +122,13 @@ class PhonevrificationScreenState extends State<PhonevrificationScreen> {
                               padding: EdgeInsets.only(
                                   bottom: MediaQuery.of(context).viewInsets.bottom /3.5),
                               child: Padding(
-                                padding: const EdgeInsets.all(18.0),
+                                padding: const EdgeInsets.all(18),
                                 child: Row(children: [
-                                  radiobutton==false?Icon(Icons.radio_button_on,color: Colors.lightBlue,):Icon(Icons.radio_button_off,color: Colors.grey,),
+                                  if (radiobutton==false) const Icon(Icons.radio_button_on,color: Colors.lightBlue,) else const Icon(Icons.radio_button_off,color: Colors.grey,),
 
 
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal:14.0),
+                                    padding: const EdgeInsets.symmetric(horizontal:14),
                                     child:  Text("Phone",style: GoogleFonts.aBeeZee(fontWeight:FontWeight.bold,fontSize: 16),)
                                     ,
                                   ),
@@ -149,6 +147,7 @@ class PhonevrificationScreenState extends State<PhonevrificationScreen> {
                       child: InkWell(
                         onTap: (){
                           setState(() {
+                            // ignore: unnecessary_statements
                             radiobutton==true;
                           });
 
@@ -162,12 +161,12 @@ class PhonevrificationScreenState extends State<PhonevrificationScreen> {
                               padding: EdgeInsets.only(
                                   bottom: MediaQuery.of(context).viewInsets.bottom / 4),
                               child:  Padding(
-                                padding: const EdgeInsets.all(18.0),
+                                padding: const EdgeInsets.all(18),
                                 child: Row(children: [
-                                  radiobutton==true?Icon(Icons.radio_button_on,color: Colors.lightBlue,):Icon(Icons.radio_button_off,color: Colors.grey,),
+                                  radiobutton==true?const Icon(Icons.radio_button_on,color: Colors.lightBlue,):const Icon(Icons.radio_button_off,color: Colors.grey,),
 
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal:14.0),
+                                    padding: const EdgeInsets.symmetric(horizontal:14),
 
                                     child:  Text("Email",style: GoogleFonts.aBeeZee(fontWeight:FontWeight.bold,fontSize: 16),)
 
@@ -202,15 +201,15 @@ class _BottomSheetEmail extends StatelessWidget {
       alignment: Alignment.center,
       height: 40,
       width: 40,
-      child: TextField(
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.blue)
+      ),
+      child: const TextField(
         keyboardType: TextInputType.number,
         maxLength: 1,
         decoration: InputDecoration(
             border: InputBorder.none
         ),
-      ),
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.blue)
       ),
     );
   }
@@ -230,7 +229,7 @@ class _BottomSheetEmail extends StatelessWidget {
           margin: const EdgeInsets.all(6),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.only(topLeft:Radius.circular(30),topRight: Radius.circular(30)),
+            borderRadius: const BorderRadius.only(topLeft:Radius.circular(30),topRight: Radius.circular(30)),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.3),
@@ -248,7 +247,7 @@ class _BottomSheetEmail extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.12,
                 width: MediaQuery.of(context).size.width * 0.56,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   child:Image.asset(
                     'images/email.png',
                   ),
@@ -261,14 +260,14 @@ class _BottomSheetEmail extends StatelessWidget {
                   children: [
                     Text("Enter the 5-digit verification code sent to",style: GoogleFonts.aBeeZee(fontSize: 13),),
                     Padding(
-                      padding: const EdgeInsets.all(4.0),
+                      padding: const EdgeInsets.all(4),
                       child: Text("bitecope@gmail.com",style: GoogleFonts.aBeeZee(fontSize: 16,fontWeight: FontWeight.bold,color: Colors.blueAccent),),
                     ),
 
                   ],
                 )),
               ),
-              SizedBox(height: 2,),
+              const SizedBox(height: 2,),
         Center(
           child: OTPTextField(
             length: 5,
@@ -276,26 +275,26 @@ class _BottomSheetEmail extends StatelessWidget {
            textFieldAlignment: MainAxisAlignment.spaceAround,
             fieldWidth: 40,
 
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 17
             ),
             onChanged: (pin) {
-              print("Changed: " + pin);
+              print('Changed: $pin');
             },
             onCompleted: (pin) {
-              print("Completed: " + pin);
+              print('Completed: $pin');
             },
           ),
         ),
 
-              SizedBox(height: 5,),
+              const SizedBox(height: 5,),
               Row(
               //  mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(18.0),
+                      padding: const EdgeInsets.all(18),
                       child: GestureDetector(
                         onTap: (){
                           Navigator.pushNamed(context, SignUpPage.routeName);
@@ -325,7 +324,7 @@ class _BottomSheetEmail extends StatelessWidget {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(18.0),
+                      padding: const EdgeInsets.all(18),
                       child: GestureDetector(
                         onTap: (){
                           Navigator.pushNamed(context, SignUpPage.routeName);
@@ -380,15 +379,15 @@ class _BottomSheetPhn extends StatelessWidget {
       alignment: Alignment.center,
       height: 40,
       width: 40,
-      child: TextField(
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.blue)
+      ),
+      child: const TextField(
         keyboardType: TextInputType.number,
         maxLength: 1,
         decoration: InputDecoration(
             border: InputBorder.none
         ),
-      ),
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.blue)
       ),
     );
   }
@@ -408,7 +407,7 @@ class _BottomSheetPhn extends StatelessWidget {
           margin: const EdgeInsets.all(6),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.only(topLeft:Radius.circular(30),topRight: Radius.circular(30)),
+            borderRadius: const BorderRadius.only(topLeft:Radius.circular(30),topRight: Radius.circular(30)),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.3),
@@ -426,7 +425,7 @@ class _BottomSheetPhn extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.12,
                 width: MediaQuery.of(context).size.width * 0.56,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   child: SvgPicture.asset(
                     'images/Illustration 5Illustrations.svg',
                   ),
@@ -439,14 +438,14 @@ class _BottomSheetPhn extends StatelessWidget {
                   children: [
                     Text("Enter the 5-digit verification code sent to",style: GoogleFonts.aBeeZee(fontSize: 13),),
                     Padding(
-                      padding: const EdgeInsets.all(4.0),
+                      padding: const EdgeInsets.all(4),
                       child: Text("+918885678923",style: GoogleFonts.aBeeZee(fontSize: 16,fontWeight: FontWeight.bold,color: Colors.blueAccent),),
                     ),
 
                   ],
                 )),
               ),
-              SizedBox(height: 2,),
+              const SizedBox(height: 2,),
               Center(
                 child: OTPTextField(
                   length: 5,
@@ -454,26 +453,26 @@ class _BottomSheetPhn extends StatelessWidget {
                   textFieldAlignment: MainAxisAlignment.spaceAround,
                   fieldWidth: 40,
 
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 17
                   ),
                   onChanged: (pin) {
-                    print("Changed: " + pin);
+                    print("Changed: $pin");
                   },
                   onCompleted: (pin) {
-                    print("Completed: " + pin);
+                    print("Completed: $pin");
                   },
                 ),
               ),
 
-              SizedBox(height: 5,),
+              const SizedBox(height: 5,),
               Row(
                 //  mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(18.0),
+                      padding: const EdgeInsets.all(18),
                       child: GestureDetector(
                         onTap: (){
                           Navigator.pushNamed(context, SignUpPage.routeName);
@@ -503,7 +502,7 @@ class _BottomSheetPhn extends StatelessWidget {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(18.0),
+                      padding: const EdgeInsets.all(18),
                       child: GestureDetector(
                         onTap: (){
                           Navigator.pushNamed(context, SignUpPage.routeName);
