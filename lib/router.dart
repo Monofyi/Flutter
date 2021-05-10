@@ -174,11 +174,11 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
     PurchaseHistoryPage.routeName: _standardRoute(
       (context, settings) => PurchaseHistoryPage.wrapped(),
     ),
-    verify_screen.routeName: _standardRoute(
-          (context, settings) => verify_screen.wrapped(),
+    VerifyScreen.routeName: _standardRoute(
+          (context, settings) => VerifyScreen.wrapped(),
     ),
-    phonevrification_screen.routeName: _standardRoute(
-          (context, settings) => phonevrification_screen.wrapped(),
+    PhonevrificationScreen.routeName: _standardRoute(
+          (context, settings) => PhonevrificationScreen.wrapped(),
     ),
   };
 

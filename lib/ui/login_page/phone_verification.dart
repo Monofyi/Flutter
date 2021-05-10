@@ -8,8 +8,8 @@ import 'package:inventory_management/ui/sign_in/controller.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:provider/provider.dart';
 
-class phonevrification_screen extends StatefulWidget {
-  static const routeName = '/phonevrification_screen';
+class PhonevrificationScreen extends StatefulWidget {
+  static const routeName = '/PhonevrificationScreen';
   static Widget wrapped() {
     return MultiProvider(
       providers: [
@@ -20,15 +20,15 @@ class phonevrification_screen extends StatefulWidget {
           ),
         ),
       ],
-      child: phonevrification_screen(),
+      child: PhonevrificationScreen(),
     );
   }
 
   @override
-  phonevrification_screenState createState() => phonevrification_screenState();
+  PhonevrificationScreenState createState() => PhonevrificationScreenState();
 }
 
-class phonevrification_screenState extends State<phonevrification_screen> {
+class PhonevrificationScreenState extends State<PhonevrificationScreen> {
   static final _formKey = GlobalKey<FormState>();
   bool animate = false;
   bool radiobutton = true;
@@ -94,7 +94,7 @@ class phonevrification_screenState extends State<phonevrification_screen> {
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child:radiobutton==true ?_BottomSheetEmail():_BottomSheetPhn()
+              child:radiobutton==true ?_BottomSheetEmail(onTap: () {  },):_BottomSheetPhn(onTap: () {  },)
 
               ),
 

@@ -7,7 +7,7 @@ import 'package:inventory_management/ui/login_page/login_page.dart';
 import 'package:inventory_management/ui/sign_in/controller.dart';
 import 'package:provider/provider.dart';
 
-class email_verfiy extends StatefulWidget {
+class EmailVerfiy extends StatefulWidget {
   static const routeName = '/verify_screen';
   static Widget wrapped() {
     return MultiProvider(
@@ -19,15 +19,15 @@ class email_verfiy extends StatefulWidget {
           ),
         ),
       ],
-      child: email_verfiy(),
+      child: EmailVerfiy(),
     );
   }
 
   @override
-  email_verfiyState createState() => email_verfiyState();
+  EmailVerfiyState createState() => EmailVerfiyState();
 }
 
-class email_verfiyState extends State<email_verfiy> {
+class EmailVerfiyState extends State<EmailVerfiy> {
  bool radiobutton= true;
   static final _formKey = GlobalKey<FormState>();
   bool animate = false;

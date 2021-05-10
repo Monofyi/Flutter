@@ -8,7 +8,7 @@ import 'package:inventory_management/ui/login_page/phone_verification.dart';
 import 'package:inventory_management/ui/sign_in/controller.dart';
 import 'package:provider/provider.dart';
 
-class verify_screen extends StatefulWidget {
+class VerifyScreen extends StatefulWidget {
   static const routeName = '/verifyscreen';
   static Widget wrapped() {
     return MultiProvider(
@@ -20,15 +20,15 @@ class verify_screen extends StatefulWidget {
           ),
         ),
       ],
-      child: verify_screen(),
+      child: VerifyScreen(),
     );
   }
 
   @override
-  _verify_screenState createState() => _verify_screenState();
+  _VerifyScreenState createState() => _VerifyScreenState();
 }
 
-class _verify_screenState extends State<verify_screen> {
+class _VerifyScreenState extends State<VerifyScreen> {
   bool radiobutton=true;
 
   static final _formKey = GlobalKey<FormState>();
@@ -90,7 +90,7 @@ class _verify_screenState extends State<verify_screen> {
               alignment: Alignment.bottomCenter,
               child: _NextButtonAndAgreement(
                 onTap: (){
-                  Navigator.pushNamed(context, phonevrification_screen.routeName);
+                  Navigator.pushNamed(context, PhonevrificationScreen.routeName);
                 },
               ),
             ),
@@ -287,7 +287,7 @@ class _BottomTextBox extends StatelessWidget {
                 text: 'Proceed',
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    Navigator.pushNamed(context, verify_screen.routeName);
+                    Navigator.pushNamed(context, VerifyScreen.routeName);
                   },
                 style: const TextStyle(color: Colors.blueAccent, fontSize: 15),
               )

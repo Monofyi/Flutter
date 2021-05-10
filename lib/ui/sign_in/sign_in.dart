@@ -215,7 +215,7 @@ class _BottomTextBox extends StatelessWidget {
                 text: 'Sign up',
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    Navigator.pushNamed(context, verify_screen.routeName);
+                    Navigator.pushNamed(context, VerifyScreen.routeName);
                   },
                 style: const TextStyle(color: Colors.blueAccent, fontSize: 18),
               )

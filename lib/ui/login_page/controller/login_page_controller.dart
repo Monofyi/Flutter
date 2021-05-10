@@ -92,7 +92,7 @@ class LoginPageController extends ValueNotifier<LoginModel> {
         recoveryQuestion: value.recoveryQuestion);
     value = value.copyWith(loading: false);
     if (result.status != LoginStatus.successfull) {
-      appNavigator.pushAndRemoveAllPage(verify_screen.routeName);
+      appNavigator.pushAndRemoveAllPage(VerifyScreen.routeName);
     } else {
       print(result.model);
       final resultError = <String>[];
