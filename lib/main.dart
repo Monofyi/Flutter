@@ -1,7 +1,7 @@
 import 'package:disposable_provider/disposable_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management/router.dart';
-import 'package:inventory_management/ui/splash_page.dart';
+import 'package:inventory_management/ui/splash_screen/home.dart';
 import 'package:provider/provider.dart';
 
 import 'app/providers/repository_provider.dart';
@@ -65,7 +65,7 @@ class BiteCopeApp extends StatelessWidget {
       onGenerateRoute:
           Provider.of<GlobalRouter>(context, listen: false).onGenerateRoute,
       home: () {
-        return const SplashPage();
+        return const Splash();
       }(),
     );
   }
