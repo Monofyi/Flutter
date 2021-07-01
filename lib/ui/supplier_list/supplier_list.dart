@@ -22,7 +22,7 @@ class _SupplierListState extends State<SupplierList> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(left: 20.0, top: 40.0, right: 20.0),
+          padding: const EdgeInsets.only(left: 20, top: 40, right: 20),
           child: SingleChildScrollView(
             child: Column(children: [
               const Align(
@@ -58,7 +58,7 @@ class _SupplierListState extends State<SupplierList> {
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
               Align(
-                  alignment: Alignment(-1, 5),
+                  alignment: const Alignment(-1, 5),
                   child: Row(
                     children: const [
                       Text('Phone Number',
@@ -112,7 +112,7 @@ class _SupplierListState extends State<SupplierList> {
                       Icon(
                         Icons.star,
                         color: Colors.red,
-                        size: 7.0,
+                        size: 7,
                       )
                     ],
                   )),

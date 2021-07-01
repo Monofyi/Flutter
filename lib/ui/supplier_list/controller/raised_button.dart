@@ -6,7 +6,7 @@ class RaisedButtons extends StatelessWidget {
   final Text text;
   final Icon icons;
 
-  const RaisedButtons({
+   const RaisedButtons({
     Key key,
      this.color,
      this.function,
@@ -16,12 +16,14 @@ class RaisedButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      color: color,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      onPressed: () {
-        function();
-      },
+    return ElevatedButton(
+      style:  ElevatedButton.styleFrom(
+        primary: color,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      ),
+      onPressed: ()  async =>
+       await function(),
+
       child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [text, icons]),
