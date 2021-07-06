@@ -24,7 +24,7 @@ class _ClipperState extends State<Clipper> {
 
   void navigationPage() {
     Navigator.of(context).pushReplacement(MaterialPageRoute<void>(
-        builder: (BuildContext context) => const Home()));
+        builder: (BuildContext context) => const Splash()));
   }
 
   @override
