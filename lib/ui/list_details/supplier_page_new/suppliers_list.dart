@@ -28,7 +28,7 @@ class _SuppliersListPageState extends State<SuppliersListPage> {
   @override
   Widget build(BuildContext context) {
     final vm = context.select((SupplierList value) => value);
-    final controller = context.watch<SuppliersListController>();
+    // final controller = context.watch<SuppliersListController>();
     final suppliers = vm.suppliers;
     return Theme(
       data: theme,

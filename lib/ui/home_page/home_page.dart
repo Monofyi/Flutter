@@ -7,7 +7,7 @@ import 'package:inventory_management/ui/list_details/machines_page/machines_list
 import 'package:inventory_management/ui/list_details/production_page/production_list/on_going_production/ongoing_production_list.dart';
 import 'package:inventory_management/ui/list_details/production_page/production_list/production_history/production_history_list.dart';
 import 'package:inventory_management/ui/list_details/production_page/start_production/start_production.dart';
-import 'package:inventory_management/ui/list_details/supplier_page/supplier_list.dart';
+// import 'package:inventory_management/ui/list_details/supplier_page/supplier_list.dart';
 import 'package:inventory_management/ui/list_details/supplier_page_new/suppliers_list.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list.dart';
 import 'package:inventory_management/ui/printing/printing_list/printing_history_list.dart';
