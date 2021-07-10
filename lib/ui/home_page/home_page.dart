@@ -8,6 +8,7 @@ import 'package:inventory_management/ui/list_details/production_page/production_
 import 'package:inventory_management/ui/list_details/production_page/production_list/production_history/production_history_list.dart';
 import 'package:inventory_management/ui/list_details/production_page/start_production/start_production.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/supplier_list.dart';
+import 'package:inventory_management/ui/list_details/supplier_page_new/suppliers_list.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list.dart';
 import 'package:inventory_management/ui/printing/printing_list/printing_history_list.dart';
 import 'package:inventory_management/ui/printing/start_printing/start_printing.dart';
@@ -51,7 +52,9 @@ class HomePage extends StatelessWidget {
             title: 'Suppliers',
             icon: null,
             onTap: () {
-              Navigator.of(context).popAndPushNamed(SupplierListPage.routeName);
+              // Navigator.of(context).popAndPushNamed(SupplierListPage.routeName);
+              Navigator.of(context)
+                  .popAndPushNamed(SuppliersListPage.routeName);
             },
           ),
           ListItem(
