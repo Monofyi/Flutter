@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:inventory_management/ui/components/error_pop_up.dart';
 import 'package:provider/provider.dart';
 
@@ -41,17 +40,16 @@ class _NewSignUpState extends State<NewSignUp> {
   @override
   Widget build(BuildContext context) {
     final controller = context.watch<LoginPageController>();
-    final vm = controller.value;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff252525),
+        backgroundColor: const Color(0xff252525),
         elevation: 0,
-        leading: Icon(
+        leading: const Icon(
           Icons.arrow_back_ios,
           color: Color(0xff32C5FF),
         ),
         centerTitle: false,
-        title: Text(
+        title: const Text(
           "Signup",
           style: TextStyle(
             color: Color(0xff32C5FF),
@@ -63,15 +61,15 @@ class _NewSignUpState extends State<NewSignUp> {
         ),
       ),
       body: Container(
-        color: Color(0xff252525),
+        color: const Color(0xff252525),
       ),
       bottomSheet: SingleChildScrollView(
         child: BottomSheet(
-          backgroundColor: Color(0xff252525),
+          backgroundColor: const Color(0xff252525),
           elevation: 0,
           enableDrag: false,
           onClosing: () {},
-          builder: (context) => Container(
+          builder: (context) => SizedBox(
             height: 720,
             child: Container(
               decoration: const BoxDecoration(
@@ -89,7 +87,7 @@ class _NewSignUpState extends State<NewSignUp> {
                       padding: const EdgeInsets.only(
                           left: 30, right: 30, top: 30, bottom: 20),
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           //helperText: 'dc',
                           labelText: 'Email',
                           labelStyle: TextStyle(
@@ -141,7 +139,7 @@ class _NewSignUpState extends State<NewSignUp> {
                       padding: const EdgeInsets.only(
                           left: 30, right: 30, top: 20, bottom: 20),
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           //helperText: 'dc',
                           labelText: 'Username',
                           labelStyle: TextStyle(
@@ -193,7 +191,7 @@ class _NewSignUpState extends State<NewSignUp> {
                       padding: const EdgeInsets.only(
                           left: 30, right: 30, top: 20, bottom: 20),
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           //helperText: 'dc',
                           labelText: 'Phone Number',
                           labelStyle: TextStyle(
@@ -245,7 +243,7 @@ class _NewSignUpState extends State<NewSignUp> {
                       padding: const EdgeInsets.only(
                           left: 30, right: 30, top: 20, bottom: 20),
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           //helperText: 'dc',
                           labelText: 'Password',
                           labelStyle: TextStyle(
@@ -297,7 +295,7 @@ class _NewSignUpState extends State<NewSignUp> {
                       padding: const EdgeInsets.only(
                           left: 30, right: 30, top: 20, bottom: 20),
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           //helperText: 'dc',
                           labelText: 'Confirm Password',
                           labelStyle: TextStyle(
@@ -345,7 +343,7 @@ class _NewSignUpState extends State<NewSignUp> {
                         validator: controller.validationMessageContactNumber,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -366,20 +364,20 @@ class _NewSignUpState extends State<NewSignUp> {
                         height: 55.20,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(55),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                               color: Color(0x3f000000),
                               blurRadius: 20,
                               offset: Offset(-2, 5),
                             ),
                           ],
-                          color: Color(0xff252525),
+                          color: const Color(0xff252525),
                         ),
                         padding: const EdgeInsets.only(
                           top: 7,
                           bottom: 8,
                         ),
-                        child: Text(
+                        child: const Text(
                           "Next",
                           style: TextStyle(
                             color: Color(0xff32C5FF),
@@ -391,7 +389,7 @@ class _NewSignUpState extends State<NewSignUp> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 40,
                     ),
                   ],
