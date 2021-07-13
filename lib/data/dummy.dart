@@ -9,7 +9,7 @@ List<SupplierModel> dummySuppliers = [
       description: 'They supply us plastic and ink for bucket.'),
   const SupplierModel(
       supplierId: 2,
-      supplierName: 'Plastic Company',
+      supplierName: 'Plastic Company Limited',
       phoneNumber: 3456789012,
       address: '78 Street G, City H, Pin - 890123',
       description: 'Consectetur culpa labore non eiusmod.'),
@@ -28,7 +28,7 @@ List<SupplierModel> dummySuppliers = [
           'Ipsum proident aliquip magna magna consectetur enim consequat esse eiusmod.'),
   const SupplierModel(
       supplierId: 5,
-      supplierName: 'Elit culpa amet cillum officia.',
+      supplierName: 'Elit culpa amet cillum officia',
       phoneNumber: 2345678901,
       address: '56 Street E, City F, Pin - 234567',
       description: 'Duis dolor exercitation elit fugiat laboris.'),

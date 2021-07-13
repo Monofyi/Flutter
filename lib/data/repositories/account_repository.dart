@@ -121,8 +121,7 @@ class AccountRepository {
     print(response.body);
     final json = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
     if (response.statusCode == 200) {
-      final token = json["token"] as String;
-
+      final token = json["Token"] as String;
       await setToken(token: token);
       return LoginResult(status: LoginStatus.successfull);
     } else {

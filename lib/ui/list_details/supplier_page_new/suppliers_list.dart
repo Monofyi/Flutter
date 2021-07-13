@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/theme.dart';
+import 'package:inventory_management/ui/components_new/gradient_widget.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/controller/supplier_controller/supplier_list/supplier_list_model.dart';
+import 'package:inventory_management/ui/list_details/supplier_page_new/supplier_details.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 
@@ -35,21 +37,27 @@ class _SuppliersListPageState extends State<SuppliersListPage> {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: const Icon(
-              Icons.keyboard_arrow_left_rounded,
-              size: 36,
+            icon: GradientWidget(
+              gradient: primaryGradient,
+              child: const Icon(
+                Icons.keyboard_arrow_left_rounded,
+                size: 36,
+              ),
             ),
             onPressed: () => Navigator.maybePop(context),
           ),
           centerTitle: true,
-          title: const Text("Suppliers"),
+          title: GradientWidget(
+            gradient: primaryGradient,
+            child: const Text("Suppliers"),
+          ),
         ),
         floatingActionButtonLocation:
             FloatingActionButtonLocation.miniCenterFloat,
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
-          child: IconTheme(
-            data: theme.appBarTheme.iconTheme,
+          child: GradientWidget(
+            gradient: primaryGradient,
             child: const Icon(
               Icons.add,
               size: 36,
@@ -75,14 +83,26 @@ class _SuppliersListPageState extends State<SuppliersListPage> {
                   boxShadow: [
                     BoxShadow(
                       color: theme.shadowColor,
-                      blurRadius: 13,
+                      blurRadius: 7,
                       spreadRadius: 1,
                     ),
                   ],
                 ),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(8),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      SupplierDetails.routeName,
+                      arguments: SupplierDetailsArgument(
+                        supplierId: suppliers[index].supplierId.toString(),
+                        supplierName: suppliers[index].supplierName,
+                        phoneNo: suppliers[index].phoneNumber.toString(),
+                        address: suppliers[index].address,
+                        description: suppliers[index].description,
+                      ),
+                    );
+                  },
                   child: Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(horizontal: 8),
