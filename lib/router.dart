@@ -18,6 +18,8 @@ import 'package:inventory_management/ui/list_details/supplier_page/supplier_list
 import 'package:inventory_management/ui/list_details/warehouse_page/add_warehouse/add_warehouse_page.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/warehouse_list.dart';
 import 'package:inventory_management/ui/login_page/login_page.dart';
+import 'package:inventory_management/ui/login_page/new_signup.dart';
+import 'package:inventory_management/ui/login_page/new_signup_two.dart';
 import 'package:inventory_management/ui/printing/ongoing_printing/ongoing_printing.dart';
 import 'package:inventory_management/ui/printing/printing_list/printing_history_list.dart';
 import 'package:inventory_management/ui/printing/start_printing/start_printing.dart';
@@ -26,6 +28,7 @@ import 'package:inventory_management/ui/purchase/purchase_history/purchase_histo
 import 'package:inventory_management/ui/reutilization/reutil.dart';
 import 'package:inventory_management/ui/settings/change_password/change_password.dart';
 import 'package:inventory_management/ui/settings/settings_page.dart';
+import 'package:inventory_management/ui/sign_in/first_screen_sinorsout.dart';
 import 'package:inventory_management/ui/sign_in/sign_in.dart';
 import 'package:inventory_management/ui/splash_page.dart';
 import 'package:inventory_management/ui/waste/wastage_list.dart';
@@ -75,6 +78,15 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
     SplashPage.routeName: _standardRoute(
       (context, settings) => const SplashPage(),
     ),
+    FirstScreen.routeName: _standardRoute(
+      (context, settings) => FirstScreen(),
+    ),
+    NewSignUp.routeName: _standardRoute(
+      (context, settings) => NewSignUp.wrapped(),
+    ),
+    // NewSignUpTwo.routeName: _standardRoute(
+    //   (context, settings) => NewSignUpTwo(),
+    // ),
     AddRawMaterials.routeName: _standardRoute(
       (context, settings) => AddRawMaterials.wrapped(),
     ),

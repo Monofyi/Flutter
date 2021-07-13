@@ -4,6 +4,7 @@ import 'package:disposable_provider/disposable_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:inventory_management/data/repositories/account_repository.dart';
 import 'package:inventory_management/ui/home_page/home_page.dart';
+import 'package:inventory_management/ui/sign_in/first_screen_sinorsout.dart';
 import 'package:inventory_management/ui/sign_in/sign_in.dart';
 import 'package:inventory_management/utils/subscription_container/subscription_container.dart';
 import 'package:inventory_management/utils/subscription_container/subscription_container_mixin.dart';
@@ -28,7 +29,7 @@ class AppRootSwitcher extends Disposable with SubscriptionContainerMixin {
     accountRepository.getToken().asStream().listen((token) async {
       print(token);
       if (token == null) {
-        appNavigator.pushAndRemoveAllPage(SignInPage.routeName);
+        appNavigator.pushAndRemoveAllPage(FirstScreen.routeName);
       } else {
         appNavigator.pushAndRemoveAllPage(HomePage.routeName);
       }

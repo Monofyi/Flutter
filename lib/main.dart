@@ -9,13 +9,13 @@ import 'domain/app_navigator.dart';
 import 'domain/app_root_switcher.dart';
 
 void main() {
-  _initializePluginsBeforeAppLaunches();
+  //_initializePluginsBeforeAppLaunches();
   runApp(BiteCopeApp.wrapped());
 }
 
-void _initializePluginsBeforeAppLaunches() {
-  WidgetsFlutterBinding.ensureInitialized();
-}
+// void _initializePluginsBeforeAppLaunches() {
+//   WidgetsFlutterBinding.ensureInitialized();
+// }
 
 enum MainPageTab {
   home,
@@ -70,3 +70,27 @@ class BiteCopeApp extends StatelessWidget {
     );
   }
 }
+
+// import 'package:flutter/material.dart';
+// import 'package:inventory_management/ui/keygen/keygen.dart';
+// import 'package:inventory_management/ui/list_details/buyers_page/addingnewbuyer_new.dart';
+// import 'package:inventory_management/ui/list_details/buyers_page/buyers_confirm_new.dart';
+// import 'package:inventory_management/ui/list_details/buyers_page/detailsbuyers_new.dart';
+//
+// import 'ui/list_details/buyers_page/buyerslist_new.dart';
+//
+// void main() {
+//   runApp(MyApp());
+// }
+//
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Vie',
+//       home: BuyersListNewDesign(),
+//       // home: BuyersListConfirm(),
+//       debugShowCheckedModeBanner: false,
+//     );
+//   }
+// }

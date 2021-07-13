@@ -4,6 +4,7 @@ import 'package:inventory_management/data/repositories/account_repository.dart';
 import 'package:inventory_management/domain/app_navigator.dart';
 import 'package:inventory_management/ui/home_page/home_page.dart';
 import 'package:inventory_management/ui/login_page/controller/login_model.dart';
+import 'package:provider/provider.dart';
 
 enum ValidationResult {
   userNameEmpty,
