@@ -4,6 +4,7 @@ Color lightBlue1 = const Color(0xFF2CCEFF);
 Color lightBlue2 = const Color(0xFF33CFFF);
 Color orange1 = const Color(0xFFF15A24);
 Color orange2 = const Color(0xFFF68F1F);
+Color dangerRed = const Color(0xFFB50000);
 Color lightGrey = const Color(0xFFE5E5E5);
 Color shadowText = const Color(0xFF9A9A9A);
 Color nearBlack = const Color(0xFF252525);
@@ -31,6 +32,12 @@ ThemeData theme = ThemeData(
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all<Color>(nearBlack),
       elevation: MaterialStateProperty.all<double>(2),
+      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+        const EdgeInsets.all(6),
+      ),
+      fixedSize: MaterialStateProperty.all<Size>(
+        const Size.fromWidth(130),
+      ),
     ),
   ),
 );

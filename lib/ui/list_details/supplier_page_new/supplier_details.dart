@@ -50,14 +50,17 @@ class SupplierDetails extends StatefulWidget {
 
 class _SupplierDetailsState extends State<SupplierDetails> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   final TextEditingController _supplierNameController = TextEditingController();
   final TextEditingController _phoneNoController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-  // final FocusNode _supplierNameNode = FocusNode();
-  // final FocusNode _phoneNoNode = FocusNode();
-  // final FocusNode _addressNode = FocusNode();
-  // final FocusNode _descriptionNode = FocusNode();
+
+  final FocusNode _supplierNameNode = FocusNode();
+  final FocusNode _phoneNoNode = FocusNode();
+  final FocusNode _addressNode = FocusNode();
+  final FocusNode _descriptionNode = FocusNode();
+
   bool isEditing = false;
 
   @override
@@ -125,8 +128,12 @@ class _SupplierDetailsState extends State<SupplierDetails> {
                                 formField(
                                   label: "Supplier Name",
                                   controller: _supplierNameController,
+                                  focusNode: _supplierNameNode,
                                   required: true,
                                   enabled: isEditing,
+                                  autofocus: true,
+                                  textInputAction: TextInputAction.next,
+                                  onEditingComplete: _phoneNoNode.requestFocus,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return "Field is mandatory";
@@ -137,9 +144,12 @@ class _SupplierDetailsState extends State<SupplierDetails> {
                                 formField(
                                   label: "Phone Number",
                                   controller: _phoneNoController,
+                                  focusNode: _phoneNoNode,
                                   required: true,
                                   maxLines: 1,
                                   enabled: isEditing,
+                                  textInputAction: TextInputAction.next,
+                                  onEditingComplete: _addressNode.requestFocus,
                                   prefixText: "+91 ",
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
@@ -151,8 +161,12 @@ class _SupplierDetailsState extends State<SupplierDetails> {
                                 formField(
                                   label: "Address",
                                   controller: _addressController,
+                                  focusNode: _addressNode,
                                   required: true,
                                   enabled: isEditing,
+                                  textInputAction: TextInputAction.next,
+                                  onEditingComplete:
+                                      _descriptionNode.requestFocus,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return "Field is mandatory";
@@ -163,8 +177,12 @@ class _SupplierDetailsState extends State<SupplierDetails> {
                                 formField(
                                   label: "Description",
                                   controller: _descriptionController,
+                                  focusNode: _descriptionNode,
                                   maxLines: 6,
                                   enabled: isEditing,
+                                  textInputAction: TextInputAction.done,
+                                  onEditingComplete:
+                                      FocusScope.of(context).unfocus,
                                 ),
                               ],
                             ),
@@ -176,7 +194,7 @@ class _SupplierDetailsState extends State<SupplierDetails> {
                 ),
               ),
               const SizedBox(height: 20),
-              isEditing ? confirmEdit(_formKey) : editAndRemove(),
+              isEditing ? confirmEdit() : editAndRemove(),
               const SizedBox(height: 20),
             ],
           ),
@@ -207,9 +225,11 @@ class _SupplierDetailsState extends State<SupplierDetails> {
     @required String label,
     @required TextEditingController controller,
     FocusNode focusNode,
+    TextInputAction textInputAction,
     void Function() onEditingComplete,
     int maxLines = 2,
     bool enabled = true,
+    bool autofocus = false,
     bool required = false,
     String prefixText,
     String Function(String) validator,
@@ -233,6 +253,7 @@ class _SupplierDetailsState extends State<SupplierDetails> {
             controller: controller,
             focusNode: focusNode,
             enabled: enabled,
+            autofocus: autofocus,
             minLines: 1,
             maxLines: maxLines,
             style: Theme.of(context)
@@ -243,6 +264,7 @@ class _SupplierDetailsState extends State<SupplierDetails> {
               prefixText: prefixText,
               errorMaxLines: 2,
             ),
+            textInputAction: textInputAction,
             onEditingComplete: onEditingComplete,
             validator: validator,
           ),
@@ -251,7 +273,7 @@ class _SupplierDetailsState extends State<SupplierDetails> {
     );
   }
 
-  Widget confirmEdit(GlobalKey<FormState> _formKey) {
+  Widget confirmEdit() {
     return Center(
       child: InkWell(
         borderRadius: BorderRadius.circular(100),
@@ -303,19 +325,61 @@ class _SupplierDetailsState extends State<SupplierDetails> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       mainAxisSize: MainAxisSize.max,
       children: [
-        ElevatedButton(
-          onPressed: () {
+        elevatedButton(
+          icon: Icons.edit,
+          text: "Edit",
+          color: lightBlue1,
+          callback: () {
             setState(() {
               isEditing = true;
             });
+            WidgetsBinding.instance?.addPostFrameCallback(
+              (_) => _supplierNameNode.requestFocus(),
+            );
           },
-          child: const Text("Edit"),
         ),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text("Remove"),
+        elevatedButton(
+          icon: Icons.delete,
+          text: "Remove",
+          color: dangerRed,
+          callback: () {},
         ),
       ],
+    );
+  }
+
+  Widget elevatedButton({
+    @required String text,
+    IconData icon,
+    Color color,
+    Function callback,
+  }) {
+    return ElevatedButton(
+      onPressed: () => callback != null ? callback() : null,
+      child: Row(
+        children: [
+          if (icon != null) ...[
+            Icon(
+              icon,
+              color: color,
+            ),
+            RotatedBox(
+              quarterTurns: 1,
+              child: Icon(
+                Icons.horizontal_rule_rounded,
+                color: color,
+              ),
+            )
+          ],
+          Expanded(
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: color),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
