@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/theme.dart';
-import 'package:inventory_management/ui/list_details/supplier_page_new/supplier_confirmation.dart';
 
 class SupplierAlertArgument {
   final String captionMessage;
