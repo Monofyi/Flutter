@@ -15,6 +15,8 @@ import 'package:inventory_management/ui/list_details/production_page/start_produ
 import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/add_new_supplier.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/add_supplier/supplier_page.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/supplier_list.dart';
+import 'package:inventory_management/ui/list_details/supplier_page_new/supplier_add.dart';
+import 'package:inventory_management/ui/list_details/supplier_page_new/supplier_confirmation.dart';
 import 'package:inventory_management/ui/list_details/supplier_page_new/supplier_details.dart';
 import 'package:inventory_management/ui/list_details/supplier_page_new/suppliers_list.dart';
 import 'package:inventory_management/ui/list_details/warehouse_page/add_warehouse/add_warehouse_page.dart';
@@ -34,6 +36,7 @@ import 'package:inventory_management/ui/waste/wastage_list.dart';
 import 'package:recase/recase.dart';
 
 import 'new_login.dart';
+import 'ui/list_details/supplier_page_new/supplier_alert.dart';
 
 /// A builder function to build page.
 typedef WidgetPageBuilder = Widget Function(
@@ -128,6 +131,16 @@ class GlobalRouter implements RouterInterface, ScreenNameInterface {
     ),
     SuppliersListPage.routeName: _standardRoute(
       (context, settings) => SuppliersListPage.wrapped(),
+    ),
+    SupplierAdd.routeName: _standardRoute(
+      (context, settings) => SupplierAdd.wrapped(),
+    ),
+    SupplierAlert.routeName: _standardRoute(
+      (context, settings) =>
+          SupplierAlert.wrapped(settings.arguments as SupplierAlertArgument),
+    ),
+    SupplierConfirmation.routeName: _standardRoute(
+      (context, settings) => SupplierConfirmation.wrapped(),
     ),
     SignUpPage.routeName: _standardRoute(
       (context, settings) => SignUpPage.wrapped(),

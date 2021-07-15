@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+Color white = const Color(0xFFFFFFFF);
 Color lightBlue1 = const Color(0xFF2CCEFF);
 Color lightBlue2 = const Color(0xFF33CFFF);
 Color orange1 = const Color(0xFFF15A24);
@@ -11,6 +12,34 @@ Color nearBlack = const Color(0xFF252525);
 Color shadowBlack = const Color(0x19000000);
 
 ThemeData theme = ThemeData(
+  colorScheme: ColorScheme(
+    brightness: Brightness.light,
+    onBackground: nearBlack,
+    background: lightGrey,
+    error: dangerRed,
+    onError: white,
+    primary: lightBlue1,
+    primaryVariant: lightBlue2,
+    onPrimary: white,
+    secondary: orange1,
+    secondaryVariant: orange2,
+    onSecondary: white,
+    surface: white,
+    onSurface: nearBlack,
+  ),
+  textTheme: TextTheme(
+    headline6: const TextStyle(
+      fontSize: 17,
+      fontWeight: FontWeight.w600,
+    ),
+    bodyText1: TextStyle(
+      color: shadowText,
+    ),
+    subtitle2: const TextStyle(
+      fontWeight: FontWeight.bold,
+    ),
+  ),
+  backgroundColor: lightGrey,
   scaffoldBackgroundColor: lightGrey,
   shadowColor: shadowBlack,
   appBarTheme: AppBarTheme(
@@ -35,9 +64,6 @@ ThemeData theme = ThemeData(
       padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
         const EdgeInsets.all(6),
       ),
-      fixedSize: MaterialStateProperty.all<Size>(
-        const Size.fromWidth(130),
-      ),
     ),
   ),
 );
@@ -51,7 +77,7 @@ LinearGradient primaryGradient = LinearGradient(
   end: Alignment.centerRight,
 );
 
-LinearGradient accentGradient = LinearGradient(
+LinearGradient secondaryGradient = LinearGradient(
   colors: <Color>[
     orange1,
     orange2,

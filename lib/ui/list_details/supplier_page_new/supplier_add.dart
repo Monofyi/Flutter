@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management/theme.dart';
-import 'package:inventory_management/ui/components_new/fixed_width_button.dart';
 import 'package:inventory_management/ui/components_new/gradient_widget.dart';
 import 'package:inventory_management/ui/components_new/rounded_wide_button.dart';
 import 'package:inventory_management/ui/list_details/supplier_page/controller/supplier_controller/supplier_list/supplier_list_model.dart';
@@ -10,42 +9,14 @@ import 'package:provider/provider.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'controller/supplier_controller/suppliers_list_controller.dart';
 
-class SupplierDetailsArgument {
-  final String supplierId;
-  final String supplierName;
-  final String phoneNo;
-  final String address;
-  final String description;
+class SupplierAdd extends StatefulWidget {
+  static String routeName = '/supplierAdd';
 
-  SupplierDetailsArgument({
-    @required this.supplierId,
-    @required this.supplierName,
-    @required this.phoneNo,
-    @required this.address,
-    @required this.description,
-  });
-}
-
-class SupplierDetails extends StatefulWidget {
-  static String routeName = '/supplierDetails';
-  final String supplierId;
-  final String supplierName;
-  final String phoneNo;
-  final String address;
-  final String description;
-
-  const SupplierDetails({
-    Key key,
-    @required this.supplierId,
-    @required this.supplierName,
-    @required this.phoneNo,
-    @required this.address,
-    @required this.description,
-  }) : super(key: key);
+  const SupplierAdd({Key key}) : super(key: key);
 
   @override
-  _SupplierDetailsState createState() => _SupplierDetailsState();
-  static Widget wrapped(SupplierDetailsArgument supplierDetailsArgument) {
+  _SupplierAddState createState() => _SupplierAddState();
+  static Widget wrapped() {
     return MultiProvider(
       providers: [
         StateNotifierProvider<SuppliersListController, SupplierList>(
@@ -53,18 +24,12 @@ class SupplierDetails extends StatefulWidget {
           create: (context) => SuppliersListController(),
         )
       ],
-      child: SupplierDetails(
-        supplierId: supplierDetailsArgument.supplierId,
-        supplierName: supplierDetailsArgument.supplierName,
-        phoneNo: supplierDetailsArgument.phoneNo,
-        address: supplierDetailsArgument.address,
-        description: supplierDetailsArgument.description,
-      ),
+      child: const SupplierAdd(),
     );
   }
 }
 
-class _SupplierDetailsState extends State<SupplierDetails> {
+class _SupplierAddState extends State<SupplierAdd> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final TextEditingController _supplierNameController = TextEditingController();
@@ -76,17 +41,6 @@ class _SupplierDetailsState extends State<SupplierDetails> {
   final FocusNode _phoneNoNode = FocusNode();
   final FocusNode _addressNode = FocusNode();
   final FocusNode _descriptionNode = FocusNode();
-
-  bool isEditing = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _supplierNameController.text = widget.supplierName;
-    _phoneNoController.text = widget.phoneNo;
-    _addressController.text = widget.address;
-    _descriptionController.text = widget.description;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,31 +65,10 @@ class _SupplierDetailsState extends State<SupplierDetails> {
                 ),
                 onPressed: () => Navigator.maybePop(context),
               ),
+              const SizedBox(height: 40),
               Expanded(
                 child: Column(
                   children: [
-                    GridView.count(
-                      crossAxisCount: 2,
-                      padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
-                      crossAxisSpacing: 20,
-                      childAspectRatio: 3,
-                      shrinkWrap: true,
-                      children: [
-                        idContainer(
-                          child: Text(
-                            "Supplier ID :",
-                            style: theme.textTheme.subtitle2,
-                          ),
-                        ),
-                        idContainer(
-                          child: Text(
-                            widget.supplierId,
-                            style: theme.textTheme.bodyText1,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -149,9 +82,8 @@ class _SupplierDetailsState extends State<SupplierDetails> {
                           addressNode: _addressNode,
                           descriptionController: _descriptionController,
                           descriptionNode: _descriptionNode,
-                          enabled: isEditing,
+                          enabled: true,
                           suppliers: suppliers,
-                          supplierName: widget.supplierName,
                         ),
                       ),
                     )
@@ -159,7 +91,7 @@ class _SupplierDetailsState extends State<SupplierDetails> {
                 ),
               ),
               const SizedBox(height: 20),
-              isEditing ? confirmEdit(controller) : editAndRemove(controller),
+              confirmAdd(controller),
               const SizedBox(height: 20),
             ],
           ),
@@ -168,39 +100,17 @@ class _SupplierDetailsState extends State<SupplierDetails> {
     );
   }
 
-  Widget idContainer({Widget child}) {
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.backgroundColor,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: theme.shadowColor,
-            blurRadius: 7,
-            spreadRadius: 1,
-          ),
-        ],
-      ),
-      alignment: Alignment.center,
-      child: child,
-    );
-  }
-
-  Widget confirmEdit(SuppliersListController controller) {
+  Widget confirmAdd(SuppliersListController controller) {
     return RoundedWideButton(
       onTap: () {
         if (_formKey.currentState.validate()) {
-          setState(() {
-            isEditing = false;
-          });
           Navigator.pushNamed(
             context,
             SupplierAlert.routeName,
             arguments: SupplierAlertArgument(
-              captionMessage: "change details of the supplier",
-              alertMessage: "Save up the new changes?",
-              callback: () => controller.updateSupplier(
-                supplierId: int.parse(widget.supplierId),
+              captionMessage: "add new supplier",
+              alertMessage: "Save up the Details?",
+              callback: () => controller.addSupplier(
                 supplierName: _supplierNameController.text,
                 phoneNo: _phoneNoController.text,
                 address: _addressController.text,
@@ -237,46 +147,6 @@ class _SupplierDetailsState extends State<SupplierDetails> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget editAndRemove(SuppliersListController controller) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        FixedWidthButton(
-          icon: Icons.edit,
-          text: "Edit",
-          color: theme.colorScheme.primary,
-          callback: () {
-            setState(() {
-              isEditing = true;
-            });
-            WidgetsBinding.instance?.addPostFrameCallback(
-              (_) => _supplierNameNode.requestFocus(),
-            );
-          },
-        ),
-        FixedWidthButton(
-          icon: Icons.delete_outline_rounded,
-          text: "Remove",
-          color: theme.errorColor,
-          callback: () {
-            Navigator.pushNamed(
-              context,
-              SupplierAlert.routeName,
-              arguments: SupplierAlertArgument(
-                captionMessage: "remove the supplier",
-                alertMessage: "Remove this supplier?",
-                callback: () => controller.deleteSupplier(
-                  supplierId: int.parse(widget.supplierId),
-                ),
-              ),
-            );
-          },
-        ),
-      ],
     );
   }
 }

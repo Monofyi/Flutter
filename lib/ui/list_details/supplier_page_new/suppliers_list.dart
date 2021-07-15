@@ -55,7 +55,7 @@ class _SuppliersListPageState extends State<SuppliersListPage> {
         floatingActionButtonLocation:
             FloatingActionButtonLocation.miniCenterFloat,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () => Navigator.pushNamed(context, "/supplierAdd"),
           child: GradientWidget(
             gradient: primaryGradient,
             child: const Icon(
